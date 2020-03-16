@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_3_t">
+<!--        <ListPreference-->
+<!--            android:defaultValue="auto"-->
+<!--            android:dialogTitle="@string/pref_3_6"-->
+<!--            android:entries="@array/entries_for_language"-->
+<!--            android:entryValues="@array/entryvalue_for_language"-->
+<!--            android:key="language"-->
+<!--            android:title="@string/pref_4_1" />-->
+        <PreferenceScreen
+            android:key="check_update"
+            android:title="@string/pref_3_1" />
+        <PreferenceScreen
+            android:key="clear_profiles"
+            android:title="@string/pref_3_2" />
+        <PreferenceScreen
+            android:key="uninstall_native"
+            android:title="@string/pref_3_3" />
+    </PreferenceCategory>
+</PreferenceScreen>

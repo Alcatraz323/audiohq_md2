@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/item_playing_application_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="20dp"
+            android:transitionName="@string/transition_preset_inner_icon"
+            app:srcCompat="@drawable/ic_cog" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="48dp"
+            android:layout_toEndOf="@id/item_playing_application_icon"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_playing_application_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"
+                android:textSize="16sp"
+                android:transitionName="@string/transition_preset_inner_label" />
+
+            <TextView
+                android:id="@+id/item_playing_application_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/item_playing_expand"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
+            android:tint="@color/base_gray_tint" />
+
+    </RelativeLayout>
+
+    <io.alcatraz.audiohq.extended.NoScrollListView
+        android:id="@+id/item_playing_process_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+</LinearLayout>

@@ -1,0 +1,19 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item2"
+        android:title="@string/main_menu_2" />
+
+    <item
+        android:id="@+id/item3"
+        android:icon="@drawable/ic_refresh_black_24dp"
+        android:title="@string/main_menu_5"
+        android:iconTint="#ffffff"
+        android:showAsAction="always" />
+
+    <item
+        android:id="@+id/item4"
+        android:title="@string/main_menu_6" />
+
+</menu>

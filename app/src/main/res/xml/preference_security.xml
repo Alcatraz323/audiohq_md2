@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_2_t">
+        <CheckBoxPreference
+            android:key="default_silent"
+            android:summary="@string/pref_2_1_summary"
+            android:title="@string/pref_2_1" />
+        <PreferenceScreen
+            android:key="default_profile"
+            android:summary="@string/pref_2_3_summary"
+            android:title="@string/pref_2_3" />
+    </PreferenceCategory>
+</PreferenceScreen>

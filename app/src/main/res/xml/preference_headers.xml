@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+    <header android:fragment="io.alcatraz.audiohq.fragments.FloatPreferenceFragment"
+        android:icon="@drawable/ic_branding_watermark_gray_24dp"
+        android:title="@string/pref_4_t"
+        android:summary="@string/pref_4_t_summary"/>
+    <header android:fragment="io.alcatraz.audiohq.fragments.SecurityPreferenceFragment"
+        android:icon="@drawable/ic_security_gray_24dp"
+        android:title="@string/pref_2_t"
+        android:summary="@string/pref_2_t_summary"/>
+    <header android:fragment="io.alcatraz.audiohq.fragments.OtherPreferenceFragment"
+        android:icon="@drawable/ic_language_gray_24dp"
+        android:title="@string/pref_3_t"
+        android:summary="@string/pref_3_t_summary"/>
+
+</preference-headers>

@@ -1,0 +1,103 @@
+package io.alcatraz.audiohq;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import io.alcatraz.audiohq.beans.QueryElement;
+
+public class Constants {
+    public static String[] SUPPORT_ABIS = {"armeabi", "armeabi-v7a", "arm64-v8a"};
+    public static int[] SUPPORT_APIS = {26, 27, 28, 29};
+    public static String MATCHED_MODULE_VERSION = "0.91";
+
+    public static String MY_PACKAGE_NAME = "io.alcatraz.audiohq";
+
+    //===============================================
+    public static final String PREF_BOOT = "boot";
+    public static final boolean DEFAULT_VALUE_PREF_BOOT = true;
+    public static final String PREF_DEFAULT_SILENT = "default_silent";
+    public static final boolean DEFAULT_VALUE_PREF_DEFAULT_SILENT = false;
+    public static final String PREF_FLOAT_SERVICE = "float_service";
+    public static final boolean DEFAULT_VALUE_PREF_FLOAT_SERVICE = false;
+    public static final String PREF_LANGUAGE = "float_service";
+    public static final String DEFAULT_VALUE_PREF_LANGUAGE = "auto";
+
+    public static final String PREF_FLOAT_WINDOW_GRAVITY = "float_gravity";
+    public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_GRAVITY = "start_top";
+    public static final String PREF_FLOAT_FOREGROUND_SERVICE = "float_foreground_notification";
+    public static final boolean DEFAULT_VALUE_PREF_FLOAT_FOREGROUND_SERVICE = false;
+    public static final String PREF_FLOAT_WINDOW_BACKGROUND = "float_background";
+    public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_BACKGROUND = "#ffffff";
+    public static final String PREF_FLOAT_WINDOW_DISMISS_DELAY = "float_dismiss_delay";
+    public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_DISMISS_DELAY = "3000";
+    public static final String PREF_FLOAT_WINDOW_MARGIN_TOP = "float_margin_top";
+    public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_MARGIN_TOP = "0";
+    public static final String PREF_FLOAT_WINDOW_MARGIN_TOP_LANDSCAPE = "float_margin_top_landscape";
+    public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_MARGIN_TOP_LANDSCAPE = "0";
+    public static final String PREF_FLOAT_WINDOW_ICON_TINT = "float_icon_tint";
+    public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_ICON_TINT = "#009688";
+    public static final String PREF_FLOAT_WINDOW_TOGGLE_SIZE = "float_toggle_size";
+    public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_TOGGLE_SIZE = "52";
+    public static final String PREF_FLOAT_WINDOW_FONT_COLOR = "float_font_color";
+    public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_FONT_COLOR = "#009688";
+    public static final String PREF_FLOAT_WINDOW_SIDE_MARGIN = "float_side_margin";
+    public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_SIDE_MARGIN = "8";
+    public static final String PREF_FLOAT_WINDOW_TOGGLE_CORNER_RADIUS = "float_toggle_corner_radius";
+    public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_TOGGLE_CORNER_RADIUS = "2";
+    public static final String PREF_FLOAT_WINDOW_CARD_RADIUS = "float_card_radius";
+    public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_CARD_RADIUS = "2";
+    public static final String PREF_FLOAT_WINDOW_SEEK_COLOR = "float_seek_bar_color";
+    public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_SEEK_COLOR = "#ff5722";
+    public static final String PREF_FLOAT_DIRECT_REACT = "float_direct_react";
+    public static final boolean DEFAULT_VALUE_PREF_FLOAT_DIRECT_REACT = false;
+
+    public static final String PREF_DEFAULT_PROFILE = "default_profile";
+    public static final String PREF_CHECK_UPDATE = "check_update";
+    public static final String PREF_CLEAR_PROFILES = "clear_profiles";
+    public static final String PREF_UNINSTALL_NATIVE = "uninstall_native";
+
+    //==============================================
+    public static String BROADCAST_ACTION_UPDATE_PREFERENCES = "update_preferences";
+
+
+    public static List<QueryElement> getOpenSourceProjects() {
+        List<QueryElement> out = new LinkedList<>();
+
+        //gson
+        QueryElement o1 = new QueryElement();
+        o1.setAuthor("google");
+        o1.setUrl("https://github.com/google/gson");
+        o1.setintro("A Java serialization/deserialization library to convert Java Objects into JSON and back");
+        o1.setLicense("Apache 2.0");
+        o1.setName("gson");
+//        //OkHttp
+//        QueryElement o2 = new QueryElement();
+//        o2.setAuthor("square");
+//        o2.setUrl("https://github.com/square/okhttp");
+//        o2.setintro("An HTTP & HTTP/2 client for Android and Java applications. ");
+//        o2.setLicense("Apache 2.0");
+//        o2.setName("OkHttp");
+//        //Okio
+//        QueryElement o3 = new QueryElement();
+//        o3.setAuthor("square");
+//        o3.setUrl("https://github.com/square/okio");
+//        o3.setintro("A modern I/O API for Java ");
+//        o3.setLicense("Apache 2.0");
+//        o3.setName("Okio");
+//        //okhttputils
+//        QueryElement o4 = new QueryElement();
+//        o4.setAuthor("hongyangAndroid");
+//        o4.setUrl("https://github.com/hongyangAndroid/okhttputils");
+//        o4.setintro("okhttp的辅助类");
+//        o4.setLicense("Apache 2.0");
+//        o4.setName("okhttputils");
+
+        //Adding Process
+        out.add(o1);
+//        out.add(o2);
+//        out.add(o3);
+//        out.add(o4);
+
+        return out;
+    }
+}

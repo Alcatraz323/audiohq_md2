@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [
+    <!ENTITY current_match_version "0.91">
+    <!ENTITY current_match_version_code "1">
+    <!ENTITY current_match_date "2020.3.15">]>
+<resources>
+    <!-- 更新修改部分 -->
+    <string name="support_lib_version">&current_match_version;</string>
+    <string name="update_title">20200316 alpha2</string>
+    <string name="update_info">
+    1.UI变更，增强动画\n
+    2.音量算法更新，包名>进程名>主音量>声道控制\n
+    3.统一模块\n
+    4.添加更多悬浮窗自定义选项\n
+    5.修复全屏悬浮窗上浮问题\n
+    6.添加音量键直接触发方式(实验性,默认关闭)\n
+    7.尝试修复多窗口/不消失问题\n
+    8.隐藏最近任务中卡片\n
+    9.尝试修复悬浮窗动画闪烁问题\n
+    10.稳定性提升
+    </string>
+
+    <!-- 一般 -->
+    <string name="app_name">Audio HeadQuarter</string>
+    <string name="activity_pref">设置</string>
+    <string name="main_menu_1">设置</string>
+    <string name="main_menu_2">关于</string>
+    <string name="main_menu_3">启动服务</string>
+    <string name="main_menu_4">停止服务</string>
+    <string name="main_menu_5">刷新</string>
+    <string name="main_menu_6">控制台输出</string>
+    <string name="main_report_bug">请把错误信息发至以下地址</string>
+    <string name="toast_no_root">无法获取root, 软件将不会工作</string>
+    <string name="rc_modified_server_noneed">已使用内置服务，禁止启动外部服务</string>
+    <string name="toast_implementing">实现中</string>
+    <string name="service_toast_already_running">服务已经运行</string>
+    <string name="service_toast_already_killed">服务已被杀死</string>
+    <string name="adjust_title">精确调整</string>
+    <string name="adjust_confirm">执行</string>
+    <string name="til_err_parse">不是一个有效的浮点数</string>
+    <string name="til_err_ofr">超出范围</string>
+    <string name="read_profile_err">配置文件读取失败</string>
+    <string name="java_server_running">Java服务器已启动</string>
+
+    <string name="main_card_status_querying">获取中…</string>
+    <string name="main_card_playing">正在播放</string>
+    <string name="main_card_playing_indicator">当前混音器中有%s个进程</string>
+    <string name="main_card_preset">应用预设</string>
+    <string name="main_card_preset_indicator">%s个应用程序预设</string>
+    <string name="main_card_help">帮助与支持</string>
+    <string name="main_card_invalid">不可用</string>
+
+    <string name="toast_copied">已复制</string>
+    <string name="ad_pb">确定</string>
+    <string name="ad_nb">取消</string>
+    <string name="ad_pb2">是</string>
+    <string name="ad_pb_no_rc_modify">安装(不修改上下文)</string>
+    <string name="ad_nb2">否</string>
+    <string name="ad_nb3">关闭</string>
+    <string name="ad_nb4">清除</string>
+    <string name="ad_processing">进行中…</string>
+    <string name="empty_view">无结果</string>
+
+    <string name="check_root">Root权限</string>
+    <string name="check_selinux">Selinux状态</string>
+    <string name="check_support">Api/Abi是否支持</string>
+    <string name="check_native_elf_info">原生文件版本</string>
+    <string name="check_native_lib_info">运行库信息</string>
+    <string name="check_audioserver_info">\'audioserver\'可执行文件信息</string>
+    <string name="check_daemon_status">守护进程状态</string>
+    <string name="check_daemon_status_alive">运行中</string>
+    <string name="check_daemon_status_dead">未运行</string>
+    <string name="check_daemon_restart">尝试重启守护进程</string>
+    <string name="aplc_split_control">双声道控制</string>
+    <string name="aplc_precise_control">精确控制</string>
+    <string name="aplc_left">L[0,1]</string>
+    <string name="aplc_right">R[0,1]</string>
+    <string name="aplc_general">综合[0.1]</string>
+    <string name="aplc_use_process_control">使用进程控制</string>
+
+    <string name="preset_disabled">预设功能不可用</string>
+    <string name="preset_disabled_define">系统服务未运行</string>
+    <string name="preset_tutorial_title">教程</string>
+    <string name="preset_tutorial_content">填入完整进程名，如io.alcatraz.audiohq:play(注意!!!进程名与包名不是一个概念
+        你可以通过ps命令查看正在运行的进程的进程名), 随后填入其他数据，检查无误后点击应用(若设置启用包名作为关键字此处可为包名)</string>
+    <string name="preset_process_name">进程名:</string>
+    <string name="preset_list_sum">%d 个应用程序</string>
+    <string name="preset_list_notice">注意: 此列表不会载入你之前的设置</string>
+    <string name="preset_loading">加载中…</string>
+    <string name="preset_search_hint">应用名/包名</string>
+    <string name="preset_tab_all_apps">全部</string>
+    <string name="preset_tab_has_set">已设置</string>
+    <string name="preset_status_has_profile">存在预设配置，</string>
+    <string name="preset_status_no_profile">无配置文件，</string>
+    <string name="preset_status_muted">已静音</string>
+    <string name="preset_status_unmuted">未静音</string>
+    <string name="preset_action_search">搜索</string>
+    <string name="preset_conflicted">\ \ 包名控制配置存在,该配置不会生效</string>
+    <string name="preset_inner_title">预设配置</string>
+    <string name="preset_manual_add">手动添加</string>
+    <string name="preset_manual_hint">进程名</string>
+    <string name="preset_manual_error">无效字符!</string>
+
+    <string name="panel_control_title_1">音量</string>
+    <string name="panel_control_general">主音量</string>
+    <string name="panel_control_channel">声道音量</string>
+    <string name="panel_control_left">左声道</string>
+    <string name="panel_control_right">右声道</string>
+    <string name="panel_control_mute">将此程序静音</string>
+    <string name="panel_control_tips_title">提示</string>
+    <string name="panel_control_tips_message">下方的修改将作为因子参与应用程序音量计算,且声道音量将会根据主音量生效</string>
+
+    <string name="playing_filter">只显示已激活进程</string>
+
+    <string name="status_server">原生服务</string>
+    <string name="status_track_ctl_position">音轨控制位置</string>
+    <string name="status_auto_remove_flag">自动移除配置</string>
+    <string name="status_thread_count">回放线程</string>
+    <string name="status_track_lock_ctl">音轨控制类型</string>
+
+    <string name="toast_cant_overlay">请允许显示在请他应用上层</string>
+    <string name="notification_overlay">AudioHQ 后台服务</string>
+
+    <!--向导-->
+    <string name="setup_step_next">下一步</string>
+    <string name="setup_step_next_final">完成</string>
+    <string name="setup_step_before">上一步</string>
+    <string name="setup_1_intro">你好朋友,在正式开始之前,让我们花一些时间完成设置</string>
+    <string name="setup_2_warning_vendor_system_title">警告！</string>
+    <string name="setup_2_warning_vendor_system_info">本软件(模块)将尝试重定向一些系统关键库，这将会带来卡在开机界面
+        以及音频系统异常的风险，如果你知道你在做什么并且懂得怎么通过twrp删除模块，你可以继续操作，并且！！！请确保你的SeLinux
+    已经关闭(permissive)或可被关闭，模块将会在开机前尝试关闭SeLinux.最后，使用本软件造成的任何后果由用户承担，祝你好运</string>
+    <string name="setup_2_warning_vendor_system_unlock">明白风险并解锁</string>
+    <string name="setup_2_requirements_not_meet_title">未满足全部安装要求</string>
+    <string name="setup_2_requirements_not_meet_info">继续操作存在风险，下一步骤已被锁定，如果你清楚你在做什么，
+    并知道怎样在recovery中删除模块，可点击下方解锁</string>
+    <string name="setup_2_warning_delay">请认真阅读警告，本页将锁定10秒</string>
+    <string name="setup_check_granted">通过</string>
+    <string name="setup_check_deny">未通过</string>
+    <string name="setup_3_install_title">安装</string>
+    <string name="setup_3_install_info">在网页下载模块后进行安装，这个操作可能损害你的系统，在安装前请确保你知道怎么恢复系统</string>
+    <string name="setup_3_install_page">网页下载</string>
+    <string name="setup_3_installed">我确认已经安装了对应版本模块</string>
+    <string name="setup_3_installed_title">Magisk模块安装版本</string>
+    <string name="setup_3_installed_summary">当前apk适用模块原生文件版本 : &current_match_version;</string>
+    <string name="setup_3_installed_detected">检测到 : %s</string>
+    <string name="setup_4_modify_rc_title">修改audioserver.rc(需要重启)</string>
+    <string name="setup_4_modify_rc_info">修改/system/etc/init/audioserver.rc,
+        为audioserver获取读取/proc的权限以启用内置服务器,注意:若rc文件打包在.img中或/system不允许写入,则此项无效(对于后者可选择在recovery中写入)</string>
+    <string name="setup_4_modify_rc_already">已修改</string>
+    <string name="setup_4_modify_rc_not_yet">未修改</string>
+    <string name="setup_4_modify_rc_warning">这个操作完成后将会重启,执行?</string>
+    <string name="setup_6_done">好耶,安装过程已完成</string>
+    <string name="setup_current_update">当前更新</string>
+    <string name="setup_selinux_check">SeLinux 检查</string>
+    <string name="setup_selinux_definition">当前版本要求关闭SeLinux,若你的Selinux未关闭本软件将不会工作,
+        模块尝试在开机时执行setenforce 0,若下方仍显示SeLinux Enforcing,则表明你的内核不允许关闭SeLinux</string>
+    <string name="setup_permissions">权限</string>
+    <string name="setup_permission_ignore_battery">忽略电池优化</string>
+    <string name="setup_permission_overlay">悬浮窗(授权后去设置手动启用)</string>
+    <string name="setup_permission_request">请求权限</string>
+    <string name="setup_permission_granted">已授权</string>
+
+
+    <!--设置-->
+    <string name="pref_1_t">后台</string>
+    <string name="pref_1_1">服务类型</string>
+    <string name="pref_1_2">修改audioserver.rc(需要重启系统)</string>
+    <string name="pref_1_2_summary">修改audioserver.rc以使用audioserver嵌入方式./system无法写入或rc打包于boot.img时将不会工作</string>
+    <string name="pref_1_3">开机启动</string>
+    <string name="pref_1_3_summary">开机时将强制启动二进制daemon程序</string>
+    <string name="pref_1_4">悬浮窗服务</string>
+    <string name="pref_1_4_summary">运行服务以实现系统音量改变时出现悬浮窗(请授权忽略电池优化,非类原生放入/system/priv-app)</string>
+    <string name="pref_2_t">实验室-安全</string>
+    <string name="pref_2_t_summary">默认静音，无预设的默认配置</string>
+    <string name="pref_2_1">未设置进程默认静音</string>
+    <string name="pref_2_1_summary">或许以后会有动态授权之类的会用到此项</string>
+    <string name="pref_2_2">Pid模式</string>
+    <string name="pref_2_2_summary">如果想临时调整正在运行的程序，或读不出进程名时可使用此项</string>
+    <string name="pref_2_3">默认配置</string>
+    <string name="pref_2_3_summary">所有未手动设置的进程的默认配置</string>
+    <string name="pref_2_4">启动守护服务</string>
+    <string name="pref_2_4_summary">守护服务可能被系统杀死,请授权忽略电池优化,非类原生放入/system/priv-app</string>
+    <string name="pref_3_t">其他</string>
+    <string name="pref_3_t_summary">卸载方法,清除配置等</string>
+    <string name="pref_3_1">检查更新</string>
+    <string name="pref_3_2">清除配置</string>
+    <string name="pref_3_3">卸载原生文件</string>
+    <string name="pref_3_4">使用包名替代进程名作为关键字</string>
+    <string name="pref_3_4_summary">界面和效果同时生效</string>
+    <string name="pref_3_5">折叠同包名进程</string>
+    <string name="pref_3_5_summary">将所有同包名进程在一组中显示(测试)</string>
+    <string name="pref_3_6">语言</string>
+    <string name="pref_4_t">悬浮窗</string>
+    <string name="pref_4_t_summary">悬浮窗开关和自定义选项</string>
+    <string name="pref_4_1">窗口对齐</string>
+    <string name="pref_4_2">背景色</string>
+    <string name="pref_4_3">使用前台服务</string>
+    <string name="pref_4_3_summary">这将会创建一个前台常驻通知以保证悬浮窗服务存活</string>
+    <string name="pref_4_4">无操作消失时间(毫秒)</string>
+    <string name="pref_4_5">顶部修正距离(dp)</string>
+    <string name="pref_4_6">横屏顶部修正距离(dp)</string>
+    <string name="pref_4_7">图标颜色</string>
+    <string name="pref_4_8">开关边长(dp)</string>
+    <string name="pref_4_9">字体颜色</string>
+    <string name="pref_4_10">侧面修正距离(dp)</string>
+    <string name="pref_4_11">按钮圆角半径(dp)</string>
+    <string name="pref_4_12">卡片圆角半径(dp)</string>
+    <string name="pref_4_13">拖动条颜色(若使用主题,此项可能不生效)</string>
+    <string name="pref_4_14">按键响应直接调出悬浮窗</string>
+    <string name="pref_4_14_summary">(实验性)监听getevent输出以实现功能，但部分设备不可用</string>
+    <string name="pref_invalid_integer">无效整数</string>
+    <string name="pref_invalid_color">无效颜色</string>
+    <string name="pref_need_to_restart_playing_process">需要完全重启播放进程(重启系统最好)</string>
+
+    <string name="pref_default_silent_warning_title">警告</string>
+    <string name="pref_default_silent_warning_message">若启用此项，请确保电话等进程的音量已被设置，若未设置可能导致听筒静音</string>
+    <string name="pref_clear_profile_confirm">你正在清除配置，执行?</string>
+
+    <!--关于-->
+    <string name="au_l_1">版本</string>
+    <string name="au_l_2">开发者</string>
+    <string name="au_l_2_1">Alcatraz,Mr_Dennis(Coolapk)</string>
+    <string name="au_l_3">查看源码</string>
+    <string name="au_l_4">开放源代码许可</string>
+    <string name="au_l_4_1">向开源致敬</string>
+    <string name="au_osp">开源相关</string>
+
+    <string name="lib_version_mismatch">Lib文件版本与Apk兼容不符，当前apk适用于lib[&current_match_version;],11.23.21,elf 0.9.2</string>
+
+    <string name="install_warning">安装过程包含危险操作(替换/system/lib(64)/libaudioflinger.so,修改/system/etc/init/audioserver.rc),
+        这个操作可能导致你的设备无法开机，变砖，甚至对硬件造成损害
+        请在设备安装的recovery具有文件管理器的情况下(如Twrp),做好上述文件的备份后进行安装操4作</string>
+    <string name="uninstall_steps">在Magisk中卸载或禁用模块即可<!--1. 将备份的libaudioflinger.so放入/system/lib(64)替换文件, 并设置其权限为
+        0644 (rw-r-r)\n
+        2. 删除/system/bin/audiohq\n
+        3. 用备份的audioserver.rc替换/system/etc/init/audioserver.rc\n
+        自动备份文件位置:/sdcard/audiohq_backups-->
+    </string>
+    <string name="install_title">原生文件未安装</string>
+    <string name="install_not_installed">请刷入原生文件/模块安装后再打开本应用,若已安装，请检查模块位数,版本以及SeLinux状态，当前apk对应模块版本: &current_match_version; ,日期: &current_match_date;</string>
+    <string name="install_confirm_title">安装?</string>
+    <string name="install_confirm_support">支持: "32-bit LSB arm" /system/bin/audioserver 可执行文件,自动备份位置/sdcard/audiohq_backups,自动备份可能失效，请确认手动备份文件存在,安装成功后将自动重启!!!</string>
+    <string name="install_confirm_detect">当前: </string>
+    <string name="install_fail_title">安装未成功完成</string>
+    <string name="install_fail_message">可以选择重试，若多次出现此内容请尝试手动安装</string>
+    <string name="install_cant_mount_rw">无法挂载/system为读写，请执行手动安装</string>
+    <string name="install_magisk_not_installed">Magisk未安装，请不要在安装Magisk前安装原生文件</string>
+    <string name="install_retry">重试</string>
+
+</resources>

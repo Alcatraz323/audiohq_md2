@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="entries_for_language">
+        <item>跟随系统</item>
+        <item>中文</item>
+        <item>英文</item>
+    </string-array>
+
+    <string-array name="entries_for_float_gravity">
+        <item>左上</item>
+        <item>右上</item>
+    </string-array>
+
+    <string-array name="setup_page_titles">
+        <item>欢迎</item>
+        <item>安装要求检查</item>
+        <item>模块安装</item>
+        <item>请稍候…</item>
+        <item>完成!</item>
+    </string-array>
+
+
+</resources>

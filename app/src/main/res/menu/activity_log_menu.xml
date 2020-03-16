@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/log_refresh"
+        android:icon="@drawable/ic_refresh_black_24dp"
+        android:title="@string/main_menu_5"
+        android:iconTint="#ffffff"
+        android:showAsAction="always" />
+</menu>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources [
+    <!ENTITY current_match_version "0.91">
+    <!ENTITY current_match_version_code "1">
+    <!ENTITY current_match_date "2020.3.15">
+    ]>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Change every update -->
+    <string name="support_lib_version">&current_match_version;</string>
+    <string name="update_title">20200316 alpha2</string>
+    <string name="update_info">
+    1.UI Change\n
+    2.Volume calculation method changed\n
+    3.optimized module\n
+    4.more float window customization\n
+    5.fixed fullscreen float window issue\n
+    6.add direct float trigger(Experimental)\n
+    7.fixed multi window issue\n
+    8.hide from recent tasks\n
+    9.fixed animation flash issue\n
+    10.stability upgrade</string>
+
+    <!-- Common -->
+    <string name="app_name">Audio HeadQuarter</string>
+    <string name="activity_pref">Preferences</string>
+    <string name="main_menu_1">Settings</string>
+    <string name="main_menu_2">About</string>
+    <string name="main_menu_3">Start service</string>
+    <string name="main_menu_4">Stop service</string>
+    <string name="main_menu_5">Refresh</string>
+    <string name="main_menu_6">Console output</string>
+    <string name="main_report_bug">Please deliver the error to the address below</string>
+    <string name="toast_no_root">No root, this program will not work</string>
+    <string name="toast_implementing">Implementing</string>
+    <string name="rc_modified_server_noneed">Built_in server running</string>
+    <string name="service_toast_already_running">Service already running</string>
+    <string name="service_toast_already_killed">Service has been killed</string>
+    <string name="adjust_title">Precise Control</string>
+    <string name="adjust_confirm">Apply</string>
+    <string name="til_err_parse">Not a float number</string>
+    <string name="til_err_ofr">Out of range</string>
+    <string name="read_profile_err">Read profile error</string>
+    <string name="java_server_running">Java Server Running</string>
+
+    <string name="main_card_status_querying">Querying</string>
+    <string name="main_card_playing">Playing</string>
+    <string name="main_card_playing_indicator">There are %s processes playing in AudioMixer</string>
+    <string name="main_card_preset">Application Preset</string>
+    <string name="main_card_preset_indicator">%s applications contains profile</string>
+    <string name="main_card_help">Help and Support</string>
+    <string name="main_card_invalid">Invalid</string>
+
+    <string name="toast_copied">Copied</string>
+    <string name="ad_pb">Yes</string>
+    <string name="ad_nb">Cancel</string>
+    <string name="ad_pb2">Yes</string>
+    <string name="ad_pb_no_rc_modify">Install, but no modify to .rc files</string>
+    <string name="ad_nb2">No</string>
+    <string name="ad_nb3">Close</string>
+    <string name="ad_nb4">Clear</string>
+    <string name="ad_processing">Processing…</string>
+    <string name="empty_view">Empty</string>
+
+    <string name="check_root">Root</string>
+    <string name="check_selinux">Selinux Status</string>
+    <string name="check_support">If Api/Abi Supported</string>
+    <string name="check_native_elf_info">Native version</string>
+    <string name="check_native_lib_info">Lib version</string>
+    <string name="check_audioserver_info">\'audioserver\' elf info </string>
+    <string name="check_daemon_status">Daemon status</string>
+    <string name="check_daemon_status_alive">Alive</string>
+    <string name="check_daemon_status_dead">Dead</string>
+    <string name="check_daemon_restart">Try restart daemon</string>
+    <string name="aplc_split_control">Split control</string>
+    <string name="aplc_precise_control">Precise control</string>
+    <string name="aplc_left">L[0,1]</string>
+    <string name="aplc_right">R[0,1]</string>
+    <string name="aplc_general">General[0,1]</string>
+    <string name="aplc_use_process_control">Use process control</string>
+
+    <string name="preset_disabled">Preset function disabled</string>
+    <string name="preset_disabled_define">This would not work when there are no server running or the
+    built-in server is not enabled</string>
+    <string name="preset_tutorial_title">Tutorial</string>
+    <string name="preset_tutorial_content">Assume you want to set a process called io.alcatraz.audiohq:play
+    (Attention!!!Process name does not equals to package name, you can try run \'ps\' command to find out),
+    Then you type the full process name below and the parameter below, after everything is checked ,apply it(If you
+        are  using weakkey mode you can use package name here),Finally, use it at your own risk, good luck</string>
+    <string name="preset_process_name">Process name:</string>
+    <string name="preset_list_sum">%d Packages</string>
+    <string name="preset_list_notice">Notice: This page would not load the profile you have set</string>
+    <string name="preset_loading">Loading…</string>
+    <string name="preset_search_hint">App name/Package name</string>
+    <string name="preset_tab_all_apps">All Apps</string>
+    <string name="preset_tab_has_set">Has set</string>
+    <string name="preset_status_has_profile">Has applied profile， </string>
+    <string name="preset_status_no_profile">No applied profile， </string>
+    <string name="preset_status_muted">Muted</string>
+    <string name="preset_status_unmuted">Not muted</string>
+    <string name="preset_action_search">Search</string>
+    <string name="preset_conflicted">\ \ Pkg level profile exist, this profile is useless</string>
+    <string name="preset_inner_title">Preset profile</string>
+    <string name="preset_manual_add">Manual add</string>
+    <string name="preset_manual_hint">Process name</string>
+    <string name="preset_manual_error">Invalid string!</string>
+
+    <string name="panel_control_title_1">Volume</string>
+    <string name="panel_control_general">General Volume</string>
+    <string name="panel_control_channel">Channel Volume</string>
+    <string name="panel_control_left">Left Volume</string>
+    <string name="panel_control_right">Right Volume</string>
+    <string name="panel_control_mute">Mute this application</string>
+    <string name="panel_control_tips_title">Tips</string>
+    <string name="panel_control_tips_message">The modification below will be multiplied under system volume,
+    and the channel volume will be multiplied under the general volume</string>
+
+    <string name="playing_filter">Show active process only</string>
+
+    <string name="status_server">Native server</string>
+    <string name="status_track_ctl_position">Track ctrl position</string>
+    <string name="status_auto_remove_flag">Auto remove</string>
+    <string name="status_thread_count">Existing threads</string>
+    <string name="status_track_lock_ctl">Track control lock type</string>
+
+    <string name="toast_cant_overlay">Can\'t do overlay, Pls grant permission</string>
+    <string name="notification_overlay">AudioHQ Foreground</string>
+
+    <!--SetupWizard-->
+    <string name="setup_step_next">Next</string>
+    <string name="setup_step_next_final">Done</string>
+    <string name="setup_step_before">Forward</string>
+    <string name="setup_1_intro">Hello my friend, before you can start, let\'s take some minutes to complete the setup</string>
+    <string name="setup_2_warning_vendor_system_title">Caution!</string>
+    <string name="setup_2_warning_vendor_system_info">This software(the module) will try rebind some
+    critical system libraries, it may cause you stuck at the boot animation and may make your audio system
+    crash, make sure you know how to recover before you flash the module,Also please MAKE SURE YOUR SeLinux
+    is PERMISSIVE or can be set to permissive, the module will try shut down SeLinux on booting, this software
+    will not work</string>
+    <string name="setup_2_warning_vendor_system_unlock">Understood and unlock</string>
+    <string name="setup_2_requirements_not_meet_title">Requirements not meet</string>
+    <string name="setup_2_requirements_not_meet_info">There are risks to proceed further installation.
+    Next step has been locked, if you know what you are doing and know how to remove the module from recovery
+    You can click unlock below</string>
+    <string name="setup_2_warning_delay">Please read the warning carefully, this page will lock for 10s</string>
+    <string name="setup_check_granted">Granted</string>
+    <string name="setup_check_deny">Denied</string>
+    <string name="setup_3_install_title">Installation</string>
+    <string name="setup_3_install_info">Now, go to the website to download the module and install.
+        This action may cause DAMAGE to your system, please make sure you know how to recover before you
+    install the module</string>
+    <string name="setup_3_install_page">Download</string>
+    <string name="setup_3_installed">I have installed the matched module</string>
+    <string name="setup_3_installed_title">Install Version</string>
+    <string name="setup_3_installed_summary">Current apk supports native revision : &current_match_version;</string>
+    <string name="setup_3_installed_detected">Detected : %s</string>
+    <string name="setup_4_modify_rc_title">Modify audioserver.rc(requires reboot)</string>
+    <string name="setup_4_modify_rc_info">Modify /system/etc/init/audioserver.rc,
+        to enable built-in server,Attention:This would NOT work when /system is ro or .rc files are packaged in boot.img
+        ,or the /system is ro(for /system ro, you can try write in recovery)</string>
+    <string name="setup_4_modify_rc_already">Has modified</string>
+    <string name="setup_4_modify_rc_not_yet">No modify done</string>
+    <string name="setup_4_modify_rc_warning">This action requires reboot, proceed?</string>
+    <string name="setup_6_done">Congratulation, now the installation process is completed</string>
+    <string name="setup_current_update">Current Update</string>
+    <string name="setup_selinux_check">SeLinux Check</string>
+    <string name="setup_selinux_definition">Your SeLinux is required to be turned to permissive, the module will try \'setenforce 0\' on boot if it still shows Enforcing below,
+    that means your kernel denied to turn it off</string>
+    <string name="setup_permissions">Permissions</string>
+    <string name="setup_permission_ignore_battery">Ignore battery optimization</string>
+    <string name="setup_permission_overlay">System window overlay(You need to go Preference activity to enable)</string>
+    <string name="setup_permission_request">Request</string>
+    <string name="setup_permission_granted">Granted</string>
+
+    <!--Preferences-->
+    <string name="pref_1_t">Background</string>
+    <string name="pref_1_1">Service type</string>
+    <string name="pref_1_2">Modify audioserver.rc(requires reboot)</string>
+    <string name="pref_1_2_summary">Modify audioserver.rc to enable built-in server.
+        This would NOT work when /system is ro or .rc files are packaged in boot.img</string>
+    <string name="pref_1_3">Boot</string>
+    <string name="pref_1_3_summary">Forced to start native daemon on boot</string>
+    <string name="pref_1_4">Float Service</string>
+    <string name="pref_1_4_summary">Run a service to show float window when the system volume is changed(grant ignore battery optimization pls)</string>
+    <string name="pref_2_t">Security</string>
+    <string name="pref_2_t_summary">Default silent, default profiles</string>
+    <string name="pref_2_1">Unset progress default silenced</string>
+    <string name="pref_2_1_summary">Process with no profile will be default silenced</string>
+    <string name="pref_2_2">Pid Mode</string>
+    <string name="pref_2_2_summary">Use pid as adjust indicator,use it when you don\t wnt to save settings
+    or the proc read function does not work</string>
+    <string name="pref_2_3">Default Profile</string>
+    <string name="pref_2_3_summary">Set default volume when there are no profile</string>
+    <string name="pref_2_4">Activate protector service</string>
+    <string name="pref_2_4_summary">May be killed by some system, if you want to use this, grant ignore battery optimization pls</string>
+    <string name="pref_3_t">Others</string>
+    <string name="pref_3_t_summary">check update, profile clear and so on</string>
+    <string name="pref_3_1">Check update</string>
+    <string name="pref_3_2">Clear profiles</string>
+    <string name="pref_3_3">Uninstall native files</string>
+    <string name="pref_3_4">Use package name as primary key</string>
+    <string name="pref_3_4_summary">The layout and effect will be changed</string>
+    <string name="pref_3_5">Show process with same package name in group</string>
+    <string name="pref_3_5_summary">Beta</string>
+    <string name="pref_3_6">Language</string>
+    <string name="pref_4_t">Float window</string>
+    <string name="pref_4_t_summary">Float service toggle and customization</string>
+    <string name="pref_4_1">Window layout gravity</string>
+    <string name="pref_4_2">Background color</string>
+    <string name="pref_4_3">Use foreground notification</string>
+    <string name="pref_4_3_summary">This will create a foreground notification to keep float service alive</string>
+    <string name="pref_4_4">Dismiss delay(ms)</string>
+    <string name="pref_4_5">Top margin(dp) For the 8.1 and below in the future</string>
+    <string name="pref_4_6">Top margin for landscape</string>
+    <string name="pref_4_7">Icon tint</string>
+    <string name="pref_4_8">Toggle size</string>
+    <string name="pref_4_9">Font color</string>
+    <string name="pref_4_10">Side margin(dp)</string>
+    <string name="pref_4_11">Toggle corner radius(dp)</string>
+    <string name="pref_4_12">Card corner radius(dp)</string>
+    <string name="pref_4_13">SeekBar color</string>
+    <string name="pref_4_14">Directly trigger the float window</string>
+    <string name="pref_4_14_summary">(Experimental)Run a process to listen the \'getevent\' stream, may not work on some device</string>
+    <string name="pref_invalid_integer">Invalid integer</string>
+    <string name="pref_invalid_color">Invalid color</string>
+    <string name="pref_need_to_restart_playing_process">Need to restart playing process</string>
+
+    <string name="pref_default_silent_warning_title">Warning</string>
+    <string name="pref_default_silent_warning_message">If you enable this option,
+        please make sure your phone and other critical system process\'s volume has been set, unless
+    you want to make your phone call to hear like silent</string>
+    <string name="pref_clear_profile_confirm">You are clearing profiles,proceed?</string>
+
+    <!--About-->
+    <string name="au_l_1">Version</string>
+    <string name="au_l_2">Developer</string>
+    <string name="au_l_2_1">Alcatraz,Mr_Dennis(Coolapk)</string>
+    <string name="au_l_3">Check sourcecode</string>
+    <string name="au_l_4">Open source Licenses</string>
+    <string name="au_l_4_1">Respect to opensource</string>
+    <string name="au_osp">Opensource Projects</string>
+    <string name="adjust_default_value" tools:ignore="MissingTranslation">1.0</string>
+
+    <string name="lib_version_mismatch">Lib version mismatch，current apk support lib[&current_match_version;],11.23.21,elf 0.9.2</string>
+
+    <string name="install_warning">The installation process contains a dangerous action,
+        replace the /system/lib(64)/libaudioflinger.so, and the /system/etc/init/audioserver.rc
+        this action may cause system can\'t start, turning your device into a brick or cause unrecoverable damage to your hardware,
+        I strongly recommend to you proceed this action ONLY IF you have installed a file manager functional recovery
+        and BACKUP the file(s) I mentioned above.</string>
+    <string name="uninstall_steps">Uninstall or disable id magisk<!--1. Replace the backup libaudioflinger.so to /system/lib(64), set
+        permission as 0644 (rw-r-r)\n
+        2. Delete /system/bin/audiohq\n
+        3. Replace the backup audioserver.rc to /system/etc/init/audioserver.rc\n
+        Auto backup position:/sdcard/audiohq_backups-->
+    </string>
+    <string name="install_title">Native file not installed</string>
+    <string name="install_not_installed">Module not installed, not the match version, or SeLinux Enforcing, current matches version: &current_match_version; ,date: &current_match_date;</string>
+    <string name="install_confirm_title">Install?</string>
+    <string name="install_confirm_support">Support: "32-bit LSB arm" /system/bin/audioserver elf, auto backup position /sdcard/audiohq_backups,The system will reboot after the installation is successful!!!,
+        If your selinux in disabled or permissive you may select "Install, but no modify to .rc files"</string>
+    <string name="install_confirm_detect">Detected: </string>
+    <string name="install_fail_title">Installation Failed</string>
+    <string name="install_fail_message">You may retry，if this dialog always shown, please try install manually</string>
+    <string name="install_cant_mount_rw">Can\'t mount /system as read-write, please try install manually</string>
+    <string name="install_magisk_not_installed">Magisk not installed, do not try install native file before you get Magisk installed</string>
+    <string name="install_retry">Retry</string>
+
+<!--    Do Not Translate the content below-->
+    <string name="transition_status_image" translatable="false">status_image</string>
+    <string name="transition_status_indicator" translatable="false">status_indicator</string>
+    <string name="transition_playing_image" translatable="false">playing_image</string>
+    <string name="transition_playing_indicator" translatable="false">playing_indicator</string>
+    <string name="transition_preset_image" translatable="false">preset_image</string>
+    <string name="transition_preset_indicator" translatable="false">preset_indicator</string>
+    <string name="transition_preset_fab" translatable="false">preset_fab</string>
+    <string name="transition_author_label" translatable="false">author_label</string>
+    <string name="transition_preset_inner_fab" translatable="false">preset_inner_fab</string>
+    <string name="transition_preset_inner_label" translatable="false">preset_inner_label</string>
+    <string name="transition_preset_inner_icon" translatable="false">preset_inner_icon</string>
+</resources>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_1_t">
+        <CheckBoxPreference
+            android:icon="@drawable/ic_branding_watermark_gray_24dp"
+            android:key="float_service"
+            android:summary="@string/pref_1_4_summary"
+            android:title="@string/pref_1_4" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_4_t">
+        <ListPreference
+            android:defaultValue="start_top"
+            android:dialogTitle="@string/pref_4_1"
+            android:entries="@array/entries_for_float_gravity"
+            android:entryValues="@array/entryvalue_for_float_gravity"
+            android:key="float_gravity"
+            android:title="@string/pref_4_1" />
+
+        <EditTextPreference
+            android:defaultValue="#ffffff"
+            android:key="float_background"
+            android:title="@string/pref_4_2" />
+
+        <CheckBoxPreference
+            android:key="float_foreground_notification"
+            android:summary="@string/pref_4_3_summary"
+            android:title="@string/pref_4_3" />
+
+        <EditTextPreference
+            android:defaultValue="3000"
+            android:key="float_dismiss_delay"
+            android:title="@string/pref_4_4" />
+
+        <EditTextPreference
+            android:defaultValue="0"
+            android:key="float_margin_top"
+            android:title="@string/pref_4_5" />
+
+        <EditTextPreference
+            android:defaultValue="0"
+            android:key="float_margin_top_landscape"
+            android:title="@string/pref_4_6" />
+
+        <EditTextPreference
+            android:defaultValue="#009688"
+            android:key="float_icon_tint"
+            android:title="@string/pref_4_7" />
+
+        <EditTextPreference
+            android:defaultValue="52"
+            android:key="float_toggle_size"
+            android:title="@string/pref_4_8" />
+
+        <EditTextPreference
+            android:defaultValue="#3C3C3C"
+            android:key="float_font_color"
+            android:title="@string/pref_4_9" />
+
+        <EditTextPreference
+            android:defaultValue="8"
+            android:key="float_side_margin"
+            android:title="@string/pref_4_10" />
+
+        <EditTextPreference
+            android:defaultValue="2"
+            android:key="float_toggle_corner_radius"
+            android:title="@string/pref_4_11" />
+
+        <EditTextPreference
+            android:defaultValue="2"
+            android:key="float_card_radius"
+            android:title="@string/pref_4_12" />
+
+        <EditTextPreference
+            android:defaultValue="#ff5722"
+            android:key="float_seek_bar_color"
+            android:title="@string/pref_4_13" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="float_direct_react"
+            android:summary="@string/pref_4_14_summary"
+            android:title="@string/pref_4_14" />
+    </PreferenceCategory>
+</PreferenceScreen>

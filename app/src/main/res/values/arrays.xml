@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string-array name="entries_for_language">
+        <item>Auto</item>
+        <item>Chinese</item>
+        <item>English</item>
+    </string-array>
+
+    <string-array name="entries_for_float_gravity">
+        <item>Start Top</item>
+        <item>End Top</item>
+    </string-array>
+
+    <string-array name="setup_page_titles">
+        <item>Welcome</item>
+        <item>Requirements check</item>
+        <item>Module Install</item>
+        <item>Wait a minute…</item>
+        <item>Done!</item>
+    </string-array>
+
+    <!--Please DO NOT add translation to the arrays below-->
+
+    <string-array name="entryvalue_for_float_gravity">
+        <item>start_top</item>
+        <item>end_top</item>
+    </string-array>
+
+    <string-array name="entryvalue_for_language">
+        <item>auto</item>
+        <item>zh</item>
+        <item>en</item>
+    </string-array>
+
+    <string-array name="preference_keys" tools:ignore="MissingTranslation">
+        <item>modified_rc</item>
+        <item>service</item>
+        <item>boot</item>
+        <item>default_silent</item>
+        <item>pid_mode</item>
+    </string-array>
+
+</resources>
