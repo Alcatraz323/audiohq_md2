@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [
     <!ENTITY current_match_version "0.91">
     <!ENTITY current_match_version_code "1">
-    <!ENTITY current_match_date "2020.3.15">]>
+    <!ENTITY current_match_date "2020.3.16">]>
 <resources>
     <!-- 更新修改部分 -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200316 alpha2</string>
+    <string name="update_title">20200317 beta1</string>
     <string name="update_info">
     1.UI变更，增强动画\n
     2.音量算法更新，包名>进程名>主音量>声道控制\n
@@ -16,7 +16,12 @@
     7.尝试修复多窗口/不消失问题\n
     8.隐藏最近任务中卡片\n
     9.尝试修复悬浮窗动画闪烁问题\n
-    10.稳定性提升
+    10.稳定性提升\n
+    11.各种动画问题修复\n
+    12.修复宽度导致按钮挤压问题\n
+    13.添加横屏侧面修正选项\n
+    14.修复拖动条重置消失时间的问题\n
+    15.添加音量改变重置消失计时器机制
     </string>
 
     <!-- 一般 -->
@@ -208,6 +213,7 @@
     <string name="pref_4_13">拖动条颜色(若使用主题,此项可能不生效)</string>
     <string name="pref_4_14">按键响应直接调出悬浮窗</string>
     <string name="pref_4_14_summary">(实验性)监听getevent输出以实现功能，但部分设备不可用</string>
+    <string name="pref_4_15">横屏侧面修正距离(dp)</string>
     <string name="pref_invalid_integer">无效整数</string>
     <string name="pref_invalid_color">无效颜色</string>
     <string name="pref_need_to_restart_playing_process">需要完全重启播放进程(重启系统最好)</string>

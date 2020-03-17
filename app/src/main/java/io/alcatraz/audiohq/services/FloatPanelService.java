@@ -89,6 +89,7 @@ public class FloatPanelService extends Service {
     String toggle_size;
     String font_color;
     String side_margin;
+    String side_margin_landscape;
     String toggle_corner_radius;
     String card_radius;
     String seek_color;
@@ -128,8 +129,10 @@ public class FloatPanelService extends Service {
         observer.setOnVolumeChangeListener(new VolumeChangeObserver.OnVolumeChangeListener() {
             @Override
             public void onVolumeChange() {
-                if(!direct_react) {
+                if (!direct_react) {
+                    handler.removeCallbacks(cleaner);
                     showPanel();
+                    handler.postDelayed(cleaner, Integer.parseInt(dismiss_delay));
                 }
             }
         });
@@ -163,7 +166,7 @@ public class FloatPanelService extends Service {
                     e.printStackTrace();
                 }
             }
-        });
+        }, handler, cleaner);
         listener_thread = new Thread(listener);
         listener_thread.start();
     }
@@ -186,7 +189,7 @@ public class FloatPanelService extends Service {
             layoutParams.gravity = Gravity.START | Gravity.TOP;
         else if (gravity.equals("end_top"))
             layoutParams.gravity = Gravity.END | Gravity.TOP;
-        layoutParams.x = 0;
+        layoutParams.x = Utils.Dp2Px(this, Integer.parseInt(side_margin));
         layoutParams.y = Utils.Dp2Px(this, Integer.parseInt(margin_top));
         if (foreground_service)
             startForeground(1, getNotification());
@@ -207,16 +210,16 @@ public class FloatPanelService extends Service {
         adapter = new FloatAdapter(this, data, handler, cleaner);
 
         if (gravity.equals("start_top")) {
-            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) toggle.getLayoutParams();
-            lp.setMarginStart(Utils.Dp2Px(this, Integer.parseInt(side_margin)));
-            toggle.setLayoutParams(lp);
+//            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) toggle.getLayoutParams();
+//            lp.setMarginStart(Utils.Dp2Px(this, Integer.parseInt(side_margin)));
+//            toggle.setLayoutParams(lp);
             slide_in_animation = AnimationUtils.loadAnimation(this, R.anim.slide_left);
             slide_out_animation = AnimationUtils.loadAnimation(this, R.anim.slide_left_back);
             list_side_out_anim = AnimationUtils.loadAnimation(this, R.anim.slide_left_back);
         } else if (gravity.equals("end_top")) {
-            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) toggle.getLayoutParams();
-            lp.setMarginEnd(Utils.Dp2Px(this, Integer.parseInt(side_margin)));
-            toggle.setLayoutParams(lp);
+//            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) toggle.getLayoutParams();
+//            lp.setMarginEnd(Utils.Dp2Px(this, Integer.parseInt(side_margin)));
+//            toggle.setLayoutParams(lp);
             slide_in_animation = AnimationUtils.loadAnimation(this, R.anim.slide_right);
             slide_out_animation = AnimationUtils.loadAnimation(this, R.anim.slide_right_back);
             list_side_out_anim = AnimationUtils.loadAnimation(this, R.anim.slide_right_back);
@@ -232,7 +235,6 @@ public class FloatPanelService extends Service {
             public void onAnimationEnd(Animation animation) {
                 try {
                     windowManager.removeViewImmediate(root);
-                    listView.setVisibility(View.GONE);
                 } catch (Exception e) {
 
                 }
@@ -245,10 +247,29 @@ public class FloatPanelService extends Service {
             }
         });
 
+        list_side_out_anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                clearList();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
         toggle.setRadius(Utils.Dp2Px(this, Float.parseFloat(toggle_corner_radius)));
         adapter.setCardRadius(Utils.Dp2Px(this, Float.parseFloat(card_radius)));
         adapter.setCardBackground(background);
         adapter.setCardSeekBarColor(seek_color);
+        adapter.setDelayed(Integer.parseInt(dismiss_delay));
+        listener.setDelayed(Integer.parseInt(dismiss_delay));
 
         int tg_size_integer = Utils.Dp2Px(this, Integer.parseInt(toggle_size));
         toggle.setCardBackgroundColor(Color.parseColor(background));
@@ -262,18 +283,9 @@ public class FloatPanelService extends Service {
 
         toggle.setOnClickListener(view -> {
             if (adapter.getCount() != 0) {
-                if (listView.getVisibility() == View.GONE) {
-                    listView.setVisibility(View.VISIBLE);
-                    listView.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            adapter.notifyDataSetChanged();
-                            listView.scheduleLayoutAnimation();
-                        }
-                    });
-                } else {
-                    AnimateUtils.playEnd(listView);
-                }
+                listView.startAnimation(list_side_out_anim);
+            } else {
+                updateList();
             }
         });
         toggle.setOnTouchListener(new View.OnTouchListener() {
@@ -310,14 +322,16 @@ public class FloatPanelService extends Service {
 
         if (ori == Configuration.ORIENTATION_LANDSCAPE) {
             layoutParams.y = Utils.Dp2Px(this, Integer.parseInt(margin_top_landscape));
+            layoutParams.x = Utils.Dp2Px(this, Integer.parseInt(side_margin_landscape));
         } else {
             layoutParams.y = Utils.Dp2Px(this, Integer.parseInt(margin_top));
+            layoutParams.x = Utils.Dp2Px(this, Integer.parseInt(side_margin));
         }
     }
 
     private void showFloatingWindow() {
         if (Settings.canDrawOverlays(this)) {
-            updateList();
+
             checkAndAdjustHeight();
 
             windowManager.addView(root, layoutParams);
@@ -352,6 +366,8 @@ public class FloatPanelService extends Service {
             public void onSuccess(PlayingSystem result) {
                 data.clear();
                 data.addAll(result.getData());
+                adapter.notifyDataSetChanged();
+                listView.scheduleLayoutAnimation();
             }
 
             @Override
@@ -359,6 +375,11 @@ public class FloatPanelService extends Service {
 
             }
         });
+    }
+
+    public void clearList() {
+        data.clear();
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -400,6 +421,8 @@ public class FloatPanelService extends Service {
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_SEEK_COLOR);
         direct_react = (boolean) spf.get(this, Constants.PREF_FLOAT_DIRECT_REACT,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_DIRECT_REACT);
+        side_margin_landscape = (String) spf.get(this, Constants.PREF_FLOAT_WINDOW_SIDE_MARGIN_LANDSCAPE,
+                Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_SIDE_MARGIN_LANDSCAPE);
         listener.setDirect_react(direct_react);
 
     }

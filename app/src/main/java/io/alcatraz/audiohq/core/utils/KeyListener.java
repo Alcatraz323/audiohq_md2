@@ -2,6 +2,7 @@ package io.alcatraz.audiohq.core.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.Looper;
 
 import java.io.BufferedReader;
@@ -16,10 +17,24 @@ public class KeyListener implements Runnable {
     private boolean direct_react = false;
     private Context context;
     private KeyListenInterface listenInterface;
+    private Handler cleaner;
+    private Runnable cleanTask;
 
-    public KeyListener(Context context, KeyListenInterface callback) {
+    public int getDelayed() {
+        return delayed;
+    }
+
+    public void setDelayed(int delayed) {
+        this.delayed = delayed;
+    }
+
+    private int delayed = 3000;
+
+    public KeyListener(Context context, KeyListenInterface callback, Handler cleaner, Runnable cleanTask) {
         listenInterface = callback;
         this.context = context;
+        this.cleaner = cleaner;
+        this.cleanTask = cleanTask;
     }
 
     @Override
@@ -39,7 +54,9 @@ public class KeyListener implements Runnable {
                 }
                 if (readLine.contains("KEY_VOLUME")) {
                     if (direct_react) {
+                        cleaner.removeCallbacks(cleanTask);
                         context.sendBroadcast(new Intent().setAction(FloatPanelService.AHQ_FLOAT_TRIGGER_ACTION));
+                        cleaner.postDelayed(cleanTask,delayed);
                     }
                 }
             }

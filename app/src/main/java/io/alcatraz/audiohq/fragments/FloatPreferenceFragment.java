@@ -33,6 +33,7 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
     private EditTextPreference float_card_corner_radius;
     private EditTextPreference float_seek_color;
     private CheckBoxPreference float_direct_react;
+    private EditTextPreference float_side_margin_landscape;
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object o) {
@@ -60,6 +61,7 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
             case Constants.PREF_FLOAT_WINDOW_SIDE_MARGIN:
             case Constants.PREF_FLOAT_WINDOW_TOGGLE_CORNER_RADIUS:
             case Constants.PREF_FLOAT_WINDOW_CARD_RADIUS:
+            case Constants.PREF_FLOAT_WINDOW_SIDE_MARGIN_LANDSCAPE:
                 String delay = (String) o;
                 try {
                     Integer.parseInt(delay);
@@ -118,6 +120,7 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
         float_foreground_service.setOnPreferenceChangeListener(this);
         float_card_corner_radius.setOnPreferenceChangeListener(this);
         float_direct_react.setOnPreferenceChangeListener(this);
+        float_side_margin_landscape.setOnPreferenceChangeListener(this);
     }
 
     private void findPreferences() {
@@ -136,6 +139,7 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
         float_card_corner_radius = findPreference(Constants.PREF_FLOAT_WINDOW_CARD_RADIUS);
         float_seek_color = findPreference(Constants.PREF_FLOAT_WINDOW_SEEK_COLOR);
         float_direct_react = findPreference(Constants.PREF_FLOAT_DIRECT_REACT);
+        float_side_margin_landscape = findPreference(Constants.PREF_FLOAT_WINDOW_SIDE_MARGIN_LANDSCAPE);
     }
 
     @Override
@@ -184,6 +188,8 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_CARD_RADIUS);
         String sk_color = (String) spfu.get(getContext(), Constants.PREF_FLOAT_WINDOW_SEEK_COLOR,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_SEEK_COLOR);
+        String s_margin_l = (String) spfu.get(getContext(), Constants.PREF_FLOAT_WINDOW_SIDE_MARGIN_LANDSCAPE,
+                Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_SIDE_MARGIN_LANDSCAPE);
 
         float_background.setSummary(f_b_color);
         float_dismiss_delay.setSummary(delay);
@@ -196,5 +202,6 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
         float_toggle_corner_radius.setSummary(c_tg_radius);
         float_card_corner_radius.setSummary(c_radius);
         float_seek_color.setSummary(sk_color);
+        float_side_margin_landscape.setSummary(s_margin_l);
     }
 }

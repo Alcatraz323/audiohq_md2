@@ -2,12 +2,12 @@
 <!DOCTYPE resources [
     <!ENTITY current_match_version "0.91">
     <!ENTITY current_match_version_code "1">
-    <!ENTITY current_match_date "2020.3.15">
+    <!ENTITY current_match_date "2020.3.16">
     ]>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Change every update -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200316 alpha2</string>
+    <string name="update_title">20200317 beta1</string>
     <string name="update_info">
     1.UI Change\n
     2.Volume calculation method changed\n
@@ -18,7 +18,12 @@
     7.fixed multi window issue\n
     8.hide from recent tasks\n
     9.fixed animation flash issue\n
-    10.stability upgrade</string>
+    10.stability upgrade\n
+    11.fixed animation issue\n
+    12.fixed width compress\n
+    13.added side margin landscape option\n
+    14.fixed fix dismiss time issue\n
+    15.added float dismiss timer reset on volume change</string>
 
     <!-- Common -->
     <string name="app_name">Audio HeadQuarter</string>
@@ -220,6 +225,7 @@
     <string name="pref_4_13">SeekBar color</string>
     <string name="pref_4_14">Directly trigger the float window</string>
     <string name="pref_4_14_summary">(Experimental)Run a process to listen the \'getevent\' stream, may not work on some device</string>
+    <string name="pref_4_15">Side margin for landscape(dp)</string>
     <string name="pref_invalid_integer">Invalid integer</string>
     <string name="pref_invalid_color">Invalid color</string>
     <string name="pref_need_to_restart_playing_process">Need to restart playing process</string>

@@ -33,6 +33,16 @@ public class FloatAdapter extends BaseAdapter {
     private int card_corner = 0;
     private int card_seekbar_color = 0;
 
+    public int getDelayed() {
+        return delayed;
+    }
+
+    public void setDelayed(int delayed) {
+        this.delayed = delayed;
+    }
+
+    private int delayed = 3000;
+
 
     public FloatAdapter(Context context, List<Pkgs> data, Handler cleaner, Runnable cleanTask) {
         this.data = data;
@@ -97,7 +107,7 @@ public class FloatAdapter extends BaseAdapter {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                cleaner.postDelayed(cleanTask,3000);
+                cleaner.postDelayed(cleanTask,delayed);
             }
         });
 

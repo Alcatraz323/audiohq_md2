@@ -64,6 +64,11 @@
             android:title="@string/pref_4_10" />
 
         <EditTextPreference
+            android:defaultValue="8"
+            android:key="float_side_margin_landscape"
+            android:title="@string/pref_4_15" />
+
+        <EditTextPreference
             android:defaultValue="2"
             android:key="float_toggle_corner_radius"
             android:title="@string/pref_4_11" />

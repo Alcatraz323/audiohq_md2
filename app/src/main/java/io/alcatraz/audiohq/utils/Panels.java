@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -18,7 +19,14 @@ public class Panels {
         return new AlertDialog.Builder(context)
                 .setTitle(R.string.install_title)
                 .setMessage(R.string.install_not_installed)
-                .setPositiveButton(R.string.ad_pb, null).create();
+                .setPositiveButton(R.string.ad_pb, null)
+                .setPositiveButton(R.string.setup_3_install_page, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        context.startActivity(new Intent(Intent.ACTION_VIEW,
+                                Uri.parse("https://alcatraz323.github.io/audiohq")));
+                    }
+                }).create();
     }
 
     public static AlertDialog getManualAddPanel(CompatWithPipeActivity activity){
