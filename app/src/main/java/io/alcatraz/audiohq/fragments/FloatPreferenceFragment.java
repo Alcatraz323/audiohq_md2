@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
@@ -34,6 +35,7 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
     private EditTextPreference float_seek_color;
     private CheckBoxPreference float_direct_react;
     private EditTextPreference float_side_margin_landscape;
+    private EditTextPreference float_filter;
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object o) {
@@ -80,11 +82,17 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
                 spfu.put(getContext(), preference.getKey(), (boolean) o);
                 getContext().sendBroadcast(new Intent().setAction(Constants.BROADCAST_ACTION_UPDATE_PREFERENCES));
                 return true;
+            case Constants.PREF_FLOAT_WINDOW_FILTER:
+                SharedPreferenceUtil spfu2 = SharedPreferenceUtil.getInstance();
+                spfu2.put(getContext(), preference.getKey(), (String) o);
+                getContext().sendBroadcast(new Intent().setAction(Constants.BROADCAST_ACTION_UPDATE_PREFERENCES));
+                return true;
         }
         return false;
     }
 
     private void bindLinsteners() {
+        showNotice();
         float_service.setOnPreferenceChangeListener((preference, o) -> {
             if (!Settings.canDrawOverlays(getContext())) {
                 Toast.makeText(getContext(), R.string.toast_cant_overlay, Toast.LENGTH_SHORT).show();
@@ -121,6 +129,7 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
         float_card_corner_radius.setOnPreferenceChangeListener(this);
         float_direct_react.setOnPreferenceChangeListener(this);
         float_side_margin_landscape.setOnPreferenceChangeListener(this);
+        float_filter.setOnPreferenceChangeListener(this);
     }
 
     private void findPreferences() {
@@ -140,6 +149,7 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
         float_seek_color = findPreference(Constants.PREF_FLOAT_WINDOW_SEEK_COLOR);
         float_direct_react = findPreference(Constants.PREF_FLOAT_DIRECT_REACT);
         float_side_margin_landscape = findPreference(Constants.PREF_FLOAT_WINDOW_SIDE_MARGIN_LANDSCAPE);
+        float_filter = findPreference(Constants.PREF_FLOAT_WINDOW_FILTER);
     }
 
     @Override
@@ -162,6 +172,13 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
                 float_gravity.setSummary(entry[i]);
             }
         }
+    }
+
+    private void showNotice(){
+        new AlertDialog.Builder(getContext())
+                .setTitle(R.string.pref_float_set_notice_title)
+                .setMessage(R.string.pref_float_set_notice_message)
+                .setPositiveButton(R.string.ad_pb,null).show();
     }
 
     private void updateEditTextSummay() {

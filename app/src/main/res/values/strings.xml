@@ -7,23 +7,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Change every update -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200317 beta1</string>
+    <string name="update_title">20200329 beta2</string>
     <string name="update_info">
-    1.UI Change\n
-    2.Volume calculation method changed\n
-    3.optimized module\n
-    4.more float window customization\n
-    5.fixed fullscreen float window issue\n
-    6.add direct float trigger(Experimental)\n
-    7.fixed multi window issue\n
-    8.hide from recent tasks\n
-    9.fixed animation flash issue\n
-    10.stability upgrade\n
-    11.fixed animation issue\n
-    12.fixed width compress\n
-    13.added side margin landscape option\n
-    14.fixed fix dismiss time issue\n
-    15.added float dismiss timer reset on volume change</string>
+        1.Whitelist for float window\n
+        2.Disabled some unreliable function\n
+        3.support SeLinux Enforcing(Magisk version>20.2)\n</string>
 
     <!-- Common -->
     <string name="app_name">Audio HeadQuarter</string>
@@ -46,6 +34,7 @@
     <string name="til_err_ofr">Out of range</string>
     <string name="read_profile_err">Read profile error</string>
     <string name="java_server_running">Java Server Running</string>
+    <string name="accessibility_description">AudioHQ gpio key trigger</string>
 
     <string name="main_card_status_querying">Querying</string>
     <string name="main_card_playing">Playing</string>
@@ -139,7 +128,7 @@
     <string name="setup_2_warning_vendor_system_info">This software(the module) will try rebind some
     critical system libraries, it may cause you stuck at the boot animation and may make your audio system
     crash, make sure you know how to recover before you flash the module,Also please MAKE SURE YOUR SeLinux
-    is PERMISSIVE or can be set to permissive, the module will try shut down SeLinux on booting, this software
+    is PERMISSIVE or can be set to permissive(the latest module may not need this, pls check Coolapk/Website intro for more information), this software
     will not work</string>
     <string name="setup_2_warning_vendor_system_unlock">Understood and unlock</string>
     <string name="setup_2_requirements_not_meet_title">Requirements not meet</string>
@@ -168,8 +157,7 @@
     <string name="setup_6_done">Congratulation, now the installation process is completed</string>
     <string name="setup_current_update">Current Update</string>
     <string name="setup_selinux_check">SeLinux Check</string>
-    <string name="setup_selinux_definition">Your SeLinux is required to be turned to permissive, the module will try \'setenforce 0\' on boot if it still shows Enforcing below,
-    that means your kernel denied to turn it off</string>
+    <string name="setup_selinux_definition">Your SeLinux is required to be turned to permissive(the latest module may not need this, pls check Coolapk/Website intro for more information)</string>
     <string name="setup_permissions">Permissions</string>
     <string name="setup_permission_ignore_battery">Ignore battery optimization</string>
     <string name="setup_permission_overlay">System window overlay(You need to go Preference activity to enable)</string>
@@ -226,9 +214,14 @@
     <string name="pref_4_14">Directly trigger the float window</string>
     <string name="pref_4_14_summary">(Experimental)Run a process to listen the \'getevent\' stream, may not work on some device</string>
     <string name="pref_4_15">Side margin for landscape(dp)</string>
+    <string name="pref_4_16">Filter(split by quot)</string>
+    <string name="pref_4_16_summary">Set the package which will not display in float window</string>
     <string name="pref_invalid_integer">Invalid integer</string>
     <string name="pref_invalid_color">Invalid color</string>
     <string name="pref_need_to_restart_playing_process">Need to restart playing process</string>
+    <string name="pref_float_set_notice_title">Notice</string>
+    <string name="pref_float_set_notice_message">Please wait the previous float window to dismiss before you change the preference,
+    unless you want the window stay on your screen and never updates</string>
 
     <string name="pref_default_silent_warning_title">Warning</string>
     <string name="pref_default_silent_warning_message">If you enable this option,

@@ -30,6 +30,7 @@ import android.widget.RelativeLayout;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.Nullable;
@@ -42,12 +43,13 @@ import io.alcatraz.audiohq.beans.AudioHQNativeInterface;
 import io.alcatraz.audiohq.beans.playing.Pkgs;
 import io.alcatraz.audiohq.beans.playing.PlayingSystem;
 import io.alcatraz.audiohq.core.utils.KeyListener;
-import io.alcatraz.audiohq.utils.AnimateUtils;
+import io.alcatraz.audiohq.extended.CancelOutsideRelativeLayout;
 import io.alcatraz.audiohq.utils.SharedPreferenceUtil;
 import io.alcatraz.audiohq.utils.Utils;
 
 public class FloatPanelService extends Service {
     public static final String AHQ_FLOAT_TRIGGER_ACTION = "ahq_float_trigger";
+    public static final String AHQ_FLOAT_DISCHAGE_ACTION = "ahq_float_discharge";
     UpdatePreferenceReceiver updatePreferenceReceiver;
     FloatWindowTrigger trigger;
     private String notificationId = "audiohq_floater";
@@ -60,7 +62,7 @@ public class FloatPanelService extends Service {
     Handler handler = new Handler();
 
     //Widgets
-    View root;
+    RelativeLayout root;
     CardView toggle;
     ListView listView;
     ImageView toggle_icon;
@@ -94,6 +96,7 @@ public class FloatPanelService extends Service {
     String card_radius;
     String seek_color;
     boolean direct_react;
+    List<String> filter = new ArrayList<>();
 
     Runnable cleaner = new Runnable() {
         @Override
@@ -198,15 +201,15 @@ public class FloatPanelService extends Service {
     @SuppressLint("ClickableViewAccessibility")
     private void initViews() {
         if (gravity.equals("start_top")) {
-            root = layoutInflater.inflate(R.layout.panel_float, null);
+            root = (RelativeLayout) layoutInflater.inflate(R.layout.panel_float, null);
 
         } else if (gravity.equals("end_top")) {
-            root = layoutInflater.inflate(R.layout.panel_float_right, null);
+            root = (RelativeLayout) layoutInflater.inflate(R.layout.panel_float_right, null);
         }
 
-        listView = root.findViewById(R.id.float_list);
-        toggle = root.findViewById(R.id.float_trigger);
-        toggle_icon = root.findViewById(R.id.float_toggle_icon);
+        listView = root.findViewById(R.id.audiohq_float_list);
+        toggle = root.findViewById(R.id.audiohq_float_trigger);
+        toggle_icon = root.findViewById(R.id.audiohq_float_toggle_icon);
         adapter = new FloatAdapter(this, data, handler, cleaner);
 
         if (gravity.equals("start_top")) {
@@ -365,7 +368,12 @@ public class FloatPanelService extends Service {
             @Override
             public void onSuccess(PlayingSystem result) {
                 data.clear();
-                data.addAll(result.getData());
+                List<Pkgs> current_result = result.getData();
+                for(Pkgs i : current_result){
+                    if(!filter.contains(i.getPkg())){
+                        data.add(i);
+                    }
+                }
                 adapter.notifyDataSetChanged();
                 listView.scheduleLayoutAnimation();
             }
@@ -424,7 +432,13 @@ public class FloatPanelService extends Service {
         side_margin_landscape = (String) spf.get(this, Constants.PREF_FLOAT_WINDOW_SIDE_MARGIN_LANDSCAPE,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_SIDE_MARGIN_LANDSCAPE);
         listener.setDirect_react(direct_react);
-
+        String filter_raw = (String) spf.get(this, Constants.PREF_FLOAT_WINDOW_FILTER,
+                Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_FILTER);
+        if (filter_raw != null) {
+            filter.clear();
+            String[] filter_cooking = filter_raw.split(",");
+            Collections.addAll(filter, filter_cooking);
+        }
     }
 
     private Notification getNotification() {

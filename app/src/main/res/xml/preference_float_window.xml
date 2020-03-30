@@ -83,10 +83,20 @@
             android:key="float_seek_bar_color"
             android:title="@string/pref_4_13" />
 
+        <EditTextPreference
+            android:key="float_filter"
+            android:title="@string/pref_4_16"
+            android:summary="@string/pref_4_16_summary"/>
+
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="float_direct_react"
             android:summary="@string/pref_4_14_summary"
             android:title="@string/pref_4_14" />
+
+        <EditTextPreference
+            android:defaultValue="#ff5722"
+            android:key="float_seek_bar_color"
+            android:title="@string/pref_4_13" />
     </PreferenceCategory>
 </PreferenceScreen>

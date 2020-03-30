@@ -52,6 +52,8 @@ public class Constants {
     public static final boolean DEFAULT_VALUE_PREF_FLOAT_DIRECT_REACT = false;
     public static final String PREF_FLOAT_WINDOW_SIDE_MARGIN_LANDSCAPE = "float_side_margin_landscape";
     public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_SIDE_MARGIN_LANDSCAPE = "8";
+    public static final String PREF_FLOAT_WINDOW_FILTER = "float_filter";
+    public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_FILTER = "";
 
     public static final String PREF_DEFAULT_PROFILE = "default_profile";
     public static final String PREF_CHECK_UPDATE = "check_update";

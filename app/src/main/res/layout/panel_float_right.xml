@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/float_root"
+    android:id="@+id/audiohq_float_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="end">
 
     <ListView
-        android:id="@+id/float_list"
+        android:id="@+id/audiohq_float_list"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:divider="@null"
         android:visibility="visible" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/float_trigger"
+        android:id="@+id/audiohq_float_trigger"
         android:layout_width="52dp"
         android:layout_height="52dp"
-        android:layout_toEndOf="@id/float_list"
+        android:layout_toEndOf="@id/audiohq_float_list"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardElevation="2dp"
@@ -32,7 +32,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/float_toggle_icon"
+                android:id="@+id/audiohq_float_toggle_icon"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:scaleX="0.7"

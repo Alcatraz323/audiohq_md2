@@ -5,23 +5,15 @@
 <resources>
     <!-- 更新修改部分 -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200317 beta1</string>
+    <string name="update_title">20200329 beta2</string>
     <string name="update_info">
-    1.UI变更，增强动画\n
-    2.音量算法更新，包名>进程名>主音量>声道控制\n
-    3.统一模块\n
-    4.添加更多悬浮窗自定义选项\n
-    5.修复全屏悬浮窗上浮问题\n
-    6.添加音量键直接触发方式(实验性,默认关闭)\n
-    7.尝试修复多窗口/不消失问题\n
-    8.隐藏最近任务中卡片\n
-    9.尝试修复悬浮窗动画闪烁问题\n
-    10.稳定性提升\n
-    11.各种动画问题修复\n
-    12.修复宽度导致按钮挤压问题\n
-    13.添加横屏侧面修正选项\n
-    14.修复拖动条重置消失时间的问题\n
-    15.添加音量改变重置消失计时器机制
+        先说一下，0.7升上来的最好清除下配置，是软件内设置->其他->清除配置，不是app清除数据，不然可能有奇特问题\n
+        还有悬浮窗设置需要等待前一个完全消失，不然就会留在屏幕上，按键响应不是必须开的，不开是音量变化响应，允许自定义触发，建议百度怎么用am命令发广播\n
+        广播的action是ahq_float_trigger\n\n
+
+        1.添加对于悬浮窗的白名单\n
+        2.禁用部分不稳定功能\n
+        3.支持SeLinux Enforcing(Magisk版本>20.2，且具有严格条件要求)\n
     </string>
 
     <!-- 一般 -->
@@ -45,6 +37,7 @@
     <string name="til_err_ofr">超出范围</string>
     <string name="read_profile_err">配置文件读取失败</string>
     <string name="java_server_running">Java服务器已启动</string>
+    <string name="accessibility_description">AudioHQ按键响应器</string>
 
     <string name="main_card_status_querying">获取中…</string>
     <string name="main_card_playing">正在播放</string>
@@ -133,7 +126,7 @@
     <string name="setup_2_warning_vendor_system_title">警告！</string>
     <string name="setup_2_warning_vendor_system_info">本软件(模块)将尝试重定向一些系统关键库，这将会带来卡在开机界面
         以及音频系统异常的风险，如果你知道你在做什么并且懂得怎么通过twrp删除模块，你可以继续操作，并且！！！请确保你的SeLinux
-    已经关闭(permissive)或可被关闭，模块将会在开机前尝试关闭SeLinux.最后，使用本软件造成的任何后果由用户承担，祝你好运</string>
+    已经关闭(permissive)或可被关闭(最新模块对于特定情况可尝试不关闭，请参考酷安简介和网页说明)，不然无法工作.最后，使用本软件造成的任何后果由用户承担，祝你好运</string>
     <string name="setup_2_warning_vendor_system_unlock">明白风险并解锁</string>
     <string name="setup_2_requirements_not_meet_title">未满足全部安装要求</string>
     <string name="setup_2_requirements_not_meet_info">继续操作存在风险，下一步骤已被锁定，如果你清楚你在做什么，
@@ -157,14 +150,12 @@
     <string name="setup_6_done">好耶,安装过程已完成</string>
     <string name="setup_current_update">当前更新</string>
     <string name="setup_selinux_check">SeLinux 检查</string>
-    <string name="setup_selinux_definition">当前版本要求关闭SeLinux,若你的Selinux未关闭本软件将不会工作,
-        模块尝试在开机时执行setenforce 0,若下方仍显示SeLinux Enforcing,则表明你的内核不允许关闭SeLinux</string>
+    <string name="setup_selinux_definition">当前版本要求关闭SeLinux(最新模块对于特定情况可尝试不关闭，请参考酷安简介和网页说明)</string>
     <string name="setup_permissions">权限</string>
     <string name="setup_permission_ignore_battery">忽略电池优化</string>
     <string name="setup_permission_overlay">悬浮窗(授权后去设置手动启用)</string>
     <string name="setup_permission_request">请求权限</string>
     <string name="setup_permission_granted">已授权</string>
-
 
     <!--设置-->
     <string name="pref_1_t">后台</string>
@@ -208,15 +199,20 @@
     <string name="pref_4_8">开关边长(dp)</string>
     <string name="pref_4_9">字体颜色</string>
     <string name="pref_4_10">侧面修正距离(dp)</string>
-    <string name="pref_4_11">按钮圆角半径(dp)</string>
+    <string name="pref_4_11">按钮圆角半径(dp)(不要设置过大)</string>
     <string name="pref_4_12">卡片圆角半径(dp)</string>
     <string name="pref_4_13">拖动条颜色(若使用主题,此项可能不生效)</string>
     <string name="pref_4_14">按键响应直接调出悬浮窗</string>
     <string name="pref_4_14_summary">(实验性)监听getevent输出以实现功能，但部分设备不可用</string>
     <string name="pref_4_15">横屏侧面修正距离(dp)</string>
+    <string name="pref_4_16">过滤器/白名单(包名用英文逗号分隔)</string>
+    <string name="pref_4_16_summary">设置的包名将不会出现在悬浮窗内</string>
     <string name="pref_invalid_integer">无效整数</string>
     <string name="pref_invalid_color">无效颜色</string>
     <string name="pref_need_to_restart_playing_process">需要完全重启播放进程(重启系统最好)</string>
+    <string name="pref_float_set_notice_title">注意</string>
+    <string name="pref_float_set_notice_message">调整本页参数前请等待前一个悬浮窗完全消失，并且设置后几秒再触发新的悬浮窗，否则将会导致悬浮窗不消失，
+    如果你启动了按键响应但需要触动屏幕才有反应，证明不支持，本人Mi4 Los Android9是一样的情况，那个不是必须开启的，不开是随音量改变调出(不是随音量面板调出)，同时你可以使用shell命令自定义触发广播action=ahq_float_trigger</string>
 
     <string name="pref_default_silent_warning_title">警告</string>
     <string name="pref_default_silent_warning_message">若启用此项，请确保电话等进程的音量已被设置，若未设置可能导致听筒静音</string>
@@ -243,7 +239,7 @@
         自动备份文件位置:/sdcard/audiohq_backups-->
     </string>
     <string name="install_title">原生文件未安装</string>
-    <string name="install_not_installed">请刷入原生文件/模块安装后再打开本应用,若已安装，请检查模块位数,版本以及SeLinux状态，当前apk对应模块版本: &current_match_version; ,日期: &current_match_date;</string>
+    <string name="install_not_installed">请刷入原生文件/模块安装后再打开本应用,若已安装，请检查模块位数,版本以及SeLinux状态，当前apk对应模块版本: &current_match_version; ,网页文件日期: &current_match_date;</string>
     <string name="install_confirm_title">安装?</string>
     <string name="install_confirm_support">支持: "32-bit LSB arm" /system/bin/audioserver 可执行文件,自动备份位置/sdcard/audiohq_backups,自动备份可能失效，请确认手动备份文件存在,安装成功后将自动重启!!!</string>
     <string name="install_confirm_detect">当前: </string>

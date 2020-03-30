@@ -2,68 +2,81 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.alcatraz.audiohq">
 
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
+        android:name=".AudioHQApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
-        android:name=".AudioHQApplication"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:excludeFromRecents="true"
-            android:name=".activities.SetupActivity">
+            android:name=".activities.SetupActivity"
+            android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:excludeFromRecents="true"
-            android:name=".activities.PresetGeneralActivity" />
+            android:name=".activities.PresetGeneralActivity"
+            android:excludeFromRecents="true" />
         <activity
-            android:excludeFromRecents="true"
-            android:name=".activities.PreferenceActivity" />
+            android:name=".activities.PreferenceActivity"
+            android:excludeFromRecents="true" />
         <activity
-            android:excludeFromRecents="true"
-            android:name=".activities.MainActivity" />
+            android:name=".activities.MainActivity"
+            android:excludeFromRecents="true" />
         <activity
-            android:excludeFromRecents="true"
-            android:name=".activities.AboutActivity" />
+            android:name=".activities.AboutActivity"
+            android:excludeFromRecents="true" />
         <activity
-            android:excludeFromRecents="true"
-            android:name=".activities.PreferenceInnerActivity" />
+            android:name=".activities.PreferenceInnerActivity"
+            android:excludeFromRecents="true" />
         <activity
-            android:excludeFromRecents="true"
-            android:name=".activities.PresetInnerActivity" />
+            android:name=".activities.PresetInnerActivity"
+            android:excludeFromRecents="true" />
         <activity
-            android:excludeFromRecents="true"
-            android:name=".activities.PlayingGeneralActivity" />
+            android:name=".activities.PlayingGeneralActivity"
+            android:excludeFromRecents="true" />
         <activity
-            android:excludeFromRecents="true"
-            android:name=".activities.DefaultProfileActivity" />
+            android:name=".activities.DefaultProfileActivity"
+            android:excludeFromRecents="true" />
         <activity
-            android:excludeFromRecents="true"
-            android:name=".activities.CheckActivity" />
+            android:name=".activities.CheckActivity"
+            android:excludeFromRecents="true" />
         <activity
-            android:excludeFromRecents="true"
-            android:name=".activities.LogActivity" />
+            android:name=".activities.LogActivity"
+            android:excludeFromRecents="true" />
 
-        <receiver
-            android:name=".BootReceiver">
+        <receiver android:name=".BootReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </receiver>
 
         <service android:name=".services.FloatPanelService" />
+<!--        <service-->
+<!--            android:name=".services.Discharger"-->
+<!--            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.accessibilityservice.AccessibilityService" />-->
+<!--            </intent-filter>-->
+<!--            <meta-data-->
+<!--                android:name="android.accessibilityservice"-->
+<!--                android:resource="@xml/accessibility_discharger" />-->
+<!--        </service>-->
+
     </application>
 
 </manifest>

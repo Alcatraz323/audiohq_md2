@@ -5,9 +5,13 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -22,6 +26,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.alcatraz.audiohq.Constants;
+import io.alcatraz.audiohq.Easter;
 import io.alcatraz.audiohq.R;
 import io.alcatraz.audiohq.adapters.AuthorAdapter;
 import io.alcatraz.audiohq.adapters.QueryElementAdapter;
@@ -36,7 +41,8 @@ public class AboutActivity extends CompatWithPipeActivity {
     Map<Integer, List<String>> data = new HashMap<>();
     ListView lv;
     Toolbar tb;
-
+    Easter easter;
+    Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,8 @@ public class AboutActivity extends CompatWithPipeActivity {
         setContentView(R.layout.activity_about);
         initData();
         initViews();
+        easter = new Easter(this);
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
     }
 
     public void showDetailDev() {
@@ -80,7 +88,34 @@ public class AboutActivity extends CompatWithPipeActivity {
                 showOSPDialog();
             } else if (p1.getItemAtPosition(p3).toString().equals(getString(R.string.au_l_2))) {
                 showDetailDev();
+            }else {
+                if(vibrator.hasVibrator()){
+                    p2.post(() -> {
+                        vibrator.cancel();
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            vibrator.vibrate(VibrationEffect.createOneShot(100,VibrationEffect.DEFAULT_AMPLITUDE));
+                        }else {
+                            vibrator.vibrate(100);
+                        }
+                    });
+
+                }
+                easter.shortClick();
             }
+        });
+
+        lv.setOnItemLongClickListener((adapterView, view, i, l) -> {
+            if(i == 0){
+                view.post(() -> {
+                    vibrator.cancel();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
+                    } else {
+                        vibrator.vibrate(200);
+                    }
+                });
+            }
+            return true;
         });
     }
 

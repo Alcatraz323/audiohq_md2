@@ -6,6 +6,7 @@
             android:summary="@string/pref_2_1_summary"
             android:title="@string/pref_2_1" />
         <PreferenceScreen
+            android:enabled="false"
             android:key="default_profile"
             android:summary="@string/pref_2_3_summary"
             android:title="@string/pref_2_3" />
