@@ -43,7 +43,6 @@ import io.alcatraz.audiohq.beans.AudioHQNativeInterface;
 import io.alcatraz.audiohq.beans.playing.Pkgs;
 import io.alcatraz.audiohq.beans.playing.PlayingSystem;
 import io.alcatraz.audiohq.core.utils.KeyListener;
-import io.alcatraz.audiohq.extended.CancelOutsideRelativeLayout;
 import io.alcatraz.audiohq.utils.SharedPreferenceUtil;
 import io.alcatraz.audiohq.utils.Utils;
 
@@ -83,13 +82,16 @@ public class FloatPanelService extends Service {
     //Preference
     String gravity;
     String background;
+    String background_dark;
     boolean foreground_service;
     String dismiss_delay;
     String margin_top;
     String margin_top_landscape;
     String icon_tint;
+    String icon_tint_dark;
     String toggle_size;
     String font_color;
+    String font_color_dark;
     String side_margin;
     String side_margin_landscape;
     String toggle_corner_radius;
@@ -269,16 +271,16 @@ public class FloatPanelService extends Service {
 
         toggle.setRadius(Utils.Dp2Px(this, Float.parseFloat(toggle_corner_radius)));
         adapter.setCardRadius(Utils.Dp2Px(this, Float.parseFloat(card_radius)));
-        adapter.setCardBackground(background);
+
         adapter.setCardSeekBarColor(seek_color);
         adapter.setDelayed(Integer.parseInt(dismiss_delay));
         listener.setDelayed(Integer.parseInt(dismiss_delay));
 
         int tg_size_integer = Utils.Dp2Px(this, Integer.parseInt(toggle_size));
-        toggle.setCardBackgroundColor(Color.parseColor(background));
+
         Utils.setViewSize(toggle, tg_size_integer, tg_size_integer);
-        Utils.setImageWithTint(toggle_icon, R.drawable.ic_volume_source, Color.parseColor(icon_tint));
-        adapter.setFontColor(font_color);
+
+
 
         LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_fall_down);
         listView.setAdapter(adapter);
@@ -330,6 +332,20 @@ public class FloatPanelService extends Service {
             layoutParams.y = Utils.Dp2Px(this, Integer.parseInt(margin_top));
             layoutParams.x = Utils.Dp2Px(this, Integer.parseInt(side_margin));
         }
+        switch (mConfiguration.uiMode & Configuration.UI_MODE_NIGHT_MASK) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                adapter.setCardBackground(background_dark);
+                toggle.setCardBackgroundColor(Color.parseColor(background_dark));
+                Utils.setImageWithTint(toggle_icon, R.drawable.ic_volume_source, Color.parseColor(icon_tint_dark));
+                adapter.setFontColor(font_color_dark);
+                break;
+            case Configuration.UI_MODE_NIGHT_NO:
+                adapter.setCardBackground(background);
+                toggle.setCardBackgroundColor(Color.parseColor(background));
+                Utils.setImageWithTint(toggle_icon, R.drawable.ic_volume_source, Color.parseColor(icon_tint));
+                adapter.setFontColor(font_color);
+                break;
+        }
     }
 
     private void showFloatingWindow() {
@@ -369,8 +385,8 @@ public class FloatPanelService extends Service {
             public void onSuccess(PlayingSystem result) {
                 data.clear();
                 List<Pkgs> current_result = result.getData();
-                for(Pkgs i : current_result){
-                    if(!filter.contains(i.getPkg())){
+                for (Pkgs i : current_result) {
+                    if (!filter.contains(i.getPkg())) {
                         data.add(i);
                     }
                 }
@@ -405,6 +421,8 @@ public class FloatPanelService extends Service {
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_GRAVITY);
         background = (String) spf.get(this, Constants.PREF_FLOAT_WINDOW_BACKGROUND,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_BACKGROUND);
+        background_dark = (String) spf.get(this, Constants.PREF_FLOAT_WINDOW_BACKGROUND_DARK,
+                Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_BACKGROUND_DARK);
         foreground_service = (boolean) spf.get(this, Constants.PREF_FLOAT_FOREGROUND_SERVICE,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_FOREGROUND_SERVICE);
         dismiss_delay = (String) spf.get(this, Constants.PREF_FLOAT_WINDOW_DISMISS_DELAY,
@@ -415,10 +433,14 @@ public class FloatPanelService extends Service {
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_MARGIN_TOP_LANDSCAPE);
         icon_tint = (String) spf.get(this, Constants.PREF_FLOAT_WINDOW_ICON_TINT,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_ICON_TINT);
+        icon_tint_dark = (String) spf.get(this, Constants.PREF_FLOAT_WINDOW_ICON_TINT_DARK,
+                Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_ICON_TINT_DARK);
         toggle_size = (String) spf.get(this, Constants.PREF_FLOAT_WINDOW_TOGGLE_SIZE,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_TOGGLE_SIZE);
         font_color = (String) spf.get(this, Constants.PREF_FLOAT_WINDOW_FONT_COLOR,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_FONT_COLOR);
+        font_color_dark = (String) spf.get(this, Constants.PREF_FLOAT_WINDOW_FONT_COLOR_DARK,
+                Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_FONT_COLOR_DARK);
         side_margin = (String) spf.get(this, Constants.PREF_FLOAT_WINDOW_SIDE_MARGIN,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_SIDE_MARGIN);
         toggle_corner_radius = (String) spf.get(this, Constants.PREF_FLOAT_WINDOW_TOGGLE_CORNER_RADIUS,

@@ -17,7 +17,8 @@ public class CheckUtils {
     public static final String SELINUX_PERMISSIVE = "Permissive";
 
     public static String getSeLinuxEnforce() {
-        return ShellUtils.execCommand("getenforce", true).responseMsg.replace("\n","");
+        return ShellUtils.execCommand("getenforce", true).
+                responseMsg.replace("\n","");
     }
 
     public static String getAudioServerInfo() {

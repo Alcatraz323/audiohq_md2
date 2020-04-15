@@ -7,11 +7,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Change every update -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200329 beta2</string>
+    <string name="update_title">20200415 play_stable_1</string>
     <string name="update_info">
-        1.Whitelist for float window\n
-        2.Disabled some unreliable function\n
-        3.support SeLinux Enforcing(Magisk version>20.2)\n</string>
+        1.Float window Background color setting for Dark Theme\n
+        2.Fixed shadow issue\n
+        3.Fixed MainActivity Animation\n
+        4.Changed About page</string>
 
     <!-- Common -->
     <string name="app_name">Audio HeadQuarter</string>
@@ -125,11 +126,11 @@
     <string name="setup_step_before">Forward</string>
     <string name="setup_1_intro">Hello my friend, before you can start, let\'s take some minutes to complete the setup</string>
     <string name="setup_2_warning_vendor_system_title">Caution!</string>
-    <string name="setup_2_warning_vendor_system_info">This software(the module) will try rebind some
+    <string name="setup_2_warning_vendor_system_info">This software(the Magisk module) will try rebind some
     critical system libraries, it may cause you stuck at the boot animation and may make your audio system
     crash, make sure you know how to recover before you flash the module,Also please MAKE SURE YOUR SeLinux
     is PERMISSIVE or can be set to permissive(the latest module may not need this, pls check Coolapk/Website intro for more information), this software
-    will not work</string>
+    will not work, developer will NEVER be responsible for the damage, if cant accept this, you can Stop here</string>
     <string name="setup_2_warning_vendor_system_unlock">Understood and unlock</string>
     <string name="setup_2_requirements_not_meet_title">Requirements not meet</string>
     <string name="setup_2_requirements_not_meet_info">There are risks to proceed further installation.
@@ -138,13 +139,13 @@
     <string name="setup_2_warning_delay">Please read the warning carefully, this page will lock for 10s</string>
     <string name="setup_check_granted">Granted</string>
     <string name="setup_check_deny">Denied</string>
-    <string name="setup_3_install_title">Installation</string>
+    <string name="setup_3_install_title">Install the module</string>
     <string name="setup_3_install_info">Now, go to the website to download the module and install.
-        This action may cause DAMAGE to your system, please make sure you know how to recover before you
+        This action may cause DAMAGE to your system, please MAKE SURE you know how to recover before you
     install the module</string>
     <string name="setup_3_install_page">Download</string>
     <string name="setup_3_installed">I have installed the matched module</string>
-    <string name="setup_3_installed_title">Install Version</string>
+    <string name="setup_3_installed_title">Target magisk module version</string>
     <string name="setup_3_installed_summary">Current apk supports native revision : &current_match_version;</string>
     <string name="setup_3_installed_detected">Detected : %s</string>
     <string name="setup_4_modify_rc_title">Modify audioserver.rc(requires reboot)</string>
@@ -216,6 +217,9 @@
     <string name="pref_4_15">Side margin for landscape(dp)</string>
     <string name="pref_4_16">Filter(split by quot)</string>
     <string name="pref_4_16_summary">Set the package which will not display in float window</string>
+    <string name="pref_4_17">Background color(Dark Theme)</string>
+    <string name="pref_4_dark_t">Dark Theme</string>
+    <string name="pref_4_light_t">Light Theme</string>
     <string name="pref_invalid_integer">Invalid integer</string>
     <string name="pref_invalid_color">Invalid color</string>
     <string name="pref_need_to_restart_playing_process">Need to restart playing process</string>
@@ -232,7 +236,7 @@
     <!--About-->
     <string name="au_l_1">Version</string>
     <string name="au_l_2">Developer</string>
-    <string name="au_l_2_1">Alcatraz,Mr_Dennis(Coolapk)</string>
+    <string name="au_l_2_1">AlcatrazDev,Mr_Dennis</string>
     <string name="au_l_3">Check sourcecode</string>
     <string name="au_l_4">Open source Licenses</string>
     <string name="au_l_4_1">Respect to opensource</string>

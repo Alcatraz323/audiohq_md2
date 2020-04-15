@@ -5,15 +5,16 @@
 <resources>
     <!-- 更新修改部分 -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200329 beta2</string>
+    <string name="update_title">20200415 play_stable_1</string>
     <string name="update_info">
         先说一下，0.7升上来的最好清除下配置，是软件内设置->其他->清除配置，不是app清除数据，不然可能有奇特问题\n
         还有悬浮窗设置需要等待前一个完全消失，不然就会留在屏幕上，按键响应不是必须开的，不开是音量变化响应，允许自定义触发，建议百度怎么用am命令发广播\n
         广播的action是ahq_float_trigger\n\n
 
-        1.添加对于悬浮窗的白名单\n
-        2.禁用部分不稳定功能\n
-        3.支持SeLinux Enforcing(Magisk版本>20.2，且具有严格条件要求)\n
+        1.添加深色主题的悬浮窗背景色设置\n
+        2.尝试修复阴影\n
+        3.主界面动画\n
+        4.更改关于界面部分描述，Play发布
     </string>
 
     <!-- 一般 -->
@@ -207,6 +208,9 @@
     <string name="pref_4_15">横屏侧面修正距离(dp)</string>
     <string name="pref_4_16">过滤器/白名单(包名用英文逗号分隔)</string>
     <string name="pref_4_16_summary">设置的包名将不会出现在悬浮窗内</string>
+    <string name="pref_4_17">背景色(深色模式)</string>
+    <string name="pref_4_dark_t">深色主题</string>
+    <string name="pref_4_light_t">亮色主题</string>
     <string name="pref_invalid_integer">无效整数</string>
     <string name="pref_invalid_color">无效颜色</string>
     <string name="pref_need_to_restart_playing_process">需要完全重启播放进程(重启系统最好)</string>
@@ -221,7 +225,7 @@
     <!--关于-->
     <string name="au_l_1">版本</string>
     <string name="au_l_2">开发者</string>
-    <string name="au_l_2_1">Alcatraz,Mr_Dennis(Coolapk)</string>
+    <string name="au_l_2_1">AlcatrazDev,Mr_Dennis</string>
     <string name="au_l_3">查看源码</string>
     <string name="au_l_4">开放源代码许可</string>
     <string name="au_l_4_1">向开源致敬</string>

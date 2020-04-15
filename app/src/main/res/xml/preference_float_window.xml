@@ -9,6 +9,42 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/pref_4_dark_t">
+        <EditTextPreference
+            android:defaultValue="#000000"
+            android:key="float_background_dark"
+            android:title="@string/pref_4_17" />
+
+        <EditTextPreference
+            android:defaultValue="#009688"
+            android:key="float_icon_tint_dark"
+            android:title="@string/pref_4_7" />
+
+        <EditTextPreference
+            android:defaultValue="#3C3C3C"
+            android:key="float_font_color_dark"
+            android:title="@string/pref_4_9" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_4_light_t">
+        <EditTextPreference
+            android:defaultValue="#ffffff"
+            android:key="float_background"
+            android:title="@string/pref_4_2" />
+
+        <EditTextPreference
+            android:defaultValue="#009688"
+            android:key="float_icon_tint"
+            android:title="@string/pref_4_7" />
+
+        <EditTextPreference
+            android:defaultValue="#3C3C3C"
+            android:key="float_font_color"
+            android:title="@string/pref_4_9" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="@string/pref_4_t">
         <ListPreference
             android:defaultValue="start_top"
@@ -17,11 +53,6 @@
             android:entryValues="@array/entryvalue_for_float_gravity"
             android:key="float_gravity"
             android:title="@string/pref_4_1" />
-
-        <EditTextPreference
-            android:defaultValue="#ffffff"
-            android:key="float_background"
-            android:title="@string/pref_4_2" />
 
         <CheckBoxPreference
             android:key="float_foreground_notification"
@@ -44,19 +75,9 @@
             android:title="@string/pref_4_6" />
 
         <EditTextPreference
-            android:defaultValue="#009688"
-            android:key="float_icon_tint"
-            android:title="@string/pref_4_7" />
-
-        <EditTextPreference
             android:defaultValue="52"
             android:key="float_toggle_size"
             android:title="@string/pref_4_8" />
-
-        <EditTextPreference
-            android:defaultValue="#3C3C3C"
-            android:key="float_font_color"
-            android:title="@string/pref_4_9" />
 
         <EditTextPreference
             android:defaultValue="8"
@@ -93,10 +114,5 @@
             android:key="float_direct_react"
             android:summary="@string/pref_4_14_summary"
             android:title="@string/pref_4_14" />
-
-        <EditTextPreference
-            android:defaultValue="#ff5722"
-            android:key="float_seek_bar_color"
-            android:title="@string/pref_4_13" />
     </PreferenceCategory>
 </PreferenceScreen>

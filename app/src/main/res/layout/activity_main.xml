@@ -89,7 +89,7 @@
                     android:background="@color/colorAccent"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <ImageView
                         android:id="@+id/main_card_status_indicator_image"

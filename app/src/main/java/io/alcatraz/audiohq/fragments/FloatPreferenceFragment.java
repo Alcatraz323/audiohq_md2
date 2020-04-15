@@ -22,13 +22,16 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
     private CheckBoxPreference float_service;
     private ListPreference float_gravity;
     private EditTextPreference float_background;
+    private EditTextPreference float_background_dark;
     private CheckBoxPreference float_foreground_service;
     private EditTextPreference float_dismiss_delay;
     private EditTextPreference float_margin_top;
     private EditTextPreference float_margin_top_landscape;
     private EditTextPreference float_icon_tint;
+    private EditTextPreference float_icon_tint_dark;
     private EditTextPreference float_toggle_size;
     private EditTextPreference float_font_color;
+    private EditTextPreference float_font_color_dark;
     private EditTextPreference float_side_margin;
     private EditTextPreference float_toggle_corner_radius;
     private EditTextPreference float_card_corner_radius;
@@ -41,8 +44,11 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
     public boolean onPreferenceChange(Preference preference, Object o) {
         switch (preference.getKey()) {
             case Constants.PREF_FLOAT_WINDOW_BACKGROUND:
+            case Constants.PREF_FLOAT_WINDOW_BACKGROUND_DARK:
             case Constants.PREF_FLOAT_WINDOW_ICON_TINT:
+            case Constants.PREF_FLOAT_WINDOW_ICON_TINT_DARK:
             case Constants.PREF_FLOAT_WINDOW_FONT_COLOR:
+            case Constants.PREF_FLOAT_WINDOW_FONT_COLOR_DARK:
             case Constants.PREF_FLOAT_WINDOW_SEEK_COLOR:
                 String color_str = (String) o;
                 try {
@@ -116,12 +122,15 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
         });
 
         float_background.setOnPreferenceChangeListener(this);
+        float_background_dark.setOnPreferenceChangeListener(this);
         float_dismiss_delay.setOnPreferenceChangeListener(this);
         float_margin_top.setOnPreferenceChangeListener(this);
         float_margin_top_landscape.setOnPreferenceChangeListener(this);
         float_icon_tint.setOnPreferenceChangeListener(this);
+        float_icon_tint_dark.setOnPreferenceChangeListener(this);
         float_toggle_size.setOnPreferenceChangeListener(this);
         float_font_color.setOnPreferenceChangeListener(this);
+        float_font_color_dark.setOnPreferenceChangeListener(this);
         float_side_margin.setOnPreferenceChangeListener(this);
         float_toggle_corner_radius.setOnPreferenceChangeListener(this);
         float_seek_color.setOnPreferenceChangeListener(this);
@@ -136,13 +145,16 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
         float_service = findPreference(Constants.PREF_FLOAT_SERVICE);
         float_gravity = findPreference(Constants.PREF_FLOAT_WINDOW_GRAVITY);
         float_background = findPreference(Constants.PREF_FLOAT_WINDOW_BACKGROUND);
+        float_background_dark = findPreference(Constants.PREF_FLOAT_WINDOW_BACKGROUND_DARK);
         float_foreground_service = findPreference(Constants.PREF_FLOAT_FOREGROUND_SERVICE);
         float_dismiss_delay = findPreference(Constants.PREF_FLOAT_WINDOW_DISMISS_DELAY);
         float_margin_top = findPreference(Constants.PREF_FLOAT_WINDOW_MARGIN_TOP);
         float_margin_top_landscape = findPreference(Constants.PREF_FLOAT_WINDOW_MARGIN_TOP_LANDSCAPE);
         float_icon_tint = findPreference(Constants.PREF_FLOAT_WINDOW_ICON_TINT);
+        float_icon_tint_dark = findPreference(Constants.PREF_FLOAT_WINDOW_ICON_TINT_DARK);
         float_toggle_size = findPreference(Constants.PREF_FLOAT_WINDOW_TOGGLE_SIZE);
         float_font_color = findPreference(Constants.PREF_FLOAT_WINDOW_FONT_COLOR);
+        float_font_color_dark = findPreference(Constants.PREF_FLOAT_WINDOW_FONT_COLOR_DARK);
         float_side_margin = findPreference(Constants.PREF_FLOAT_WINDOW_SIDE_MARGIN);
         float_toggle_corner_radius = findPreference(Constants.PREF_FLOAT_WINDOW_TOGGLE_CORNER_RADIUS);
         float_card_corner_radius = findPreference(Constants.PREF_FLOAT_WINDOW_CARD_RADIUS);
@@ -185,6 +197,8 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
         SharedPreferenceUtil spfu = SharedPreferenceUtil.getInstance();
         String f_b_color = (String) spfu.get(getContext(), Constants.PREF_FLOAT_WINDOW_BACKGROUND,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_BACKGROUND);
+        String f_b_d_color = (String) spfu.get(getContext(), Constants.PREF_FLOAT_WINDOW_BACKGROUND_DARK,
+                Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_BACKGROUND_DARK);
         String delay = (String) spfu.get(getContext(), Constants.PREF_FLOAT_WINDOW_DISMISS_DELAY,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_DISMISS_DELAY);
         String m_top = (String) spfu.get(getContext(), Constants.PREF_FLOAT_WINDOW_MARGIN_TOP,
@@ -193,10 +207,14 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_MARGIN_TOP_LANDSCAPE);
         String ic_tint = (String) spfu.get(getContext(), Constants.PREF_FLOAT_WINDOW_ICON_TINT,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_ICON_TINT);
+        String ic_tint_dark = (String) spfu.get(getContext(), Constants.PREF_FLOAT_WINDOW_ICON_TINT_DARK,
+                Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_ICON_TINT_DARK);
         String tg_size = (String) spfu.get(getContext(), Constants.PREF_FLOAT_WINDOW_TOGGLE_SIZE,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_TOGGLE_SIZE);
         String f_color = (String) spfu.get(getContext(), Constants.PREF_FLOAT_WINDOW_FONT_COLOR,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_FONT_COLOR);
+        String f_color_dark = (String) spfu.get(getContext(), Constants.PREF_FLOAT_WINDOW_FONT_COLOR_DARK,
+                Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_FONT_COLOR_DARK);
         String s_margin = (String) spfu.get(getContext(), Constants.PREF_FLOAT_WINDOW_SIDE_MARGIN,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_SIDE_MARGIN);
         String c_tg_radius = (String) spfu.get(getContext(), Constants.PREF_FLOAT_WINDOW_TOGGLE_CORNER_RADIUS,
@@ -209,12 +227,15 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_SIDE_MARGIN_LANDSCAPE);
 
         float_background.setSummary(f_b_color);
+        float_background_dark.setSummary(f_b_d_color);
         float_dismiss_delay.setSummary(delay);
         float_margin_top.setSummary(m_top);
         float_margin_top_landscape.setSummary(m_top_l);
         float_icon_tint.setSummary(ic_tint);
+        float_icon_tint_dark.setSummary(ic_tint_dark);
         float_toggle_size.setSummary(tg_size);
         float_font_color.setSummary(f_color);
+        float_font_color_dark.setSummary(f_color_dark);
         float_side_margin.setSummary(s_margin);
         float_toggle_corner_radius.setSummary(c_tg_radius);
         float_card_corner_radius.setSummary(c_radius);

@@ -11,6 +11,7 @@
         android:layout_height="52dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
+        android:layout_margin="1dp"
         app:cardElevation="2dp"
         app:cardMaxElevation="4dp"
         app:cardPreventCornerOverlap="true"

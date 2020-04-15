@@ -28,6 +28,8 @@ public class Constants {
     public static final boolean DEFAULT_VALUE_PREF_FLOAT_FOREGROUND_SERVICE = false;
     public static final String PREF_FLOAT_WINDOW_BACKGROUND = "float_background";
     public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_BACKGROUND = "#ffffff";
+    public static final String PREF_FLOAT_WINDOW_BACKGROUND_DARK = "float_background_dark";
+    public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_BACKGROUND_DARK = "#000000";
     public static final String PREF_FLOAT_WINDOW_DISMISS_DELAY = "float_dismiss_delay";
     public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_DISMISS_DELAY = "3000";
     public static final String PREF_FLOAT_WINDOW_MARGIN_TOP = "float_margin_top";
@@ -36,10 +38,14 @@ public class Constants {
     public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_MARGIN_TOP_LANDSCAPE = "0";
     public static final String PREF_FLOAT_WINDOW_ICON_TINT = "float_icon_tint";
     public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_ICON_TINT = "#009688";
+    public static final String PREF_FLOAT_WINDOW_ICON_TINT_DARK = "float_icon_tint_dark";
+    public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_ICON_TINT_DARK = "#009688";
     public static final String PREF_FLOAT_WINDOW_TOGGLE_SIZE = "float_toggle_size";
     public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_TOGGLE_SIZE = "52";
     public static final String PREF_FLOAT_WINDOW_FONT_COLOR = "float_font_color";
     public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_FONT_COLOR = "#009688";
+    public static final String PREF_FLOAT_WINDOW_FONT_COLOR_DARK = "float_font_color_dark";
+    public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_FONT_COLOR_DARK = "#009688";
     public static final String PREF_FLOAT_WINDOW_SIDE_MARGIN = "float_side_margin";
     public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_SIDE_MARGIN = "8";
     public static final String PREF_FLOAT_WINDOW_TOGGLE_CORNER_RADIUS = "float_toggle_corner_radius";
@@ -74,13 +80,13 @@ public class Constants {
         o1.setintro("A Java serialization/deserialization library to convert Java Objects into JSON and back");
         o1.setLicense("Apache 2.0");
         o1.setName("gson");
-//        //OkHttp
-//        QueryElement o2 = new QueryElement();
-//        o2.setAuthor("square");
-//        o2.setUrl("https://github.com/square/okhttp");
-//        o2.setintro("An HTTP & HTTP/2 client for Android and Java applications. ");
-//        o2.setLicense("Apache 2.0");
-//        o2.setName("OkHttp");
+        //aosp
+        QueryElement o2 = new QueryElement();
+        o2.setAuthor("google");
+        o2.setUrl("https://source.android.com/");
+        o2.setintro("Android is an open source operating system for mobile devices and a corresponding open source project led by Google. This site and the Android Open Source Project (AOSP) repository offer the information and source code needed to create custom variants of the Android OS, port devices and accessories to the Android platform, and ensure devices meet the compatibility requirements that keep the Android ecosystem a healthy and stable environment for millions of users.");
+        o2.setLicense("Apache 2.0");
+        o2.setName("AOSP");
 //        //Okio
 //        QueryElement o3 = new QueryElement();
 //        o3.setAuthor("square");
@@ -98,7 +104,7 @@ public class Constants {
 
         //Adding Process
         out.add(o1);
-//        out.add(o2);
+        out.add(o2);
 //        out.add(o3);
 //        out.add(o4);
 

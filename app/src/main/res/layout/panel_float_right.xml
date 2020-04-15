@@ -18,6 +18,7 @@
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:layout_toEndOf="@id/audiohq_float_list"
+        android:layout_margin="1dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardElevation="2dp"

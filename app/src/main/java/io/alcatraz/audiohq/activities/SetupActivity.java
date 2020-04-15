@@ -85,7 +85,7 @@ public class SetupActivity extends SetupWizardBaseActivity {
 
     @Override
     public int getVersionCode() {
-        return 16;
+        return 20;
     }
 
     private void onSelectSetup4_Apply() {
@@ -183,8 +183,13 @@ public class SetupActivity extends SetupWizardBaseActivity {
                 Utils.setImageWithTint(audioserver_check_indicator, R.drawable.ic_close, color_red);
                 can_go_next = false;
             }
-            String[] audioserver_info_processed = audioserver_info.split(":")[1].split(",");
-            audioserver_check_state.setText(audioserver_info_processed[0] + "," + audioserver_info_processed[1]);
+            try {
+                String[] audioserver_info_processed = audioserver_info.split(":")[1].split(",");
+                audioserver_check_state.setText(audioserver_info_processed[0] + "," + audioserver_info_processed[1]);
+            }catch (Exception e){
+                audioserver_check_state.setText("Cant retreive audioserver info!");
+            }
+
             AnimateUtils.playstart(audioserver_check, () -> {
             });
         } else {
