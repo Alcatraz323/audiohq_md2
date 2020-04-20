@@ -5,7 +5,7 @@
 <resources>
     <!-- 更新修改部分 -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200420 play_stable_2</string>
+    <string name="update_title">20200420 play_stable_2_d722c64</string>
     <string name="update_info">
         1.优化拖条算法，或许更丝滑？\n
         2.在“正在播放”中添加关键说明，请查看\n
