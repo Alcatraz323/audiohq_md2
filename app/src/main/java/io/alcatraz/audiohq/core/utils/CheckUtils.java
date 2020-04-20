@@ -1,21 +1,11 @@
 package io.alcatraz.audiohq.core.utils;
 
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Build;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import io.alcatraz.audiohq.Constants;
 import io.alcatraz.audiohq.utils.Utils;
 
 public class CheckUtils {
-    public static final String SELINUX_DISABLED = "Disabled";
-    public static final String SELINUX_ENFORCING = "Enforcing";
-    public static final String SELINUX_PERMISSIVE = "Permissive";
-
     public static String getSeLinuxEnforce() {
         return ShellUtils.execCommand("getenforce", true).
                 responseMsg.replace("\n","");
@@ -74,38 +64,4 @@ public class CheckUtils {
         }
         return mismatch;
     }
-
-    public static boolean hasModifiedRC(){
-        ShellUtils.CommandResult original = ShellUtils.execCommand("cat /system/etc/init/audioserver.rc", false);
-        String modify = original.responseMsg;
-        return modify.contains("readproc");
-    }
-
-//    public static String getLibVersion() {
-//        String raw = AudioHqApis.getAudioFlingerInfo().responseMsg;
-//
-//        if (Utils.isStringNotEmpty(raw)) {
-//            String[] process_1 = raw.split("\\[");
-//            String[] process_2 = process_1[1].split("]");
-//            return process_2[0];
-//        }
-//        return null;
-//    }
-
-    public static boolean getMagiskInstalled(Context context) {
-        final PackageManager packageManager = context.getPackageManager();//获取packagemanager
-        List<PackageInfo> pinfo;//获取所有已安装程序的包信息
-        pinfo = packageManager.getInstalledPackages(0);
-        List<String> pName = new ArrayList<String>();//用于存储所有已安装程序的包名
-        //从pinfo中将包名字逐一取出，压入pName list中
-        if (pinfo != null) {
-            for (int i = 0; i < pinfo.size(); i++) {
-                String pn = pinfo.get(i).packageName;
-                pName.add(pn);
-            }
-        }
-        return true;//pName.contains("com.topjohnwu.magisk");//判断pName中是否有目标程序的包名，有TRUE，没有FALSE
-    }
-
-
 }

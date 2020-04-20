@@ -348,6 +348,7 @@ public class FloatPanelService extends Service {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void showFloatingWindow() {
         if (Settings.canDrawOverlays(this)) {
 

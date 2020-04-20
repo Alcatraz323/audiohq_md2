@@ -5,16 +5,11 @@
 <resources>
     <!-- 更新修改部分 -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200415 play_stable_1</string>
+    <string name="update_title">20200420 play_stable_2</string>
     <string name="update_info">
-        先说一下，0.7升上来的最好清除下配置，是软件内设置->其他->清除配置，不是app清除数据，不然可能有奇特问题\n
-        还有悬浮窗设置需要等待前一个完全消失，不然就会留在屏幕上，按键响应不是必须开的，不开是音量变化响应，允许自定义触发，建议百度怎么用am命令发广播\n
-        广播的action是ahq_float_trigger\n\n
-
-        1.添加深色主题的悬浮窗背景色设置\n
-        2.尝试修复阴影\n
-        3.主界面动画\n
-        4.更改关于界面部分描述，Play发布
+        1.优化拖条算法，或许更丝滑？\n
+        2.在“正在播放”中添加关键说明，请查看\n
+        3.潜在问题修复，warning去除\n
     </string>
 
     <!-- 一般 -->
@@ -109,6 +104,11 @@
     <string name="panel_control_tips_message">下方的修改将作为因子参与应用程序音量计算,且声道音量将会根据主音量生效</string>
 
     <string name="playing_filter">只显示已激活进程</string>
+    <string name="playing_why_no_title">有些应用不出现在列表/悬浮窗？</string>
+    <string name="playing_why_no_content">有2种情况：1.游戏音效型音轨：这类音轨将在播放完成后自动删除，若需调整此类，请使用预设
+    2.直出音频：这一般表现在一些专业的本地播放器，通话，外置解码，qq8.0以上语音，目前版本为了兼容性，且这类音频在系统中有独立的控制(比如通话，播放器你可以通过控制其他可控制的来达到相同效果)。
+        所以舍弃了这部分控制，当不需要考虑魔改rom兼容性时，我将考虑恢复这部分控制
+    </string>
 
     <string name="status_server">原生服务</string>
     <string name="status_track_ctl_position">音轨控制位置</string>

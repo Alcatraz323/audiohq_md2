@@ -11,7 +11,6 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -37,12 +36,13 @@ import io.alcatraz.audiohq.utils.PackageCtlUtils;
 import io.alcatraz.audiohq.utils.Utils;
 
 public class AboutActivity extends CompatWithPipeActivity {
-    List<Integer> imgs = new ArrayList<Integer>();
-    Map<Integer, List<String>> data = new HashMap<>();
-    ListView lv;
-    Toolbar tb;
-    Easter easter;
-    Vibrator vibrator;
+    private List<Integer> imgs = new ArrayList<Integer>();
+    @SuppressLint("UseSparseArrays")
+    private Map<Integer, List<String>> data = new HashMap<>();
+    private ListView lv;
+    private Toolbar tb;
+    private Easter easter;
+    private Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +57,8 @@ public class AboutActivity extends CompatWithPipeActivity {
     public void showDetailDev() {
         AlertDialog g = new AlertDialog.Builder(this)
                 .setTitle(R.string.au_l_2)
-                .setMessage("主代码:Alcatraz\n" +
-                        "主要测试人员:Mr_Dennis(Coolapk)")
+                .setMessage("Code:Alcatraz(GooglePlay)\n" +
+                        "Main tester:Mr_Dennis")
                 .setPositiveButton(R.string.ad_pb, null)
                 .show();
     }

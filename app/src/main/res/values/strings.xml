@@ -7,12 +7,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Change every update -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200415 play_stable_1</string>
+    <string name="update_title">20200420 play_stable_2</string>
     <string name="update_info">
-        1.Float window Background color setting for Dark Theme\n
-        2.Fixed shadow issue\n
-        3.Fixed MainActivity Animation\n
-        4.Changed About page</string>
+        1.Optimized seekbar sequence\n
+        2.add help text in Playing Activity, pls check it\n
+        3.bug fix, code warning fix\n</string>
 
     <!-- Common -->
     <string name="app_name">Audio HeadQuarter</string>
@@ -110,6 +109,11 @@
     and the channel volume will be multiplied under the general volume</string>
 
     <string name="playing_filter">Show active process only</string>
+    <string name="playing_why_no_title">Why some app is not in the list</string>
+    <string name="playing_why_no_content">There are 2 situation, 1.fast game sfx like track, they will be deleted
+        after the whole play, to adjust this type, use "Preset" function, 2.Direct output audio.This version of app/module just control the Tracks that are in the AudioMixer,
+    some native player,and telephone uses tracks type like direct out, offload audio, they will not be processed in AudioMixer, so they are not in the list
+    when miui no longer need support, I may switch to all type control</string>
 
     <string name="status_server">Native server</string>
     <string name="status_track_ctl_position">Track ctrl position</string>
@@ -130,7 +134,7 @@
     critical system libraries, it may cause you stuck at the boot animation and may make your audio system
     crash, make sure you know how to recover before you flash the module,Also please MAKE SURE YOUR SeLinux
     is PERMISSIVE or can be set to permissive(the latest module may not need this, pls check Coolapk/Website intro for more information), this software
-    will not work, developer will NEVER be responsible for the damage, if cant accept this, you can Stop here</string>
+    will not work, developer will NEVER be responsible for the damage, if can not accept this, you can Stop here</string>
     <string name="setup_2_warning_vendor_system_unlock">Understood and unlock</string>
     <string name="setup_2_requirements_not_meet_title">Requirements not meet</string>
     <string name="setup_2_requirements_not_meet_info">There are risks to proceed further installation.

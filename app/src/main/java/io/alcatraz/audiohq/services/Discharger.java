@@ -2,12 +2,8 @@ package io.alcatraz.audiohq.services;
 
 import android.accessibilityservice.AccessibilityService;
 import android.content.Intent;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityEvent;
-import android.view.accessibility.AccessibilityNodeInfo;
-
-import java.util.List;
 
 public class Discharger extends AccessibilityService {
     @Override

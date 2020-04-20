@@ -14,7 +14,6 @@ import io.alcatraz.audiohq.Constants;
 import io.alcatraz.audiohq.R;
 import io.alcatraz.audiohq.activities.DefaultProfileActivity;
 import io.alcatraz.audiohq.beans.AudioHQNativeInterface;
-import io.alcatraz.audiohq.beans.StringProfile;
 import io.alcatraz.audiohq.beans.SwitchConfigurations;
 import io.alcatraz.audiohq.core.utils.AudioHQApis;
 import io.alcatraz.audiohq.extended.CompatWithPipeActivity;

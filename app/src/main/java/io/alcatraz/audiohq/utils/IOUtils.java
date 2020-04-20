@@ -6,16 +6,13 @@ import java.io.*;
 
 public class IOUtils {
     public static String Okioread(String dir) {
-        Source source = null;
+        Source source;
         BufferedSource bufferedSource = null;
         try {
             File file = new File(dir);
             source = Okio.source(file);
             bufferedSource = Okio.buffer(source);
-            String content = bufferedSource.readUtf8();
-            return content;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return bufferedSource.readUtf8();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -25,15 +22,13 @@ public class IOUtils {
     }
 
     public static void Okiowrite(String dir, String content) {
-        Sink sink = null;
+        Sink sink;
         BufferedSink bufferedSink = null;
         try {
             File dest = new File(dir);
             sink = Okio.sink(dest);
             bufferedSink = Okio.buffer(sink);
             bufferedSink.writeUtf8(content);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -60,25 +55,23 @@ public class IOUtils {
 
     public static String read(File file, ReadMonitor rm) {
         String line;
-        String content = null;
+        StringBuilder content = null;
         try {
             FileInputStream fis = new FileInputStream(file);
-            if (fis != null) {
-                InputStreamReader reader = new InputStreamReader(fis);
-                BufferedReader buffreader = new BufferedReader(reader);
-                while ((line = buffreader.readLine()) != null) {
-                    content = content + "\n";
-                    content += line;
-                }
-                fis.close();
+            InputStreamReader reader = new InputStreamReader(fis);
+            BufferedReader buffreader = new BufferedReader(reader);
+            while ((line = buffreader.readLine()) != null) {
+                content = (content == null ? new StringBuilder("null") : content).append("\n");
+                content.append(line);
             }
+            fis.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return content;
+        return content == null ? null : content.toString();
     }
 
-    public static interface ReadMonitor {
+    public interface ReadMonitor {
         void onLine(String line);
 
         void callFinish();

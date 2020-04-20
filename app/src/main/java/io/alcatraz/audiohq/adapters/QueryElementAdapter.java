@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import io.alcatraz.audiohq.R;
@@ -23,14 +24,13 @@ public class QueryElementAdapter extends RecyclerView.Adapter<QueryElementContai
     public QueryElementAdapter(Context c, List<QueryElement> data) {
         ctx = c;
         this.data = data;
-        lf = (LayoutInflater) ctx.getSystemService(ctx.LAYOUT_INFLATER_SERVICE);
+        lf = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
-    public QueryElementContainer onCreateViewHolder(ViewGroup p1, int p2) {
+    public QueryElementContainer onCreateViewHolder(@NonNull ViewGroup p1, int p2) {
         View v = lf.inflate(R.layout.item_opensource_holder, p1, false);
-        QueryElementContainer mvh = new QueryElementContainer(v);
-        return mvh;
+        return new QueryElementContainer(v);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package io.alcatraz.audiohq.core.utils;
 
 class AudioHQRaw {
-    static void setProfile(String process_name,
+    static synchronized void setProfile(String process_name,
                            float prog_general,
                            float prog_left,
                            float prog_right,
@@ -131,20 +131,20 @@ class AudioHQRaw {
             this.has_params = has_params;
         }
 
-        public boolean requiresRoot() {
+        protected boolean requiresRoot() {
             return require_root;
         }
 
-        public boolean hasParams() {
+        protected boolean hasParams() {
             return has_params;
         }
 
-        public String getCmd_raw() {
+        protected String getCmd_raw() {
             return cmd_raw;
         }
 
         @SuppressWarnings("ConfusingArgumentToVarargsMethod")
-        public String createCmd(String... params) {
+        protected String createCmd(String... params) {
             return String.format(cmd_raw, params);
         }
     }

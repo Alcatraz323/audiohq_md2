@@ -51,20 +51,17 @@ public class Utils {
     }
 
     public static boolean isStringNotEmpty(String target) {
-        if (target != null && !target.equals("") && !target.equals("null")) {
-            return true;
-        }
-        return false;
+        return target != null && !target.equals("") && !target.equals("null");
     }
 
     public static String extractStringArr(String[] arr) {
-        String out = "";
+        StringBuilder out = new StringBuilder();
         for (int i = 0; i < arr.length; i++) {
-            out += arr[i];
+            out.append(arr[i]);
             if (i != arr.length - 1)
-                out += ",";
+                out.append(",");
         }
-        return out;
+        return out.toString();
     }
 
     public static boolean checkDeviceHasNavigationBar(Context context) {

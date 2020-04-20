@@ -13,8 +13,7 @@ public class UpdateUtils {
     public static boolean checkFileNeedsUpdate(String dir, long mills_to_expire) {
         File toCheck = new File(dir);
         double expi_min = mills_to_expire / 60000;
-        boolean result = toCheck.lastModified() + mills_to_expire < System.currentTimeMillis();
-        return result;
+        return toCheck.lastModified() + mills_to_expire < System.currentTimeMillis();
     }
 
     public static boolean checkUpdate() {

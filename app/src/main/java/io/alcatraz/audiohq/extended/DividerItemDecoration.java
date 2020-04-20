@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -105,7 +106,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
      * @param state
      */
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         //下面super...代码其实调用的就是那个过时的getItemOffsets,也就是说这个方法体内容也可以通通移到那个过时的getItemOffsets中
         super.getItemOffsets(outRect, view, parent, state);
         //获取layoutParams参数
@@ -245,26 +246,22 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
                     .getOrientation();
             if (orientation == StaggeredGridLayoutManager.VERTICAL) {
                 // 如果是最后一列，则不需要绘制右边
-                if ((pos + 1) % spanCount == 0)
-                    return true;
+                return (pos + 1) % spanCount == 0;
             } else {
                 childCount = childCount - childCount % spanCount;
                 // 如果是最后一列，则不需要绘制右边
-                if (pos >= childCount)
-                    return true;
+                return pos >= childCount;
             }
         } else if (layoutManager instanceof StaggeredGridLayoutManager) {
             int orientation = ((StaggeredGridLayoutManager) layoutManager)
                     .getOrientation();
             if (orientation == StaggeredGridLayoutManager.VERTICAL) {
                 // 如果是最后一列，则不需要绘制右边
-                if ((pos + 1) % spanCount == 0)
-                    return true;
+                return (pos + 1) % spanCount == 0;
             } else {
                 childCount = childCount - childCount % spanCount;
                 // 如果是最后一列，则不需要绘制右边
-                if (pos >= childCount)
-                    return true;
+                return pos >= childCount;
             }
         }
         return false;
@@ -281,8 +278,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             if (orientation == StaggeredGridLayoutManager.VERTICAL) {
                 // 如果是最后一行，则不需要绘制底部
                 childCount = childCount - childCount % spanCount;
-                if (pos >= childCount)
-                    return true;
+                return pos >= childCount;
             } else {// StaggeredGridLayoutManager 横向滚动
                 // 如果是最后一行，则不需要绘制底部
                 if ((pos + 1) % spanCount == 0)

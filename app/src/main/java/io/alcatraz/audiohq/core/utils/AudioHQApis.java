@@ -21,7 +21,7 @@ public class AudioHQApis {
         if (CheckUtils.checkAndWarnMismatch()) {
             Panels.getNotInstalledPanel(context).show();
         } else {
-            AudioHQRaw.setProfile(process_name, prog_general, prog_left, prog_right, split_control, isweakkey);
+            new Thread(() -> AudioHQRaw.setProfile(process_name, prog_general, prog_left, prog_right, split_control, isweakkey)).start();
         }
     }
 

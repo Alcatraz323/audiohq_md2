@@ -1,10 +1,13 @@
 package io.alcatraz.audiohq.utils;
 
-import android.animation.*;
-import android.os.*;
-import android.view.*;
-import android.view.animation.*;
-import android.widget.*;
+import android.animation.Animator;
+import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.widget.TextView;
 
 public class AnimateUtils {
     public static void playstart(final View v, SimpleAnimateInterface animateInterface) {

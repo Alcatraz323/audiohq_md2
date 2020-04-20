@@ -11,7 +11,7 @@ public class ControlElement implements Parcelable {
     private Drawable icon;
     private boolean conflicted = false;
     private boolean isweakkey;
-    private int color = 0;
+    private int color;
 
     public ControlElement(String label, String status, String process,boolean isweakkey, Drawable icon, int color) {
         this.label = label;

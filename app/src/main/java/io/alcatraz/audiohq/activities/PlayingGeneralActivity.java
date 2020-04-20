@@ -9,14 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.alcatraz.support.v4.appcompat.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,6 +40,9 @@ public class PlayingGeneralActivity extends CompatWithPipeActivity {
     LinearLayout filter;
     Switch filter_switch;
 
+    ImageButton why_no_expand;
+    TextView why_no_info;
+
     RecyclerView recyclerView;
     PlayingRecyclerAdapter playingRecyclerAdapter;
     LayoutAnimationController controller;
@@ -49,12 +55,7 @@ public class PlayingGeneralActivity extends CompatWithPipeActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playing);
         initViews();
-        toolbar.post(new Runnable() {
-            @Override
-            public void run() {
-                initialize();
-            }
-        });
+        toolbar.post(() -> initialize());
     }
 
     private void findViews(){
@@ -62,12 +63,14 @@ public class PlayingGeneralActivity extends CompatWithPipeActivity {
         filter = findViewById(R.id.playing_general_filter);
         filter_switch = findViewById(R.id.playing_general_filter_switch);
         recyclerView = findViewById(R.id.playing_general_recycler);
+        why_no_expand = findViewById(R.id.playing_why_no_expand);
+        why_no_info = findViewById(R.id.playing_why_no_info);
     }
 
     private void initViews(){
         findViews();
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         StatusBarUtil.setColor(this, Color.parseColor("#212121"),0);
@@ -78,15 +81,22 @@ public class PlayingGeneralActivity extends CompatWithPipeActivity {
         recyclerView.setLayoutAnimation(controller);
         recyclerView.setAdapter(playingRecyclerAdapter);
 
-        filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (filter_switch.isChecked()) {
-                    playingRecyclerAdapter.filterActive(false);
-                }else {
-                    playingRecyclerAdapter.filterActive(true);
-                }
-                filter_switch.setChecked(!filter_switch.isChecked());
+        filter.setOnClickListener(view -> {
+            if (filter_switch.isChecked()) {
+                playingRecyclerAdapter.filterActive(false);
+            }else {
+                playingRecyclerAdapter.filterActive(true);
+            }
+            filter_switch.setChecked(!filter_switch.isChecked());
+        });
+
+        why_no_expand.setOnClickListener(view -> {
+            if (why_no_info.getMaxLines() == 1) {
+                why_no_expand.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
+                why_no_info.setMaxLines(Integer.MAX_VALUE);
+            } else {
+                why_no_expand.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
+                why_no_info.setMaxLines(1);
             }
         });
     }
@@ -112,22 +122,12 @@ public class PlayingGeneralActivity extends CompatWithPipeActivity {
     }
 
     public void showProessing(){
-        progressBar.post(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.VISIBLE);
-            }
-        });
+        progressBar.post(() -> progressBar.setVisibility(View.VISIBLE));
 
     }
 
     public void hideProcessing(){
-        progressBar.post(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.GONE);
-            }
-        });
+        progressBar.post(() -> progressBar.setVisibility(View.GONE));
     }
 
     private void initData(){
