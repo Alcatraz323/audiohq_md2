@@ -83,7 +83,7 @@ public class AboutActivity extends CompatWithPipeActivity {
         lv.setAdapter(aa);
         lv.setOnItemClickListener((p1, p2, p3, p4) -> {
             if (p1.getItemAtPosition(p3).toString().equals(getString(R.string.au_l_3))) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Alcatraz323/audiohq")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Alcatraz323/audiohq_md2")));
             } else if (p1.getItemAtPosition(p3).toString().equals(getString(R.string.au_l_4))) {
                 showOSPDialog();
             } else if (p1.getItemAtPosition(p3).toString().equals(getString(R.string.au_l_2))) {

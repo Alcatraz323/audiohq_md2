@@ -7,11 +7,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Change every update -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200420 play_stable_2_d722c64</string>
+    <string name="update_title">20200501 play_stable_3_d722c64</string>
     <string name="update_info">
-        1.Optimized seekbar sequence\n
-        2.add help text in Playing Activity, pls check it\n
-        3.bug fix, code warning fix\n</string>
+        1.Added "no empty window" option\n
+        2.whitelist gui\n
+        3.updated opensource url in "About"\n</string>
 
     <!-- Common -->
     <string name="app_name">Audio HeadQuarter</string>
@@ -222,6 +222,8 @@
     <string name="pref_4_16">Filter(split by quot)</string>
     <string name="pref_4_16_summary">Set the package which will not display in float window</string>
     <string name="pref_4_17">Background color(Dark Theme)</string>
+    <string name="pref_4_18">No window when empty</string>
+    <string name="pref_4_18_summary">The window will not show when the play list is empty, need to kill this app and restart to work</string>
     <string name="pref_4_dark_t">Dark Theme</string>
     <string name="pref_4_light_t">Light Theme</string>
     <string name="pref_invalid_integer">Invalid integer</string>
@@ -236,6 +238,7 @@
         please make sure your phone and other critical system process\'s volume has been set, unless
     you want to make your phone call to hear like silent</string>
     <string name="pref_clear_profile_confirm">You are clearing profiles,proceed?</string>
+    <string name="profile_configure_app_pick">Pick app</string>
 
     <!--About-->
     <string name="au_l_1">Version</string>

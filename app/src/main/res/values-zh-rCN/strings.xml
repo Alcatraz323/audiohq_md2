@@ -5,11 +5,12 @@
 <resources>
     <!-- 更新修改部分 -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200420 play_stable_2_d722c64</string>
+    <string name="update_title">20200501 play_stable_3_d722c64</string>
     <string name="update_info">
-        1.优化拖条算法，或许更丝滑？\n
+        1.添加无可调项目不显示悬浮窗选项\n
         2.在“正在播放”中添加关键说明，请查看\n
-        3.潜在问题修复，warning去除\n
+        3.白名单界面更新，不用你们手打包名了\n
+        4.更新在"关于"中的本项目开源地址
     </string>
 
     <!-- 一般 -->
@@ -209,6 +210,8 @@
     <string name="pref_4_16">过滤器/白名单(包名用英文逗号分隔)</string>
     <string name="pref_4_16_summary">设置的包名将不会出现在悬浮窗内</string>
     <string name="pref_4_17">背景色(深色模式)</string>
+    <string name="pref_4_18">无条目时不显示悬浮窗</string>
+    <string name="pref_4_18_summary">开启此项后若列表中无可调节应用将不显示悬浮窗,需要强行停止本应用生效</string>
     <string name="pref_4_dark_t">深色主题</string>
     <string name="pref_4_light_t">亮色主题</string>
     <string name="pref_invalid_integer">无效整数</string>
@@ -221,6 +224,7 @@
     <string name="pref_default_silent_warning_title">警告</string>
     <string name="pref_default_silent_warning_message">若启用此项，请确保电话等进程的音量已被设置，若未设置可能导致听筒静音</string>
     <string name="pref_clear_profile_confirm">你正在清除配置，执行?</string>
+    <string name="profile_configure_app_pick">选择App</string>
 
     <!--关于-->
     <string name="au_l_1">版本</string>

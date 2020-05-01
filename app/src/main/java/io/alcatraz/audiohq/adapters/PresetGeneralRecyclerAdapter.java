@@ -28,7 +28,7 @@ public class PresetGeneralRecyclerAdapter extends RecyclerView.Adapter<PresetGen
     private CompatWithPipeActivity activity;
     private LayoutInflater inflater;
     private FloatingActionButton floatingActionButton;
-    PackageFilter filter;
+    private PackageFilter filter;
 
     public PresetGeneralRecyclerAdapter(CompatWithPipeActivity activity, List<ControlElement> data, FloatingActionButton floatingActionButton) {
         this.activity = activity;

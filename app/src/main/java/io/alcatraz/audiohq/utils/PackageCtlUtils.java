@@ -17,6 +17,11 @@ public class PackageCtlUtils {
         }
     }
 
+    public static Drawable getIcon(Context ctx, ApplicationInfo info) {
+        PackageManager pm = ctx.getPackageManager();
+        return pm.getApplicationIcon(info);
+    }
+
     public static String getLabel(Context ctx, String pkg) {
         PackageManager pm = ctx.getPackageManager();
         try {
@@ -27,6 +32,10 @@ public class PackageCtlUtils {
         }
     }
 
+    public static String getLabel(Context ctx, ApplicationInfo info){
+        PackageManager pm = ctx.getPackageManager();
+        return pm.getApplicationLabel(info).toString();
+    }
 
     public static synchronized String getVersionName(Context context) {
         try {

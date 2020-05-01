@@ -104,10 +104,15 @@
             android:key="float_seek_bar_color"
             android:title="@string/pref_4_13" />
 
-        <EditTextPreference
+        <PreferenceScreen
             android:key="float_filter"
             android:title="@string/pref_4_16"
             android:summary="@string/pref_4_16_summary"/>
+
+        <CheckBoxPreference
+            android:key="float_no_empty_window"
+            android:summary="@string/pref_4_18_summary"
+            android:title="@string/pref_4_18" />
 
         <CheckBoxPreference
             android:defaultValue="false"

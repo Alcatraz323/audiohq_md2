@@ -57,6 +57,7 @@
         <activity
             android:name=".activities.LogActivity"
             android:excludeFromRecents="true" />
+        <activity android:name=".activities.WhiteListPickActivity" />
 
         <receiver android:name=".BootReceiver">
             <intent-filter>

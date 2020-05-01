@@ -170,7 +170,7 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
     }
 
     public void updateData(){
-        showProessing();
+        showProcessing();
         all_data.clear();
         all_adapter.notifyDataSetChanged();
         recycler_for_all.scheduleLayoutAnimation();
@@ -205,7 +205,7 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
     }
 
     public void updateHasSet(){
-        showProessing();
+        showProcessing();
         set_data.clear();
         set_adapter.notifyDataSetChanged();
         recycler_for_set.scheduleLayoutAnimation();
@@ -284,7 +284,7 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void showProessing(){
+    public void showProcessing(){
         progressBar.post(new Runnable() {
             @Override
             public void run() {

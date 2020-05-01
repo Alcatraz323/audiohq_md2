@@ -13,8 +13,11 @@ import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 import io.alcatraz.audiohq.Constants;
 import io.alcatraz.audiohq.R;
+import io.alcatraz.audiohq.activities.WhiteListPickActivity;
+import io.alcatraz.audiohq.extended.CompatWithPipeActivity;
 import io.alcatraz.audiohq.services.FloatPanelService;
 import io.alcatraz.audiohq.utils.SharedPreferenceUtil;
 
@@ -38,7 +41,8 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
     private EditTextPreference float_seek_color;
     private CheckBoxPreference float_direct_react;
     private EditTextPreference float_side_margin_landscape;
-    private EditTextPreference float_filter;
+    private PreferenceScreen float_filter;
+    private CheckBoxPreference float_no_empty_window;
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object o) {
@@ -84,13 +88,9 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
                 return true;
             case Constants.PREF_FLOAT_FOREGROUND_SERVICE:
             case Constants.PREF_FLOAT_DIRECT_REACT:
+            case Constants.PREF_FLOAT_NO_EMPTY_WINDOW:
                 SharedPreferenceUtil spfu = SharedPreferenceUtil.getInstance();
                 spfu.put(getContext(), preference.getKey(), (boolean) o);
-                getContext().sendBroadcast(new Intent().setAction(Constants.BROADCAST_ACTION_UPDATE_PREFERENCES));
-                return true;
-            case Constants.PREF_FLOAT_WINDOW_FILTER:
-                SharedPreferenceUtil spfu2 = SharedPreferenceUtil.getInstance();
-                spfu2.put(getContext(), preference.getKey(), (String) o);
                 getContext().sendBroadcast(new Intent().setAction(Constants.BROADCAST_ACTION_UPDATE_PREFERENCES));
                 return true;
         }
@@ -138,7 +138,15 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
         float_card_corner_radius.setOnPreferenceChangeListener(this);
         float_direct_react.setOnPreferenceChangeListener(this);
         float_side_margin_landscape.setOnPreferenceChangeListener(this);
-        float_filter.setOnPreferenceChangeListener(this);
+        float_no_empty_window.setOnPreferenceChangeListener(this);
+        float_filter.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                CompatWithPipeActivity activity = (CompatWithPipeActivity) getActivity();
+                activity.startTransition(new Intent(getContext(), WhiteListPickActivity.class));
+                return true;
+            }
+        });
     }
 
     private void findPreferences() {
@@ -162,6 +170,7 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
         float_direct_react = findPreference(Constants.PREF_FLOAT_DIRECT_REACT);
         float_side_margin_landscape = findPreference(Constants.PREF_FLOAT_WINDOW_SIDE_MARGIN_LANDSCAPE);
         float_filter = findPreference(Constants.PREF_FLOAT_WINDOW_FILTER);
+        float_no_empty_window = findPreference(Constants.PREF_FLOAT_NO_EMPTY_WINDOW);
     }
 
     @Override

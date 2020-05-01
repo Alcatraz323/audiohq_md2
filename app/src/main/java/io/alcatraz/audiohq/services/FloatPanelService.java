@@ -98,6 +98,7 @@ public class FloatPanelService extends Service {
     String card_radius;
     String seek_color;
     boolean direct_react;
+    boolean no_empty_window;
     List<String> filter = new ArrayList<>();
 
     Runnable cleaner = new Runnable() {
@@ -281,7 +282,6 @@ public class FloatPanelService extends Service {
         Utils.setViewSize(toggle, tg_size_integer, tg_size_integer);
 
 
-
         LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_fall_down);
         listView.setAdapter(adapter);
         listView.setLayoutAnimation(controller);
@@ -348,36 +348,55 @@ public class FloatPanelService extends Service {
         }
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     private void showFloatingWindow() {
         if (Settings.canDrawOverlays(this)) {
-
-            checkAndAdjustHeight();
-
-            windowManager.addView(root, layoutParams);
-            toggle.startAnimation(slide_in_animation);
-
-            int dismiss_mills = Integer.parseInt(dismiss_delay);
-
-            //noinspection Convert2Lambda
-            root.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    switch (motionEvent.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                        case MotionEvent.ACTION_MOVE:
-                            handler.removeCallbacks(cleaner);
-                            break;
-                        case MotionEvent.ACTION_UP:
-                            handler.postDelayed(cleaner, dismiss_mills);
-                            break;
+            if (no_empty_window) {
+                playingSystem.update(new AudioHQNativeInterface<PlayingSystem>() {
+                    @Override
+                    public void onSuccess(PlayingSystem result) {
+                        if (result.getData().size() > 0) {
+                            showFloatWindow_Impl();
+                        }
                     }
-                    return false;
-                }
-            });
 
-            handler.postDelayed(cleaner, dismiss_mills);
+                    @Override
+                    public void onFailure(String reason) {
+
+                    }
+                });
+            } else {
+                showFloatWindow_Impl();
+            }
         }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void showFloatWindow_Impl() {
+        checkAndAdjustHeight();
+
+        windowManager.addView(root, layoutParams);
+        toggle.startAnimation(slide_in_animation);
+
+        int dismiss_mills = Integer.parseInt(dismiss_delay);
+
+        //noinspection Convert2Lambda
+        root.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                    case MotionEvent.ACTION_MOVE:
+                        handler.removeCallbacks(cleaner);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        handler.postDelayed(cleaner, dismiss_mills);
+                        break;
+                }
+                return false;
+            }
+        });
+
+        handler.postDelayed(cleaner, dismiss_mills);
     }
 
     public void updateList() {
@@ -454,10 +473,12 @@ public class FloatPanelService extends Service {
                 Constants.DEFAULT_VALUE_PREF_FLOAT_DIRECT_REACT);
         side_margin_landscape = (String) spf.get(this, Constants.PREF_FLOAT_WINDOW_SIDE_MARGIN_LANDSCAPE,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_SIDE_MARGIN_LANDSCAPE);
+        no_empty_window = (boolean) spf.get(this, Constants.PREF_FLOAT_NO_EMPTY_WINDOW,
+                Constants.DEFAULT_VALUE_PREF_NO_EMPTY_WINDOW);
         listener.setDirect_react(direct_react);
         String filter_raw = (String) spf.get(this, Constants.PREF_FLOAT_WINDOW_FILTER,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_FILTER);
-        if (filter_raw != null) {
+        if (filter_raw != null && !filter_raw.equals("")) {
             filter.clear();
             String[] filter_cooking = filter_raw.split(",");
             Collections.addAll(filter, filter_cooking);

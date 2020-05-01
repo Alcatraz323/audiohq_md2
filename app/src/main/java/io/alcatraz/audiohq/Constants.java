@@ -60,6 +60,8 @@ public class Constants {
     public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_SIDE_MARGIN_LANDSCAPE = "8";
     public static final String PREF_FLOAT_WINDOW_FILTER = "float_filter";
     public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_FILTER = "";
+    public static final String PREF_FLOAT_NO_EMPTY_WINDOW = "float_no_empty_window";
+    public static final boolean DEFAULT_VALUE_PREF_NO_EMPTY_WINDOW = false;
 
     public static final String PREF_DEFAULT_PROFILE = "default_profile";
     public static final String PREF_CHECK_UPDATE = "check_update";
