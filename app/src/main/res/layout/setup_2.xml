@@ -129,123 +129,123 @@
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/setup_2_root_check"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:visibility="visible"
-            app:cardElevation="2dp"
-            app:cardMaxElevation="4dp"
-            app:cardPreventCornerOverlap="true"
-            app:cardUseCompatPadding="true">
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/setup_2_root_check"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="3dp"-->
+<!--            android:layout_marginRight="3dp"-->
+<!--            android:visibility="visible"-->
+<!--            app:cardElevation="2dp"-->
+<!--            app:cardMaxElevation="4dp"-->
+<!--            app:cardPreventCornerOverlap="true"-->
+<!--            app:cardUseCompatPadding="true">-->
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
 
-                <ImageView
-                    android:id="@+id/setup_2_root_check_indicator"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:scaleX="0.9"
-                    android:scaleY="0.9"
-                    app:srcCompat="@drawable/ic_check_green_24dp" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/setup_2_root_check_indicator"-->
+<!--                    android:layout_width="32dp"-->
+<!--                    android:layout_height="32dp"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    android:layout_marginBottom="16dp"-->
+<!--                    android:scaleX="0.9"-->
+<!--                    android:scaleY="0.9"-->
+<!--                    app:srcCompat="@drawable/ic_check_green_24dp" />-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_toEndOf="@+id/setup_2_root_check_indicator"
-                    android:gravity="end"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginBottom="8dp"-->
+<!--                    android:layout_marginEnd="8dp"-->
+<!--                    android:layout_toEndOf="@+id/setup_2_root_check_indicator"-->
+<!--                    android:gravity="end"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:id="@+id/setup_2_root_check_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:layout_marginTop="12dp"
-                        android:text="@string/check_root"
-                        android:textAllCaps="false"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"
-                        android:textColor="@color/green_colorPrimary"
-                        android:textStyle="bold" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/setup_2_root_check_title"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginBottom="2dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:text="@string/check_root"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"-->
+<!--                        android:textColor="@color/green_colorPrimary"-->
+<!--                        android:textStyle="bold" />-->
 
-                    <TextView
-                        android:id="@+id/setup_2_root_check_state"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setup_check_granted" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/setup_2_root_check_state"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/setup_check_granted" />-->
 
-                </LinearLayout>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+<!--                </LinearLayout>-->
+<!--            </RelativeLayout>-->
+<!--        </androidx.cardview.widget.CardView>-->
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/setup_2_audioserver_check"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:visibility="visible"
-            app:cardElevation="2dp"
-            app:cardMaxElevation="4dp"
-            app:cardPreventCornerOverlap="true"
-            app:cardUseCompatPadding="true">
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/setup_2_audioserver_check"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="3dp"-->
+<!--            android:layout_marginRight="3dp"-->
+<!--            android:visibility="visible"-->
+<!--            app:cardElevation="2dp"-->
+<!--            app:cardMaxElevation="4dp"-->
+<!--            app:cardPreventCornerOverlap="true"-->
+<!--            app:cardUseCompatPadding="true">-->
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
 
-                <ImageView
-                    android:id="@+id/setup_2_audioserver_check_indicator"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:scaleX="0.9"
-                    android:scaleY="0.9"
-                    app:srcCompat="@drawable/ic_check_green_24dp" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/setup_2_audioserver_check_indicator"-->
+<!--                    android:layout_width="32dp"-->
+<!--                    android:layout_height="32dp"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    android:layout_marginBottom="16dp"-->
+<!--                    android:scaleX="0.9"-->
+<!--                    android:scaleY="0.9"-->
+<!--                    app:srcCompat="@drawable/ic_check_green_24dp" />-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_toEndOf="@+id/setup_2_audioserver_check_indicator"
-                    android:gravity="end"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginBottom="8dp"-->
+<!--                    android:layout_marginEnd="8dp"-->
+<!--                    android:layout_toEndOf="@+id/setup_2_audioserver_check_indicator"-->
+<!--                    android:gravity="end"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:id="@+id/setup_2_audioserver_check_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:layout_marginTop="12dp"
-                        android:text="@string/check_audioserver_info"
-                        android:textAllCaps="false"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"
-                        android:textColor="@color/green_colorPrimary"
-                        android:textStyle="bold" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/setup_2_audioserver_check_title"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginBottom="2dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:text="@string/check_audioserver_info"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"-->
+<!--                        android:textColor="@color/green_colorPrimary"-->
+<!--                        android:textStyle="bold" />-->
 
-                    <TextView
-                        android:id="@+id/setup_2_audioserver_check_state"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setup_check_granted" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/setup_2_audioserver_check_state"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/setup_check_granted" />-->
 
-                </LinearLayout>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+<!--                </LinearLayout>-->
+<!--            </RelativeLayout>-->
+<!--        </androidx.cardview.widget.CardView>-->
 
         <androidx.cardview.widget.CardView
             android:id="@+id/setup_2_api_check"

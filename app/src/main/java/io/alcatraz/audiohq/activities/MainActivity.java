@@ -160,13 +160,13 @@ public class MainActivity extends CompatWithPipeActivity implements View.OnClick
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item2:
-                startTransition(new Intent(this, AboutActivity.class));
+                startActivity(new Intent(this, AboutActivity.class));
                 break;
             case R.id.item3:
                 initData();
                 break;
             case R.id.item4:
-                startTransition(new Intent(this,LogActivity.class));
+                startActivity(new Intent(this,LogActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -181,7 +181,7 @@ public class MainActivity extends CompatWithPipeActivity implements View.OnClick
                 break;
             case R.id.main_card_playing:
                 if (isFunctionValid) {
-                    startTransition(new Intent(MainActivity.this,PlayingGeneralActivity.class));
+                    startActivity(new Intent(MainActivity.this,PlayingGeneralActivity.class));
                 } else {
                     toast(R.string.main_card_invalid);
                 }
@@ -198,7 +198,7 @@ public class MainActivity extends CompatWithPipeActivity implements View.OnClick
                 break;
             case R.id.main_card_setting:
                 if (isFunctionValid) {
-                    startTransition(new Intent(MainActivity.this, PreferenceActivity.class));
+                    startActivity(new Intent(MainActivity.this, PreferenceActivity.class));
                 } else {
                     toast(R.string.main_card_invalid);
                 }

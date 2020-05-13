@@ -5,12 +5,21 @@
 <resources>
     <!-- 更新修改部分 -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200501 play_stable_3_d722c64</string>
+    <string name="update_title">20200513 play_stable_4_0ea0036</string>
     <string name="update_info">
-        1.添加无可调项目不显示悬浮窗选项\n
-        2.在“正在播放”中添加关键说明，请查看\n
+        1.修复无可调项目不显示悬浮窗选项\n
+        2.移除不必要动画，移除除了Se检查以外Root使用\n
         3.白名单界面更新，不用你们手打包名了\n
-        4.更新在"关于"中的本项目开源地址
+        4.更新在"关于"中的本项目开源地址\n
+        5.回答几个常见问题\n
+        a.软件是否需要后台\n
+        只有悬浮窗功能需要保留apk 后台，底层服务不需要apk后台\n
+        b.微信，钉钉等语音或者退出时显示悬浮窗\n
+        这个不是bug,是因为这些软件动了音量\n
+        c.酷狗只显示进程名\n
+        酷狗包名，进程名不规范，默认算法读不出进程名\n
+        d.xxx不支持/xxx列表没有/xx电话没有\n
+        请仔细阅读"正在播放"界面内的说明,此处不再赘述\n
     </string>
 
     <!-- 一般 -->
@@ -138,7 +147,7 @@
     <string name="setup_check_deny">未通过</string>
     <string name="setup_3_install_title">安装</string>
     <string name="setup_3_install_info">在网页下载模块后进行安装，这个操作可能损害你的系统，在安装前请确保你知道怎么恢复系统</string>
-    <string name="setup_3_install_page">网页下载</string>
+    <string name="setup_3_install_page">网页下载(若已安装模块，请忽略)</string>
     <string name="setup_3_installed">我确认已经安装了对应版本模块</string>
     <string name="setup_3_installed_title">Magisk模块安装版本</string>
     <string name="setup_3_installed_summary">当前apk适用模块原生文件版本 : &current_match_version;</string>

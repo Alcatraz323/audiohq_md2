@@ -44,7 +44,7 @@ public class PreferenceActivity extends CompatWithPipeActivity {
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
             Intent intent = new Intent(PreferenceActivity.this,PreferenceInnerActivity.class);
             intent.putExtra(PreferenceInnerActivity.PREFERENCE_TRANSFER_HEADER, (PreferenceHeader) adapterView.getItemAtPosition(i));
-            startTransition(intent);
+            startActivity(intent);
         });
     }
 

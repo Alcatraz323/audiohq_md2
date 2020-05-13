@@ -7,11 +7,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Change every update -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200501 play_stable_3_d722c64</string>
+    <string name="update_title">20200513 play_stable_4_0ea0036</string>
     <string name="update_info">
-        1.Added "no empty window" option\n
-        2.whitelist gui\n
-        3.updated opensource url in "About"\n</string>
+        1.Fixed "no empty window" option\n
+        2.removed some unnecessary animation\n
+        3.removed root permission for audiohq api use
+    </string>
 
     <!-- Common -->
     <string name="app_name">Audio HeadQuarter</string>
@@ -146,7 +147,7 @@
     <string name="setup_3_install_title">Install the module</string>
     <string name="setup_3_install_info">Now, go to the website to download the module and install.
         This action may cause DAMAGE to your system, please MAKE SURE you know how to recover before you
-    install the module</string>
+    install the module, if you have installed pls ignore this and check the checkbox below</string>
     <string name="setup_3_install_page">Download</string>
     <string name="setup_3_installed">I have installed the matched module</string>
     <string name="setup_3_installed_title">Target magisk module version</string>

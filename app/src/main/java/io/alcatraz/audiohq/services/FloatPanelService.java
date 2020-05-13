@@ -354,7 +354,15 @@ public class FloatPanelService extends Service {
                 playingSystem.update(new AudioHQNativeInterface<PlayingSystem>() {
                     @Override
                     public void onSuccess(PlayingSystem result) {
-                        if (result.getData().size() > 0) {
+                        List<Pkgs> current_result = result.getData();
+                        List<Pkgs> new_list = new ArrayList<>();
+                        for (Pkgs i : current_result) {
+                            if (!filter.contains(i.getPkg())) {
+                                new_list.add(i);
+                            }
+                        }
+
+                        if (new_list.size() > 0) {
                             showFloatWindow_Impl();
                         }
                     }
