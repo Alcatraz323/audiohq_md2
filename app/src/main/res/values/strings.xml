@@ -7,10 +7,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Change every update -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200805 play_stable_5_b704c0b</string>
+    <string name="update_title">20200805 play_stable_5_b43cf37</string>
     <string name="update_info">
         1.dismisses window when touch outside\n
         2.opensourced prebuilt libraries for aosp and its variants\n
+        3.targetApi set to 29
     </string>
 
     <!-- Common -->
