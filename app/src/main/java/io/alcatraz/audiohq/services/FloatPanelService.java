@@ -188,7 +188,7 @@ public class FloatPanelService extends Service {
         layoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
         layoutParams.format = PixelFormat.RGBA_8888;
         layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
+                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
         layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
         if (gravity.equals("start_top"))
@@ -209,7 +209,6 @@ public class FloatPanelService extends Service {
         } else if (gravity.equals("end_top")) {
             root = (RelativeLayout) layoutInflater.inflate(R.layout.panel_float_right, null);
         }
-
         listView = root.findViewById(R.id.audiohq_float_list);
         toggle = root.findViewById(R.id.audiohq_float_trigger);
         toggle_icon = root.findViewById(R.id.audiohq_float_toggle_icon);
@@ -303,6 +302,10 @@ public class FloatPanelService extends Service {
                         break;
                     case MotionEvent.ACTION_UP:
                         handler.postDelayed(cleaner, Integer.parseInt(dismiss_delay));
+                        break;
+                    case MotionEvent.ACTION_OUTSIDE:
+                        handler.removeCallbacks(cleaner);
+                        toggle.startAnimation(slide_out_animation);
                         break;
                 }
                 return false;
@@ -398,6 +401,10 @@ public class FloatPanelService extends Service {
                         break;
                     case MotionEvent.ACTION_UP:
                         handler.postDelayed(cleaner, dismiss_mills);
+                        break;
+                    case MotionEvent.ACTION_OUTSIDE:
+                        handler.removeCallbacks(cleaner);
+                        toggle.startAnimation(slide_out_animation);
                         break;
                 }
                 return false;

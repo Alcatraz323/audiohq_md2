@@ -5,13 +5,12 @@
 <resources>
     <!-- 更新修改部分 -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200513 play_stable_4_b704c0b</string>
+    <string name="update_title">20200805 play_stable_5_b704c0b</string>
     <string name="update_info">
-        1.修复无可调项目不显示悬浮窗选项\n
-        2.移除不必要动画，移除除了Se检查以外Root使用\n
-        3.白名单界面更新，不用你们手打包名了\n
-        4.更新在"关于"中的本项目开源地址\n
-        5.回答几个常见问题\n
+        1.触摸悬浮窗外区域关闭悬浮窗\n
+        2.开放了用于aosp及其变体想整合进系统所需的文件，请去我的github查看\n
+        3.更新在"关于"中的本项目开源地址\n
+        4.回答几个常见问题\n
         a.软件是否需要后台\n
         只有悬浮窗功能需要保留apk 后台，底层服务不需要apk后台\n
         b.微信，钉钉等语音或者退出时显示悬浮窗\n
@@ -20,6 +19,8 @@
         酷狗包名，进程名不规范，默认算法读不出进程名\n
         d.xxx不支持/xxx列表没有/xx电话没有\n
         请仔细阅读"正在播放"界面内的说明,此处不再赘述\n
+        e.如何同时播放？\n
+        使用权限软件禁止 启动播放就会把别人停掉的软件 的音频焦点，不行就把两个都禁止
     </string>
 
     <!-- 一般 -->

@@ -7,11 +7,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Change every update -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200513 play_stable_4_b704c0b</string>
+    <string name="update_title">20200805 play_stable_5_b704c0b</string>
     <string name="update_info">
-        1.Fixed "no empty window" option\n
-        2.removed some unnecessary animation\n
-        3.removed root permission for audiohq api use
+        1.dismisses window when touch outside\n
+        2.opensourced prebuilt libraries for aosp and its variants\n
     </string>
 
     <!-- Common -->
