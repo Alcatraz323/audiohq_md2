@@ -562,7 +562,7 @@ public class FloatPanelService extends Service {
         IntentFilter dis_fil = new IntentFilter();
         tr_fil.addAction(AHQ_FLOAT_DISCHAGE_ACTION);
         discharger = new FloatWindowDischarger();
-        registerReceiver(discharger, tr_fil);
+        registerReceiver(discharger, dis_fil);
         homeKeyEventBroadCastReceiver = new HomeKeyEventBroadCastReceiver();
         registerReceiver(homeKeyEventBroadCastReceiver, new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
     }

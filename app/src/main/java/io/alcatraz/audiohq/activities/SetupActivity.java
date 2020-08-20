@@ -85,7 +85,7 @@ public class SetupActivity extends SetupWizardBaseActivity {
 
     @Override
     public int getVersionCode() {
-        return 25;
+        return 26;
     }
 
     private void onSelectSetup4_Apply() {

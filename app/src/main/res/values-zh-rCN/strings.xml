@@ -5,7 +5,7 @@
 <resources>
     <!-- 更新修改部分 -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200820 play_stable_6_ff94e43</string>
+    <string name="update_title">20200820 play_stable_6_1faffb8</string>
     <string name="update_info">
         1.触摸Home,最近任务关闭悬浮窗\n
         2.开放了 用于aosp及其变体想整合进系统所需的文件，请去我的github查看\n

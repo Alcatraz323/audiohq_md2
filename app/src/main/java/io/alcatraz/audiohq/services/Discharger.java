@@ -21,15 +21,6 @@ public class Discharger extends AccessibilityService {
 
     @Override
     protected boolean onKeyEvent(KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_HOME || event.getKeyCode() == KeyEvent.KEYCODE_BACK || event.getKeyCode() == KeyEvent.KEYCODE_MENU) {
-            LogBuff.E("1");
-            Log.e("ALCDisc","1");
-            if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                LogBuff.E("2");
-                Log.e("ALCDisc","1");
-                sendBroadcast(new Intent().setAction(FloatPanelService.AHQ_FLOAT_DISCHAGE_ACTION));
-            }
-        }
         return false;
     }
 }

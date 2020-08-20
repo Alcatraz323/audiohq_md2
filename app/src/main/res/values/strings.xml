@@ -7,7 +7,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Change every update -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200820 play_stable_6_ff94e43</string>
+    <string name="update_title">20200820 play_stable_6_1faffb8</string>
     <string name="update_info">
         1.dismisses window when touch home and recent task\n
         2.opensourced prebuilt libraries for aosp and its variants\n
