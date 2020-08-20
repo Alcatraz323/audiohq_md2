@@ -5,13 +5,15 @@
 <resources>
     <!-- 更新修改部分 -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200805 play_stable_5_a5431af</string>
+    <string name="update_title">20200820 play_stable_6_ff94e43</string>
     <string name="update_info">
         1.触摸Home,最近任务关闭悬浮窗\n
         2.开放了 用于aosp及其变体想整合进系统所需的文件，请去我的github查看\n
         3.添加“默认展开悬浮窗”选项\n
         4.修复悬浮窗附近无法点击问题\n
-        5.回答几个常见问题\n
+        5.添加硬件加速标签\n
+        6.更新支持库版本\n
+        7.回答几个常见问题\n
         a.软件是否需要后台\n
         只有悬浮窗功能需要保留apk 后台，底层服务不需要apk后台\n
         b.微信，钉钉等语音或者退出时显示悬浮窗\n
