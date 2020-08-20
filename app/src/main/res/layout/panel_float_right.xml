@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/audiohq_float_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:gravity="end">
 
     <ListView
         android:id="@+id/audiohq_float_list"
-        android:layout_width="240dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:divider="@null"
         android:visibility="visible" />
@@ -17,7 +18,6 @@
         android:id="@+id/audiohq_float_trigger"
         android:layout_width="52dp"
         android:layout_height="52dp"
-        android:layout_toEndOf="@id/audiohq_float_list"
         android:layout_margin="1dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
@@ -43,4 +43,4 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-</RelativeLayout>
+</LinearLayout>

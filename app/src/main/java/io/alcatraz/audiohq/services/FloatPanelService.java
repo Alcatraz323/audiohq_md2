@@ -20,11 +20,13 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -51,6 +53,8 @@ public class FloatPanelService extends Service {
     public static final String AHQ_FLOAT_DISCHAGE_ACTION = "ahq_float_discharge";
     UpdatePreferenceReceiver updatePreferenceReceiver;
     FloatWindowTrigger trigger;
+    FloatWindowDischarger discharger;
+    HomeKeyEventBroadCastReceiver homeKeyEventBroadCastReceiver;
     private String notificationId = "audiohq_floater";
 
     //Controllers
@@ -61,7 +65,7 @@ public class FloatPanelService extends Service {
     Handler handler = new Handler();
 
     //Widgets
-    RelativeLayout root;
+    LinearLayout root;
     CardView toggle;
     ListView listView;
     ImageView toggle_icon;
@@ -99,6 +103,7 @@ public class FloatPanelService extends Service {
     String seek_color;
     boolean direct_react;
     boolean no_empty_window;
+    boolean default_expanded_panel;
     List<String> filter = new ArrayList<>();
 
     Runnable cleaner = new Runnable() {
@@ -143,12 +148,13 @@ public class FloatPanelService extends Service {
             }
         });
 
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager
+                = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             String notificationName = "AudioHQ Foreground";
-            NotificationChannel channel = new NotificationChannel(notificationId, notificationName, NotificationManager.IMPORTANCE_HIGH);
+            NotificationChannel channel =
+                    new NotificationChannel(notificationId, notificationName, NotificationManager.IMPORTANCE_HIGH);
             notificationManager.createNotificationChannel(channel);
         }
 
@@ -188,7 +194,8 @@ public class FloatPanelService extends Service {
         layoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
         layoutParams.format = PixelFormat.RGBA_8888;
         layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
+                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH |
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED;
         layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
         if (gravity.equals("start_top"))
@@ -204,10 +211,10 @@ public class FloatPanelService extends Service {
     @SuppressLint("ClickableViewAccessibility")
     private void initViews() {
         if (gravity.equals("start_top")) {
-            root = (RelativeLayout) layoutInflater.inflate(R.layout.panel_float, null);
+            root = (LinearLayout) layoutInflater.inflate(R.layout.panel_float, null);
 
         } else if (gravity.equals("end_top")) {
-            root = (RelativeLayout) layoutInflater.inflate(R.layout.panel_float_right, null);
+            root = (LinearLayout) layoutInflater.inflate(R.layout.panel_float_right, null);
         }
         listView = root.findViewById(R.id.audiohq_float_list);
         toggle = root.findViewById(R.id.audiohq_float_trigger);
@@ -261,6 +268,28 @@ public class FloatPanelService extends Service {
             @Override
             public void onAnimationEnd(Animation animation) {
                 clearList();
+                ViewGroup.LayoutParams params = listView.getLayoutParams();
+                params.width = Utils.Dp2Px(FloatPanelService.this, 0);
+                listView.setLayoutParams(params);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        slide_in_animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                if (default_expanded_panel) {
+                    updateList();
+                }
             }
 
             @Override
@@ -280,7 +309,6 @@ public class FloatPanelService extends Service {
 
         Utils.setViewSize(toggle, tg_size_integer, tg_size_integer);
 
-
         LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_fall_down);
         listView.setAdapter(adapter);
         listView.setLayoutAnimation(controller);
@@ -292,6 +320,7 @@ public class FloatPanelService extends Service {
                 updateList();
             }
         });
+
         toggle.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -425,6 +454,13 @@ public class FloatPanelService extends Service {
                         data.add(i);
                     }
                 }
+                if (data.size() > 0) {
+                    root.removeView(listView);
+                    ViewGroup.LayoutParams params = listView.getLayoutParams();
+                    params.width = Utils.Dp2Px(FloatPanelService.this, 240);
+                    listView.setLayoutParams(params);
+                    root.addView(listView,1);
+                }
                 adapter.notifyDataSetChanged();
                 listView.scheduleLayoutAnimation();
             }
@@ -446,6 +482,8 @@ public class FloatPanelService extends Service {
         observer.unregisterVolumeReceiver();
         unregisterReceiver(updatePreferenceReceiver);
         unregisterReceiver(trigger);
+        unregisterReceiver(discharger);
+        unregisterReceiver(homeKeyEventBroadCastReceiver);
         killKeyListener();
         super.onDestroy();
     }
@@ -490,6 +528,8 @@ public class FloatPanelService extends Service {
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_SIDE_MARGIN_LANDSCAPE);
         no_empty_window = (boolean) spf.get(this, Constants.PREF_FLOAT_NO_EMPTY_WINDOW,
                 Constants.DEFAULT_VALUE_PREF_NO_EMPTY_WINDOW);
+        default_expanded_panel = (boolean) spf.get(this, Constants.PREF_FLOAT_DEFAULT_EXPANDED_PANEL,
+                Constants.DEFAULT_VALUE_PREF_FLOAT_DEFAULT_EXPANDED_PANEL);
         listener.setDirect_react(direct_react);
         String filter_raw = (String) spf.get(this, Constants.PREF_FLOAT_WINDOW_FILTER,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_FILTER);
@@ -519,6 +559,12 @@ public class FloatPanelService extends Service {
         tr_fil.addAction(AHQ_FLOAT_TRIGGER_ACTION);
         trigger = new FloatWindowTrigger();
         registerReceiver(trigger, tr_fil);
+        IntentFilter dis_fil = new IntentFilter();
+        tr_fil.addAction(AHQ_FLOAT_DISCHAGE_ACTION);
+        discharger = new FloatWindowDischarger();
+        registerReceiver(discharger, tr_fil);
+        homeKeyEventBroadCastReceiver = new HomeKeyEventBroadCastReceiver();
+        registerReceiver(homeKeyEventBroadCastReceiver, new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
     }
 
     class UpdatePreferenceReceiver extends BroadcastReceiver {
@@ -535,6 +581,35 @@ public class FloatPanelService extends Service {
         @Override
         public void onReceive(Context context, Intent intent) {
             showPanel();
+        }
+    }
+
+    class FloatWindowDischarger extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            toggle.startAnimation(slide_out_animation);
+        }
+    }
+
+    class HomeKeyEventBroadCastReceiver extends BroadcastReceiver {
+        static final String SYSTEM_REASON = "reason";
+        static final String SYSTEM_HOME_KEY = "homekey";//home key
+        static final String SYSTEM_RECENT_APPS = "recentapps";//long home key
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)) {
+                String reason = intent.getStringExtra(SYSTEM_REASON);
+                if (reason != null) {
+                    if (reason.equals(SYSTEM_HOME_KEY)) {
+                        toggle.startAnimation(slide_out_animation);
+                    } else if (reason.equals(SYSTEM_RECENT_APPS)) {
+                        toggle.startAnimation(slide_out_animation);
+                    }
+                }
+            }
         }
     }
 }

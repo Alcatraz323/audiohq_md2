@@ -5,12 +5,12 @@
 <resources>
     <!-- 更新修改部分 -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200805 play_stable_5_b43cf37</string>
+    <string name="update_title">20200805 play_stable_5_a5431af</string>
     <string name="update_info">
-        1.触摸悬浮窗外区域关闭悬浮窗\n
+        1.触摸Home,最近任务关闭悬浮窗\n
         2.开放了 用于aosp及其变体想整合进系统所需的文件，请去我的github查看\n
-        3.targetApi变更为29\n
-        4.更新在"关于"中的本项目开源地址\n
+        3.添加“默认展开悬浮窗”选项\n
+        4.修复悬浮窗附近无法点击问题\n
         5.回答几个常见问题\n
         a.软件是否需要后台\n
         只有悬浮窗功能需要保留apk 后台，底层服务不需要apk后台\n
@@ -45,7 +45,7 @@
     <string name="til_err_ofr">超出范围</string>
     <string name="read_profile_err">配置文件读取失败</string>
     <string name="java_server_running">Java服务器已启动</string>
-    <string name="accessibility_description">AudioHQ按键响应器</string>
+    <string name="accessibility_description">AudioHQ金刚键关闭悬浮窗</string>
 
     <string name="main_card_status_querying">获取中…</string>
     <string name="main_card_playing">正在播放</string>
@@ -223,6 +223,8 @@
     <string name="pref_4_17">背景色(深色模式)</string>
     <string name="pref_4_18">无条目时不显示悬浮窗</string>
     <string name="pref_4_18_summary">开启此项后若列表中无可调节应用将不显示悬浮窗,需要强行停止本应用生效</string>
+    <string name="pref_4_19">默认展开</string>
+    <string name="pref_4_19_summary">开启时将直接展开控制面板</string>
     <string name="pref_4_dark_t">深色主题</string>
     <string name="pref_4_light_t">亮色主题</string>
     <string name="pref_invalid_integer">无效整数</string>

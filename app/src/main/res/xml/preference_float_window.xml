@@ -55,6 +55,11 @@
             android:title="@string/pref_4_1" />
 
         <CheckBoxPreference
+            android:key="float_default_expanded_panel"
+            android:summary="@string/pref_4_19_summary"
+            android:title="@string/pref_4_19" />
+
+        <CheckBoxPreference
             android:key="float_foreground_notification"
             android:summary="@string/pref_4_3_summary"
             android:title="@string/pref_4_3" />

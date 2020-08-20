@@ -43,6 +43,7 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
     private EditTextPreference float_side_margin_landscape;
     private PreferenceScreen float_filter;
     private CheckBoxPreference float_no_empty_window;
+    private CheckBoxPreference float_default_expanded_panel;
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object o) {
@@ -89,6 +90,7 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
             case Constants.PREF_FLOAT_FOREGROUND_SERVICE:
             case Constants.PREF_FLOAT_DIRECT_REACT:
             case Constants.PREF_FLOAT_NO_EMPTY_WINDOW:
+            case Constants.PREF_FLOAT_DEFAULT_EXPANDED_PANEL:
                 SharedPreferenceUtil spfu = SharedPreferenceUtil.getInstance();
                 spfu.put(getContext(), preference.getKey(), (boolean) o);
                 getContext().sendBroadcast(new Intent().setAction(Constants.BROADCAST_ACTION_UPDATE_PREFERENCES));
@@ -139,6 +141,7 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
         float_direct_react.setOnPreferenceChangeListener(this);
         float_side_margin_landscape.setOnPreferenceChangeListener(this);
         float_no_empty_window.setOnPreferenceChangeListener(this);
+        float_default_expanded_panel.setOnPreferenceChangeListener(this);
         float_filter.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -171,6 +174,7 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
         float_side_margin_landscape = findPreference(Constants.PREF_FLOAT_WINDOW_SIDE_MARGIN_LANDSCAPE);
         float_filter = findPreference(Constants.PREF_FLOAT_WINDOW_FILTER);
         float_no_empty_window = findPreference(Constants.PREF_FLOAT_NO_EMPTY_WINDOW);
+        float_default_expanded_panel = findPreference(Constants.PREF_FLOAT_DEFAULT_EXPANDED_PANEL);
     }
 
     @Override

@@ -7,11 +7,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Change every update -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200805 play_stable_5_b43cf37</string>
+    <string name="update_title">20200820 play_stable_6_a5431af</string>
     <string name="update_info">
-        1.dismisses window when touch outside\n
+        1.dismisses window when touch home and recent task\n
         2.opensourced prebuilt libraries for aosp and its variants\n
-        3.targetApi set to 29
+        3.add default expand option\n
+        4.fixed useless space allocation
     </string>
 
     <!-- Common -->
@@ -35,7 +36,7 @@
     <string name="til_err_ofr">Out of range</string>
     <string name="read_profile_err">Read profile error</string>
     <string name="java_server_running">Java Server Running</string>
-    <string name="accessibility_description">AudioHQ gpio key trigger</string>
+    <string name="accessibility_description">AudioHQ Discharger for keys</string>
 
     <string name="main_card_status_querying">Querying</string>
     <string name="main_card_playing">Playing</string>
@@ -225,6 +226,8 @@
     <string name="pref_4_17">Background color(Dark Theme)</string>
     <string name="pref_4_18">No window when empty</string>
     <string name="pref_4_18_summary">The window will not show when the play list is empty, need to kill this app and restart to work</string>
+    <string name="pref_4_19">Default expanded window</string>
+    <string name="pref_4_19_summary">Directly show the control panel when is on</string>
     <string name="pref_4_dark_t">Dark Theme</string>
     <string name="pref_4_light_t">Light Theme</string>
     <string name="pref_invalid_integer">Invalid integer</string>
