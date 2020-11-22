@@ -1,5 +1,6 @@
 package io.alcatraz.audiohq.adapters;
 
+import android.app.Service;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import androidx.cardview.widget.CardView;
+import io.alcatraz.audiohq.AudioHQApplication;
 import io.alcatraz.audiohq.Constants;
 import io.alcatraz.audiohq.R;
 import io.alcatraz.audiohq.beans.playing.Pkgs;
@@ -24,7 +27,7 @@ import io.alcatraz.audiohq.utils.Utils;
 
 public class FloatAdapter extends BaseAdapter {
     private List<Pkgs> data;
-    private Context context;
+    private Service context;
     private LayoutInflater inflater;
     private Handler cleaner;
     private Runnable cleanTask;
@@ -44,7 +47,7 @@ public class FloatAdapter extends BaseAdapter {
     private int delayed = 3000;
 
 
-    public FloatAdapter(Context context, List<Pkgs> data, Handler cleaner, Runnable cleanTask) {
+    public FloatAdapter(Service context, List<Pkgs> data, Handler cleaner, Runnable cleanTask) {
         this.data = data;
         this.context = context;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -81,22 +84,47 @@ public class FloatAdapter extends BaseAdapter {
         CardView cardView = view.findViewById(R.id.float_list_item_card);
         LinearLayout back_tint = view.findViewById(R.id.float_item_back_tint);
 
+        FrameLayout pin = view.findViewById(R.id.float_list_item_pin);
+        ImageView pinImage = view.findViewById(R.id.float_list_item_pin_image);
+
+        if(pkgs.isSticky()) {
+            Utils.setImageWithTint(pinImage, R.drawable.ic_pin, context.getColor(R.color.colorAccent));
+        }else{
+            pinImage.setImageResource(R.drawable.ic_pin_off);
+        }
+
+        pin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AudioHQApplication application = (AudioHQApplication) context.getApplication();
+                if (pkgs.isSticky()) {
+                    application.getPlayingSystem().removeStickyApp(pkgs.getPkg());
+                    pinImage.setImageResource(R.drawable.ic_pin_off);
+                    pkgs.setSticky(false);
+                } else {
+                    application.getPlayingSystem().addStickyApp(pkgs.getPkg());
+                    Utils.setImageWithTint(pinImage, R.drawable.ic_pin, context.getColor(R.color.colorAccent));
+                    pkgs.setSticky(true);
+                }
+            }
+        });
+
         cardView.setRadius(getCardRadius());
         back_tint.setBackgroundColor(getCardBackground());
 
         aplc_label.setTextColor(getFontColor());
-        aplc_icon.setImageDrawable(PackageCtlUtils.getIcon(context,pkgs.getPkg()));
-        aplc_label.setText(PackageCtlUtils.getLabel(context,pkgs.getPkg()));
+        aplc_icon.setImageDrawable(PackageCtlUtils.getIcon(context, pkgs.getPkg()));
+        aplc_label.setText(PackageCtlUtils.getLabel(context, pkgs.getPkg()));
 
-        seekBar.setProgress((int) (pkgs.getGeneral()*10000));
-        Utils.setSeekBarColor(seekBar,getCardSeekBarColor());
+        seekBar.setProgress((int) (pkgs.getGeneral() * 10000));
+        Utils.setSeekBarColor(seekBar, getCardSeekBarColor());
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                if(b){
-                    AudioHQApis.setProfile(context,pkgs.getPkg(),i*0.0001f,(float)pkgs.getLeft(),
-                            (float)pkgs.getRight(),true,true);
+                if (b) {
+                    AudioHQApis.setProfile(context, pkgs.getPkg(), i * 0.0001f, (float) pkgs.getLeft(),
+                            (float) pkgs.getRight(), true, true);
                 }
             }
 
@@ -107,7 +135,7 @@ public class FloatAdapter extends BaseAdapter {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                cleaner.postDelayed(cleanTask,delayed);
+                cleaner.postDelayed(cleanTask, delayed);
             }
         });
 

@@ -21,6 +21,8 @@ public class Pkgs {
     private boolean has_profile;
     private boolean has_active_track;
     private List<Processes> processes;
+
+    private boolean sticky = false;
     public void setPkg(String pkg) {
          this.pkg = pkg;
      }
@@ -84,4 +86,11 @@ public class Pkgs {
          return processes;
      }
 
+    public boolean isSticky() {
+        return sticky;
+    }
+
+    public void setSticky(boolean sticky) {
+        this.sticky = sticky;
+    }
 }

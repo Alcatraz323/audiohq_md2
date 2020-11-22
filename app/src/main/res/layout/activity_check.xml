@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="128dp"
             android:fitsSystemWindows="true"
+
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginBottom="48dp"
             app:expandedTitleMarginStart="96dp"
@@ -45,6 +46,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="86dp"
                     android:text="@string/check_daemon_status_alive"
+                    android:textColor="#D5D5D5"
                     android:transitionName="@string/transition_status_indicator" />
 
 
@@ -55,7 +57,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:title="@string/check_daemon_status" />
+                app:title="@string/check_daemon_status"
+                app:titleTextColor="#FFFFFF" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
 

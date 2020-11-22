@@ -8,6 +8,10 @@
 <!--            android:entryValues="@array/entryvalue_for_language"-->
 <!--            android:key="language"-->
 <!--            android:title="@string/pref_4_1" />-->
+        <CheckBoxPreference
+            android:key="exclude_from_recent"
+            android:summary="@string/pref_3_7_summary"
+            android:title="@string/pref_3_7" />
         <PreferenceScreen
             android:key="check_update"
             android:title="@string/pref_3_1" />

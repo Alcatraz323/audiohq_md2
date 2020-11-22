@@ -5,15 +5,13 @@
 <resources>
     <!-- 更新修改部分 -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200820 play_stable_6_1faffb8</string>
+    <string name="update_title">20201120 stable_7_anniversary_f0531c9</string>
     <string name="update_info">
-        1.触摸Home,最近任务关闭悬浮窗\n
-        2.开放了 用于aosp及其变体想整合进系统所需的文件，请去我的github查看\n
-        3.添加“默认展开悬浮窗”选项\n
-        4.修复悬浮窗附近无法点击问题\n
-        5.添加硬件加速标签\n
-        6.更新支持库版本\n
-        7.回答几个常见问题\n
+        1.悬浮窗/"正在播放"固定应用(点击图钉)\n
+        2.无障碍服务版按键响应\n
+        3.可设置的后台隐藏\n
+        4.全root执行选项\n
+        5.回答几个常见问题\n
         a.软件是否需要后台\n
         只有悬浮窗功能需要保留apk 后台，底层服务不需要apk后台\n
         b.微信，钉钉等语音或者退出时显示悬浮窗\n
@@ -47,7 +45,7 @@
     <string name="til_err_ofr">超出范围</string>
     <string name="read_profile_err">配置文件读取失败</string>
     <string name="java_server_running">Java服务器已启动</string>
-    <string name="accessibility_description">AudioHQ金刚键关闭悬浮窗</string>
+    <string name="accessibility_description">AudioHQ按键监听器，用于音量键直接触发悬浮窗，请不要与实验性的基于getevent的触发器同时开启</string>
 
     <string name="main_card_status_querying">获取中…</string>
     <string name="main_card_playing">正在播放</string>
@@ -191,6 +189,8 @@
     <string name="pref_2_3_summary">所有未手动设置的进程的默认配置</string>
     <string name="pref_2_4">启动守护服务</string>
     <string name="pref_2_4_summary">守护服务可能被系统杀死,请授权忽略电池优化,非类原生放入/system/priv-app</string>
+    <string name="pref_2_5">使用Root执行</string>
+    <string name="pref_2_5_summary">所有命令使用root执行(会有很多授权提示，可以去Magisk关闭提示)</string>
     <string name="pref_3_t">其他</string>
     <string name="pref_3_t_summary">卸载方法,清除配置等</string>
     <string name="pref_3_1">检查更新</string>
@@ -201,6 +201,8 @@
     <string name="pref_3_5">折叠同包名进程</string>
     <string name="pref_3_5_summary">将所有同包名进程在一组中显示(测试)</string>
     <string name="pref_3_6">语言</string>
+    <string name="pref_3_7">后台隐藏</string>
+    <string name="pref_3_7_summary">启用后将不会出现在最近任务中</string>
     <string name="pref_4_t">悬浮窗</string>
     <string name="pref_4_t_summary">悬浮窗开关和自定义选项</string>
     <string name="pref_4_1">窗口对齐</string>
@@ -220,13 +222,17 @@
     <string name="pref_4_14">按键响应直接调出悬浮窗</string>
     <string name="pref_4_14_summary">(实验性)监听getevent输出以实现功能，但部分设备不可用</string>
     <string name="pref_4_15">横屏侧面修正距离(dp)</string>
-    <string name="pref_4_16">过滤器/白名单(包名用英文逗号分隔)</string>
+    <string name="pref_4_16">过滤器/白名单</string>
     <string name="pref_4_16_summary">设置的包名将不会出现在悬浮窗内</string>
     <string name="pref_4_17">背景色(深色模式)</string>
     <string name="pref_4_18">无条目时不显示悬浮窗</string>
     <string name="pref_4_18_summary">开启此项后若列表中无可调节应用将不显示悬浮窗,需要强行停止本应用生效</string>
     <string name="pref_4_19">默认展开</string>
     <string name="pref_4_19_summary">开启时将直接展开控制面板</string>
+    <string name="pref_4_20">按键响应(无障碍服务)</string>
+    <string name="pref_4_20_summary">使用无障碍服务实现按键响应,请不要与getevent响应同时开启</string>
+    <string name="pref_4_21">固定应用</string>
+    <string name="pref_4_21_summary">将特定应用固定在悬浮窗和正在播放界面上(无视播放状态)</string>
     <string name="pref_4_dark_t">深色主题</string>
     <string name="pref_4_light_t">亮色主题</string>
     <string name="pref_invalid_integer">无效整数</string>
@@ -243,6 +249,7 @@
 
     <!--关于-->
     <string name="au_l_1">版本</string>
+    <string name="au_l_1st_anniversary_version">一周年至尊纪念版(</string>
     <string name="au_l_2">开发者</string>
     <string name="au_l_2_1">AlcatrazDev,Mr_Dennis</string>
     <string name="au_l_3">查看源码</string>

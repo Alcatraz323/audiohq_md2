@@ -16,7 +16,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import io.alcatraz.audiohq.Constants;
 import io.alcatraz.audiohq.R;
-import io.alcatraz.audiohq.activities.WhiteListPickActivity;
+import io.alcatraz.audiohq.activities.AppPickActivity;
 import io.alcatraz.audiohq.extended.CompatWithPipeActivity;
 import io.alcatraz.audiohq.services.FloatPanelService;
 import io.alcatraz.audiohq.utils.SharedPreferenceUtil;
@@ -44,6 +44,8 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
     private PreferenceScreen float_filter;
     private CheckBoxPreference float_no_empty_window;
     private CheckBoxPreference float_default_expanded_panel;
+    private PreferenceScreen float_accessibility_trigger;
+    private PreferenceScreen float_sticky_apps;
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object o) {
@@ -146,7 +148,24 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 CompatWithPipeActivity activity = (CompatWithPipeActivity) getActivity();
-                activity.startTransition(new Intent(getContext(), WhiteListPickActivity.class));
+                activity.startTransition(new Intent(getContext(), AppPickActivity.class).
+                        putExtra(AppPickActivity.KEY_PICKER_TYPE, AppPickActivity.PICKER_WHITE_LIST));
+                return true;
+            }
+        });
+        float_accessibility_trigger.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
+                return true;
+            }
+        });
+        float_sticky_apps.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                CompatWithPipeActivity activity = (CompatWithPipeActivity) getActivity();
+                activity.startTransition(new Intent(getContext(), AppPickActivity.class).
+                        putExtra(AppPickActivity.KEY_PICKER_TYPE, AppPickActivity.PICKER_TYPE_STICKY_APPS));
                 return true;
             }
         });
@@ -175,11 +194,13 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
         float_filter = findPreference(Constants.PREF_FLOAT_WINDOW_FILTER);
         float_no_empty_window = findPreference(Constants.PREF_FLOAT_NO_EMPTY_WINDOW);
         float_default_expanded_panel = findPreference(Constants.PREF_FLOAT_DEFAULT_EXPANDED_PANEL);
+        float_accessibility_trigger = findPreference(Constants.PREF_FLOAT_ACCESSIBILITY_TRIGGER);
+        float_sticky_apps = findPreference(Constants.PREF_FLOAT_STICKY_APPS);
     }
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        setPreferencesFromResource(R.xml.preference_float_window,rootKey);
+        setPreferencesFromResource(R.xml.preference_float_window, rootKey);
         findPreferences();
         bindLinsteners();
         updateEditTextSummay();
@@ -199,11 +220,11 @@ public class FloatPreferenceFragment extends PreferenceFragmentCompat implements
         }
     }
 
-    private void showNotice(){
+    private void showNotice() {
         new AlertDialog.Builder(getContext())
                 .setTitle(R.string.pref_float_set_notice_title)
                 .setMessage(R.string.pref_float_set_notice_message)
-                .setPositiveButton(R.string.ad_pb,null).show();
+                .setPositiveButton(R.string.ad_pb, null).show();
     }
 
     private void updateEditTextSummay() {

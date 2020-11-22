@@ -7,6 +7,11 @@
             android:summary="@string/pref_1_4_summary"
             android:title="@string/pref_1_4" />
 
+        <PreferenceScreen
+            android:key="float_sticky_apps"
+            android:title="@string/pref_4_21"
+            android:summary="@string/pref_4_21_summary"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_4_dark_t">
@@ -124,5 +129,10 @@
             android:key="float_direct_react"
             android:summary="@string/pref_4_14_summary"
             android:title="@string/pref_4_14" />
+
+        <PreferenceScreen
+            android:key="float_accessibility_trigger"
+            android:title="@string/pref_4_20"
+            android:summary="@string/pref_4_20_summary"/>
     </PreferenceCategory>
 </PreferenceScreen>

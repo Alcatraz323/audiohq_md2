@@ -15,16 +15,16 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import io.alcatraz.audiohq.R;
-import io.alcatraz.audiohq.activities.WhiteListPickActivity;
+import io.alcatraz.audiohq.activities.AppPickActivity;
 import io.alcatraz.audiohq.beans.PickerPack;
 
 public class PackPickerAdapter extends RecyclerView.Adapter<PickerHolder>{
     private List<PickerPack> data;
-    private WhiteListPickActivity activity;
+    private AppPickActivity activity;
     private LayoutInflater inflater;
     private PackageFilter filter;
 
-    public PackPickerAdapter(WhiteListPickActivity activity, List<PickerPack> data) {
+    public PackPickerAdapter(AppPickActivity activity, List<PickerPack> data) {
         this.activity = activity;
         this.data = data;
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -46,9 +46,9 @@ public class PackPickerAdapter extends RecyclerView.Adapter<PickerHolder>{
         holder.checkBox.setChecked(element.checked);
         holder.itemView.setOnClickListener(view -> {
             if (holder.checkBox.isChecked()) {
-                activity.ignoreRemove(element.pack);
+                activity.pickerRemove(element.pack);
             } else {
-                activity.ignoreAdd(element.pack);
+                activity.pickerAdd(element.pack);
             }
             holder.checkBox.setChecked(!holder.checkBox.isChecked());
         });

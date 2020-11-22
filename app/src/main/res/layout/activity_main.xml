@@ -76,8 +76,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/main_card_status_querying"
-                            android:textColor="#FFFFFF" />
+                            android:text="@string/main_card_status_querying" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -114,12 +113,14 @@
                             android:text="@string/check_daemon_status"
                             android:textAllCaps="false"
                             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"
+                            android:textColor="#FFFFFF"
                             android:textSize="18sp" />
 
                         <TextView
                             android:id="@+id/main_card_status_vinfo"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:textColor="#D8D8D8" />
 
                         <TextView
                             android:id="@+id/main_card_status_indicator"

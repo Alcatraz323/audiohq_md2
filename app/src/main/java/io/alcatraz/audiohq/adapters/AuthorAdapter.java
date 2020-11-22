@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 import java.util.Map;
 
+import io.alcatraz.audiohq.Constants;
 import io.alcatraz.audiohq.R;
 
 public class AuthorAdapter extends BaseAdapter {
@@ -54,6 +55,13 @@ public class AuthorAdapter extends BaseAdapter {
         iv.setImageResource(img.get(p1));
         txv1.setText(data.get(p1).get(0));
         txv2.setText(data.get(p1).get(1));
+        if(p1 == 0) {
+            if(Constants.ANNIVERSARY_1ST){
+                TextView txv3 = p2.findViewById(R.id.authoritemTextView3);
+                txv3.setVisibility(View.VISIBLE);
+                txv3.setText(R.string.au_l_1st_anniversary_version);
+            }
+        }
         if (p1 == 2)
             txv2.setVisibility(View.GONE);
         else

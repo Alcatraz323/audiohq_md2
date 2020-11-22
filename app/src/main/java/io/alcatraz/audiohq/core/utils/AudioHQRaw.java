@@ -1,12 +1,12 @@
 package io.alcatraz.audiohq.core.utils;
 
-class AudioHQRaw {
+public class AudioHQRaw {
     static synchronized void setProfile(String process_name,
-                           float prog_general,
-                           float prog_left,
-                           float prog_right,
-                           boolean split_control,
-                           boolean isweakkey) {
+                                        float prog_general,
+                                        float prog_left,
+                                        float prog_right,
+                                        boolean split_control,
+                                        boolean isweakkey) {
         runAudioHqCmd(AudioHqCmds.SET_PROFILE, process_name,
                 prog_left + "", prog_right + "", prog_general + "",
                 split_control ? "true" : "false", isweakkey ? "true" : "false");
@@ -52,12 +52,12 @@ class AudioHQRaw {
         runAudioHqCmd(AudioHqCmds.UNMUTE_PROCESS, process_name, isweakkey ? "true" : "false");
     }
 
-    static ShellUtils.CommandResult getOverallStatus(){
+    static ShellUtils.CommandResult getOverallStatus() {
         return runAudioHqCmd(AudioHqCmds.GET_OVR_STATUS);
     }
 
-    static ShellUtils.CommandResult getProfile(String process,boolean isweakKey){
-        return runAudioHqCmd(AudioHqCmds.GET_PROFILE,process,isweakKey?"true":"false");
+    static ShellUtils.CommandResult getProfile(String process, boolean isweakKey) {
+        return runAudioHqCmd(AudioHqCmds.GET_PROFILE, process, isweakKey ? "true" : "false");
     }
 
     static ShellUtils.CommandResult getDefaultProfile() {
@@ -80,11 +80,11 @@ class AudioHQRaw {
         runAudioHqCmd(AudioHqCmds.START_NATIVE_SERVICE);
     }
 
-    static ShellUtils.CommandResult listProfiles(){
+    static ShellUtils.CommandResult listProfiles() {
         return runAudioHqCmd(AudioHqCmds.LIST_PROFILE);
     }
 
-    static ShellUtils.CommandResult listMuted(){
+    static ShellUtils.CommandResult listMuted() {
         return runAudioHqCmd(AudioHqCmds.LIST_MUTED);
     }
 
@@ -94,14 +94,14 @@ class AudioHQRaw {
             cmd = audioHqCmds.createCmd(params);
         else
             cmd = audioHqCmds.getCmd_raw();
-        ShellUtils.CommandResult result = ShellUtils.execCommand(cmd, audioHqCmds.requiresRoot());
+        ShellUtils.CommandResult result = ShellUtils.execCommand(cmd, AudioHqCmds.FORCE_ROOT_SHELL || audioHqCmds.requiresRoot());
         if (result.responseMsg != null && result.responseMsg.length() != 0) {
             result.responseMsg = result.responseMsg.substring(0, result.responseMsg.length() - 1);
         }
         return result;
     }
 
-    enum AudioHqCmds {
+    public enum AudioHqCmds {
         SET_PROFILE("audiohq --set-profile \"%s\" %s %s %s %s %s", false, true),
         UNSET_PROFILE("audiohq --unset-profile \"%s\" %s", false, true),
         GET_SWITCHES("audiohq --switches", false, false),
@@ -115,11 +115,12 @@ class AudioHQRaw {
         GET_NATIVE_ELF_INFO("audiohq --elf-info", false, false),
         SET_WEAK_KEY_ADJUST("audiohq --weak-key %s", false, true),
         START_NATIVE_SERVICE("audiohq --service", true, false),
-        GET_OVR_STATUS("audiohq --ovr-status",false,false),
-        GET_PROFILE("audiohq --get-profile \"%s\" %s",false,true),
-        LIST_PROFILE("audiohq --list-profile",false,false),
-        LIST_MUTED("audiohq --list-muted",false,false);
+        GET_OVR_STATUS("audiohq --ovr-status", false, false),
+        GET_PROFILE("audiohq --get-profile \"%s\" %s", false, true),
+        LIST_PROFILE("audiohq --list-profile", false, false),
+        LIST_MUTED("audiohq --list-muted", false, false);
 
+        public static boolean FORCE_ROOT_SHELL = false;
 
         private String cmd_raw;
         private boolean require_root;

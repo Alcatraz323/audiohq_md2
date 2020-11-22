@@ -32,7 +32,7 @@
                     android:layout_height="48dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="76dp"
-                    android:tint="#ffffff"
+                    android:tint="#CDCDCD"
                     android:transitionName="@string/transition_preset_image"
                     app:srcCompat="@drawable/ic_apps_black_24dp" />
 
@@ -64,6 +64,7 @@
             android:paddingEnd="16dp"
             app:tabIndicatorColor="@color/colorAccent"
             app:tabMode="scrollable"
+            app:tabSelectedTextColor="#ACACAC"
             app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget" />
 
     </com.google.android.material.appbar.AppBarLayout>

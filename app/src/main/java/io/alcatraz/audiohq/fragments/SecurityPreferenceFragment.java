@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -16,10 +15,12 @@ import io.alcatraz.audiohq.activities.DefaultProfileActivity;
 import io.alcatraz.audiohq.beans.AudioHQNativeInterface;
 import io.alcatraz.audiohq.beans.SwitchConfigurations;
 import io.alcatraz.audiohq.core.utils.AudioHQApis;
+import io.alcatraz.audiohq.core.utils.AudioHQRaw;
 import io.alcatraz.audiohq.extended.CompatWithPipeActivity;
 
 public class SecurityPreferenceFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener {
     private CheckBoxPreference default_silent;
+    private CheckBoxPreference root_shell;
     private PreferenceScreen default_profile;
 
     private boolean default_silent_val;
@@ -30,25 +31,20 @@ public class SecurityPreferenceFragment extends PreferenceFragmentCompat impleme
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preference_security);
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.preference_security, rootKey);
         findPreferences();
-        bindLinsteners();
+        bindListeners();
         updateSummary();
     }
 
-    @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-
-    }
-
     private void findPreferences() {
-        default_silent = (CheckBoxPreference) findPreference(Constants.PREF_DEFAULT_SILENT);
-        default_profile = (PreferenceScreen) findPreference(Constants.PREF_DEFAULT_PROFILE);
+        default_silent = findPreference(Constants.PREF_DEFAULT_SILENT);
+        default_profile = findPreference(Constants.PREF_DEFAULT_PROFILE);
+        root_shell = findPreference(Constants.PREF_ROOT_SHELL);
     }
 
-    private void bindLinsteners() {
+    private void bindListeners() {
         default_silent.setOnPreferenceChangeListener((preference, o) -> {
             if (!default_silent_val) {
                 new AlertDialog.Builder(getContext())
@@ -75,6 +71,14 @@ public class SecurityPreferenceFragment extends PreferenceFragmentCompat impleme
             assert activity != null;
             activity.startTransition(new Intent(activity, DefaultProfileActivity.class));
             return true;
+        });
+
+        root_shell.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                AudioHQRaw.AudioHqCmds.FORCE_ROOT_SHELL = (boolean) newValue;
+                return true;
+            }
         });
     }
 

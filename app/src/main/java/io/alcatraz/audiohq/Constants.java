@@ -7,8 +7,9 @@ import io.alcatraz.audiohq.beans.QueryElement;
 
 public class Constants {
     public static String[] SUPPORT_ABIS = {"armeabi", "armeabi-v7a", "arm64-v8a"};
-    public static int[] SUPPORT_APIS = {26, 27, 28, 29};
+    public static int[] SUPPORT_APIS = {26, 27, 28, 29, 30};    //Android 8.0 - Android 11
     public static String MATCHED_MODULE_VERSION = "0.91";
+    public static boolean ANNIVERSARY_1ST = true;
 
     public static String MY_PACKAGE_NAME = "io.alcatraz.audiohq";
 
@@ -19,7 +20,7 @@ public class Constants {
     public static final boolean DEFAULT_VALUE_PREF_DEFAULT_SILENT = false;
     public static final String PREF_FLOAT_SERVICE = "float_service";
     public static final boolean DEFAULT_VALUE_PREF_FLOAT_SERVICE = false;
-    public static final String PREF_LANGUAGE = "float_service";
+    public static final String PREF_LANGUAGE = "language";
     public static final String DEFAULT_VALUE_PREF_LANGUAGE = "auto";
 
     public static final String PREF_FLOAT_WINDOW_GRAVITY = "float_gravity";
@@ -64,6 +65,14 @@ public class Constants {
     public static final boolean DEFAULT_VALUE_PREF_NO_EMPTY_WINDOW = false;
     public static final String PREF_FLOAT_DEFAULT_EXPANDED_PANEL = "float_default_expanded_panel";
     public static final boolean DEFAULT_VALUE_PREF_FLOAT_DEFAULT_EXPANDED_PANEL = false;
+    public static final String PREF_FLOAT_ACCESSIBILITY_TRIGGER = "float_accessibility_trigger";
+    public static final String PREF_FLOAT_STICKY_APPS = "float_sticky_apps";
+    public static final String DEFAULT_VALUE_PREF_FLOAT_STICKY_APPS = "";
+
+    public static final String PREF_EXCLUDE_FROM_RECENT = "exclude_from_recent";
+    public static final boolean DEFAULT_VALUE_PREF_EXCLUDE_FROM_RECENT = false;
+    public static final String PREF_ROOT_SHELL = "root_shell";
+    public static final boolean DEFAULT_VALUE_PREF_ROOT_SHELL = false;
 
     public static final String PREF_DEFAULT_PROFILE = "default_profile";
     public static final String PREF_CHECK_UPDATE = "check_update";

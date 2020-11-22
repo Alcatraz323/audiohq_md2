@@ -1,6 +1,7 @@
 package io.alcatraz.audiohq.activities;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -79,13 +80,21 @@ public class SetupActivity extends SetupWizardBaseActivity {
 
     @Override
     public void onFinishSetup() {
-        startActivity(new Intent(this, MainActivity.class));
+        ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        if (activityManager != null) {
+            List<ActivityManager.AppTask> tasks = activityManager.getAppTasks();
+            if (tasks != null && tasks.size() > 0) {
+                tasks.get(0).setExcludeFromRecents(exclude_from_recent);
+            }
+        }
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
         finish();
     }
 
     @Override
     public int getVersionCode() {
-        return 26;
+        return 27;
     }
 
     private void onSelectSetup4_Apply() {
@@ -218,7 +227,7 @@ public class SetupActivity extends SetupWizardBaseActivity {
             });
             restoreState();
             banNextStep();
-        }else {
+        } else {
             banNextStep();
             toast(R.string.setup_2_warning_delay);
             new Thread(() -> {
@@ -237,15 +246,15 @@ public class SetupActivity extends SetupWizardBaseActivity {
         });
     }
 
-    public SetupPage getSelinuxCheckPage(){
-        SetupPage page = new SetupPage(getString(R.string.setup_selinux_check),R.layout.setup_7);
-        View root = getLayoutInflater().inflate(R.layout.setup_7,null);
+    public SetupPage getSelinuxCheckPage() {
+        SetupPage page = new SetupPage(getString(R.string.setup_selinux_check), R.layout.setup_7);
+        View root = getLayoutInflater().inflate(R.layout.setup_7, null);
         LinearLayout background = root.findViewById(R.id.setup_selinux_background);
         TextView status = root.findViewById(R.id.setup_selinux_status);
         ImageView indicator = root.findViewById(R.id.setup_selinux_indicator);
 
         String enforcing = CheckUtils.getSeLinuxEnforce();
-        if(enforcing!=null) {
+        if (enforcing != null) {
             boolean isEnforcing = enforcing.contains("Enforcing");
 
             status.setText(enforcing);
@@ -259,9 +268,9 @@ public class SetupActivity extends SetupWizardBaseActivity {
         return page;
     }
 
-    public SetupPage getPermissionPage(){
-        SetupPage page = new SetupPage(getString(R.string.setup_permissions),R.layout.setup_8);
-        View root = getLayoutInflater().inflate(R.layout.setup_8,null);
+    public SetupPage getPermissionPage() {
+        SetupPage page = new SetupPage(getString(R.string.setup_permissions), R.layout.setup_8);
+        View root = getLayoutInflater().inflate(R.layout.setup_8, null);
         Button request_battery_ignore = root.findViewById(R.id.request_battery_ignore);
         Button request_overlay = root.findViewById(R.id.request_overlay);
         request_battery_ignore.setOnClickListener(new View.OnClickListener() {

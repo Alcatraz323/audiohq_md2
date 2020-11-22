@@ -5,6 +5,10 @@
             android:key="default_silent"
             android:summary="@string/pref_2_1_summary"
             android:title="@string/pref_2_1" />
+        <CheckBoxPreference
+            android:key="root_shell"
+            android:summary="@string/pref_2_5_summary"
+            android:title="@string/pref_2_5" />
         <PreferenceScreen
             android:enabled="false"
             android:key="default_profile"

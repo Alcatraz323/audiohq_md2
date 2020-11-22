@@ -41,7 +41,7 @@ public class CheckActivity extends CompatWithPipeActivity {
         initViews();
     }
 
-    private void findViews(){
+    private void findViews() {
         appBarLayout = findViewById(R.id.check_app_bar);
         toolbar = findViewById(R.id.check_toolbar);
         indicator_image = findViewById(R.id.check_icon);
@@ -49,13 +49,13 @@ public class CheckActivity extends CompatWithPipeActivity {
         collapsingToolbarLayout = findViewById(R.id.check_collapse);
     }
 
-    private void initViews(){
+    private void initViews() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        StatusBarUtil.setColor(this, Color.parseColor("#212121"),0);
-
+        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+        collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         toolbar.post(new Runnable() {
             @Override
             public void run() {
@@ -65,7 +65,7 @@ public class CheckActivity extends CompatWithPipeActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    public void loadCheckPanel(){
+    public void loadCheckPanel() {
         showProessing();
         TextView root = findViewById(R.id.check_root);
         TextView selinux = findViewById(R.id.check_selinux);
@@ -84,17 +84,16 @@ public class CheckActivity extends CompatWithPipeActivity {
         AudioHQApis.getAudioHQNativeInfo(this, new AudioHQNativeInterface<String[]>() {
             @Override
             public void onSuccess(String[] result) {
-                appBarLayout.setBackgroundColor(getColor(R.color.status_back));
-                collapsingToolbarLayout.setContentScrimColor(getColor(R.color.status_back));
-                StatusBarUtil.setColor(CheckActivity.this,getColor(R.color.status_back),0);
-                elf_info.setText(result[0]+result[1]);
+                appBarLayout.setBackgroundColor(getColor(R.color.colorAccent));
+                collapsingToolbarLayout.setContentScrimColor(getColor(R.color.colorAccent));
+                StatusBarUtil.setColor(CheckActivity.this, getColor(R.color.colorAccent), 0);
+                elf_info.setText(result[0] + result[1]);
             }
 
             @Override
             public void onFailure(String reason) {
                 appBarLayout.setBackgroundColor(getColor(R.color.base_gray_tint));
-                collapsingToolbarLayout.setContentScrimColor(getColor(R.color.base_gray_tint));
-                StatusBarUtil.setColor(CheckActivity.this,getColor(R.color.base_gray_tint),0);
+                StatusBarUtil.setColor(CheckActivity.this, getColor(R.color.base_gray_tint), 0);
                 indicator.setText(R.string.check_daemon_status_dead);
                 indicator_image.setImageResource(R.drawable.ic_close);
                 elf_info.setText(reason);
@@ -109,7 +108,7 @@ public class CheckActivity extends CompatWithPipeActivity {
         hideProcessing();
     }
 
-    public void showProessing(){
+    public void showProessing() {
         progressBar.post(new Runnable() {
             @Override
             public void run() {
@@ -119,7 +118,7 @@ public class CheckActivity extends CompatWithPipeActivity {
 
     }
 
-    public void hideProcessing(){
+    public void hideProcessing() {
         progressBar.post(new Runnable() {
             @Override
             public void run() {
@@ -141,12 +140,13 @@ public class CheckActivity extends CompatWithPipeActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater mi = new MenuInflater(this);
-        mi.inflate(R.menu.activity_playing_menu,menu);
+        mi.inflate(R.menu.activity_playing_menu, menu);
         progressBar = (ProgressBar) menu.findItem(R.id.action_progress_bar).getActionView();
-        int dp24 = Utils.Dp2Px(this,24);
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(dp24+Utils.Dp2Px(this,16),dp24);
+        int dp24 = Utils.Dp2Px(this, 24);
+        ViewGroup.LayoutParams params =
+                new ViewGroup.LayoutParams(dp24 + Utils.Dp2Px(this, 16), dp24);
         progressBar.setLayoutParams(params);
-        progressBar.setPadding(0,0,Utils.Dp2Px(this,16),0);
+        progressBar.setPadding(0, 0, Utils.Dp2Px(this, 16), 0);
 
         return super.onCreateOptionsMenu(menu);
     }

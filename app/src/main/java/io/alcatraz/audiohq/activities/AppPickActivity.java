@@ -24,6 +24,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import io.alcatraz.audiohq.AudioHQApplication;
 import io.alcatraz.audiohq.Constants;
 import io.alcatraz.audiohq.R;
 import io.alcatraz.audiohq.adapters.PackPickerAdapter;
@@ -33,7 +34,13 @@ import io.alcatraz.audiohq.utils.PackageCtlUtils;
 import io.alcatraz.audiohq.utils.SharedPreferenceUtil;
 import io.alcatraz.audiohq.utils.Utils;
 
-public class WhiteListPickActivity extends CompatWithPipeActivity {
+public class AppPickActivity extends CompatWithPipeActivity {
+    public static final String KEY_PICKER_TYPE = "key_picker_type";
+    public static final int PICKER_WHITE_LIST = 0;
+    public static final int PICKER_TYPE_STICKY_APPS = 1;
+
+    public static final int PICKER_TYPE_NULL = -1;
+
     Toolbar toolbar;
     RecyclerView recyclerView;
 
@@ -44,17 +51,17 @@ public class WhiteListPickActivity extends CompatWithPipeActivity {
     SearchView searchView;
     ProgressBar progressBar;
 
+    int pickerType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        pickerType = getIntent().getIntExtra(KEY_PICKER_TYPE, PICKER_TYPE_NULL);
         setContentView(R.layout.activity_profile_pick_app);
         initViews();
-        toolbar.post(new Runnable() {
-            @Override
-            public void run() {
-                initData();
-                doneFirstInitialize = true;
-            }
+        toolbar.post(() -> {
+            initData();
+            doneFirstInitialize = true;
         });
     }
 
@@ -78,25 +85,35 @@ public class WhiteListPickActivity extends CompatWithPipeActivity {
             data.clear();
             picked.clear();
             SharedPreferenceUtil sharedPreferenceUtil = SharedPreferenceUtil.getInstance();
-            String raw = (String) sharedPreferenceUtil.get(WhiteListPickActivity.this,
-                    Constants.PREF_FLOAT_WINDOW_FILTER,
-                    Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_FILTER);
+            String raw = "";
+            switch (pickerType) {
+                case PICKER_WHITE_LIST:
+                    raw = (String) sharedPreferenceUtil.get(AppPickActivity.this,
+                            Constants.PREF_FLOAT_WINDOW_FILTER,
+                            Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_FILTER);
+                    break;
+                case PICKER_TYPE_STICKY_APPS:
+                    raw = (String) sharedPreferenceUtil.get(AppPickActivity.this,
+                            Constants.PREF_FLOAT_STICKY_APPS,
+                            Constants.DEFAULT_VALUE_PREF_FLOAT_STICKY_APPS);
+                    break;
+            }
 
-            if(raw != null && !raw.equals("")){
+            if (raw != null && !raw.equals("")) {
                 String[] filter_cooking = raw.split(",");
                 Collections.addAll(picked, filter_cooking);
             }
 
             //Add 'system_server' manually
-            PickerPack system_server = new PickerPack("system_server","system_server",
+            PickerPack system_server = new PickerPack("system_server", "system_server",
                     null, picked.contains("system_server"));
             data.add(system_server);
 
             List<PackageInfo> packageInfo = getPackageManager().getInstalledPackages(0);
-            for(PackageInfo i: packageInfo){
-                String label = PackageCtlUtils.getLabel(WhiteListPickActivity.this,i.applicationInfo);
-                Drawable icon = PackageCtlUtils.getIcon(WhiteListPickActivity.this,i.applicationInfo);
-                PickerPack current = new PickerPack(i.packageName,label,icon,picked.contains(i.packageName));
+            for (PackageInfo i : packageInfo) {
+                String label = PackageCtlUtils.getLabel(AppPickActivity.this, i.applicationInfo);
+                Drawable icon = PackageCtlUtils.getIcon(AppPickActivity.this, i.applicationInfo);
+                PickerPack current = new PickerPack(i.packageName, label, icon, picked.contains(i.packageName));
                 data.add(current);
             }
 
@@ -142,29 +159,44 @@ public class WhiteListPickActivity extends CompatWithPipeActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void ignoreAdd(String target){
-        picked.add(target);
-        saveIgnored();
-    }
-
-    public void ignoreRemove(String target) {
-        for(int i = 0; i< picked.size();i++){
-            if(picked.get(i).equals(target)){
-                picked.remove(i);
-                saveIgnored();
-                return;
-            }
+    public void pickerAdd(String target) {
+        if (!picked.contains(target)) {
+            picked.add(target);
+            savePicked();
         }
     }
-    private void saveIgnored(){
-        SharedPreferenceUtil.getInstance().put(this,Constants.PREF_FLOAT_WINDOW_FILTER,ignoredPackToStr());
+
+    public void pickerRemove(String target) {
+        if (picked.contains(target)) {
+            picked.remove(target);
+            savePicked();
+        }
     }
 
-    private String ignoredPackToStr() {
+    private void savePicked() {
+        switch (pickerType) {
+            case PICKER_WHITE_LIST:
+                SharedPreferenceUtil.getInstance().put(this, Constants.PREF_FLOAT_WINDOW_FILTER, pickedPackToStr());
+                sendBroadcast(new Intent().setAction(Constants.BROADCAST_ACTION_UPDATE_PREFERENCES));
+                break;
+            case PICKER_TYPE_STICKY_APPS:
+                SharedPreferenceUtil.getInstance().put(this, Constants.PREF_FLOAT_STICKY_APPS, pickedPackToStr());
+                sendBroadcast(new Intent().setAction(Constants.BROADCAST_ACTION_UPDATE_PREFERENCES));
+                notifyPlayingStickyUpdate();
+                break;
+        }
+    }
+
+    private void notifyPlayingStickyUpdate() {
+        AudioHQApplication application = (AudioHQApplication) getApplication();
+        application.getPlayingSystem().updateStickyApps();
+    }
+
+    private String pickedPackToStr() {
         StringBuilder out = new StringBuilder();
-        for(int i = 0; i< picked.size();i++){
+        for (int i = 0; i < picked.size(); i++) {
             out.append(picked.get(i));
-            if(i != picked.size() -1){
+            if (i != picked.size() - 1) {
                 out.append(",");
             }
         }
@@ -178,22 +210,12 @@ public class WhiteListPickActivity extends CompatWithPipeActivity {
     }
 
     public void showProcessing() {
-        progressBar.post(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.VISIBLE);
-            }
-        });
+        progressBar.post(() -> progressBar.setVisibility(View.VISIBLE));
 
     }
 
     public void hideProcessing() {
-        progressBar.post(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.GONE);
-            }
-        });
+        progressBar.post(() -> progressBar.setVisibility(View.GONE));
     }
 
     @Override

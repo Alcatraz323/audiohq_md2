@@ -7,14 +7,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Change every update -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20200820 play_stable_6_1faffb8</string>
+    <string name="update_title">20201120 stable_7_anniversary_f0531c9</string>
     <string name="update_info">
-        1.dismisses window when touch home and recent task\n
-        2.opensourced prebuilt libraries for aosp and its variants\n
-        3.add default expand option\n
-        4.fixed useless space allocation\n
-        5.add HARDWARE_ACCELERATION tag\n
-        6.updated used libraries
+        1.Pin apps to float window and Playing section even if it is not playing\n
+        2.Direct trigger(Accessibility Service)\n
+        3.Switchable "exclude form recent tasks"\n
+        4.root shell option\n
     </string>
 
     <!-- Common -->
@@ -38,7 +36,7 @@
     <string name="til_err_ofr">Out of range</string>
     <string name="read_profile_err">Read profile error</string>
     <string name="java_server_running">Java Server Running</string>
-    <string name="accessibility_description">AudioHQ Discharger for keys</string>
+    <string name="accessibility_description">AudioHQ volume key listener, pls do not enable when you enable the \'getevent\' base direct trigger</string>
 
     <string name="main_card_status_querying">Querying</string>
     <string name="main_card_playing">Playing</string>
@@ -194,6 +192,8 @@
     <string name="pref_2_3_summary">Set default volume when there are no profile</string>
     <string name="pref_2_4">Activate protector service</string>
     <string name="pref_2_4_summary">May be killed by some system, if you want to use this, grant ignore battery optimization pls</string>
+    <string name="pref_2_5">All command use root shell</string>
+    <string name="pref_2_5_summary">Try run all command under root user, including audiohq command(Will be a lot of root granted toast, go Magisk Manager to turn the toast off)</string>
     <string name="pref_3_t">Others</string>
     <string name="pref_3_t_summary">check update, profile clear and so on</string>
     <string name="pref_3_1">Check update</string>
@@ -204,6 +204,8 @@
     <string name="pref_3_5">Show process with same package name in group</string>
     <string name="pref_3_5_summary">Beta</string>
     <string name="pref_3_6">Language</string>
+    <string name="pref_3_7">Exclude from recent tasks</string>
+    <string name="pref_3_7_summary">Switch if this app is shown in Recent tasks</string>
     <string name="pref_4_t">Float window</string>
     <string name="pref_4_t_summary">Float service toggle and customization</string>
     <string name="pref_4_1">Window layout gravity</string>
@@ -220,16 +222,20 @@
     <string name="pref_4_11">Toggle corner radius(dp)</string>
     <string name="pref_4_12">Card corner radius(dp)</string>
     <string name="pref_4_13">SeekBar color</string>
-    <string name="pref_4_14">Directly trigger the float window</string>
+    <string name="pref_4_14">Directly trigger the float window(Experimental)</string>
     <string name="pref_4_14_summary">(Experimental)Run a process to listen the \'getevent\' stream, may not work on some device</string>
     <string name="pref_4_15">Side margin for landscape(dp)</string>
-    <string name="pref_4_16">Filter(split by quot)</string>
+    <string name="pref_4_16">Filter</string>
     <string name="pref_4_16_summary">Set the package which will not display in float window</string>
     <string name="pref_4_17">Background color(Dark Theme)</string>
     <string name="pref_4_18">No window when empty</string>
     <string name="pref_4_18_summary">The window will not show when the play list is empty, need to kill this app and restart to work</string>
     <string name="pref_4_19">Default expanded window</string>
     <string name="pref_4_19_summary">Directly show the control panel when is on</string>
+    <string name="pref_4_20">Directly trigger the float window</string>
+    <string name="pref_4_20_summary">Use accessibility service to trigger the panel, pls do not enable both direct trigger same time</string>
+    <string name="pref_4_21">Sticky Apps</string>
+    <string name="pref_4_21_summary">Pin some app to float window and Playing section even it is not playing sound</string>
     <string name="pref_4_dark_t">Dark Theme</string>
     <string name="pref_4_light_t">Light Theme</string>
     <string name="pref_invalid_integer">Invalid integer</string>
@@ -248,6 +254,7 @@
 
     <!--About-->
     <string name="au_l_1">Version</string>
+    <string name="au_l_1st_anniversary_version">1st Anniversary</string>
     <string name="au_l_2">Developer</string>
     <string name="au_l_2_1">AlcatrazDev,Mr_Dennis</string>
     <string name="au_l_3">Check sourcecode</string>

@@ -9,6 +9,14 @@ import android.view.accessibility.AccessibilityEvent;
 import io.alcatraz.audiohq.LogBuff;
 
 public class Discharger extends AccessibilityService {
+    static Discharger mService;
+
+    @Override
+    protected void onServiceConnected() {
+        super.onServiceConnected();
+        mService = this;
+    }
+
     @Override
     public void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
 
@@ -21,6 +29,11 @@ public class Discharger extends AccessibilityService {
 
     @Override
     protected boolean onKeyEvent(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_UP || event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_DOWN) {
+            if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                sendBroadcast(new Intent().setAction(FloatPanelService.AHQ_FLOAT_TRIGGER_ACTION));
+            }
+        }
         return false;
     }
 }

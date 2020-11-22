@@ -177,7 +177,7 @@ public class AudioHQApis {
 
     public static void listMuted(Context context, AudioHQNativeInterface<ListMuted> nativeInterface){
         if (CheckUtils.checkAndWarnMismatch()) {
-            Panels.getNotInstalledPanel(context).show();
+            //Panels.getNotInstalledPanel(context).show();
             nativeInterface.onFailure("Installation failure!");
         } else {
             ShellUtils.CommandResult result = AudioHQRaw.listMuted();

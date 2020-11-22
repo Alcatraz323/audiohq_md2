@@ -102,7 +102,6 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setImmersive(true);
         shared_counter.setText(getIntent().getStringExtra(KEY_PROFILE_COUNT));
-        StatusBarUtil.setColor(this, Color.parseColor("#212121"),0);
 
         preset_add.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -73,8 +73,6 @@ public class PlayingGeneralActivity extends CompatWithPipeActivity {
         Objects.requireNonNull(getSupportActionBar()).setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        StatusBarUtil.setColor(this, Color.parseColor("#212121"),0);
-
         playingRecyclerAdapter = new PlayingRecyclerAdapter(this,data);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         controller= AnimationUtils.loadLayoutAnimation(this, R.anim.layout_fall_down);

@@ -6,20 +6,27 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
+
+import com.alcatraz.support.v4.appcompat.StatusBarUtil;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 import io.alcatraz.audiohq.Constants;
+import io.alcatraz.audiohq.R;
 import io.alcatraz.audiohq.utils.PermissionInterface;
 import io.alcatraz.audiohq.utils.SharedPreferenceUtil;
+import io.alcatraz.audiohq.utils.Utils;
 
 @SuppressLint("Registered")
 public class CompatWithPipeActivity extends AppCompatActivity {
@@ -35,6 +42,7 @@ public class CompatWithPipeActivity extends AppCompatActivity {
     public boolean boot;
     public boolean float_service;
     public String language = "";
+    public boolean exclude_from_recent;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -47,9 +55,10 @@ public class CompatWithPipeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadPrefernce();
+        loadPreference();
+        setupStatusBarAntiColor();
         setupTransition();
-        registReceivers();
+        registerReceivers();
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -63,16 +72,18 @@ public class CompatWithPipeActivity extends AppCompatActivity {
         requestQueue++;
     }
 
-    public void onReloadPreferenceDone(){}
+    public void onReloadPreferenceDone() {
+    }
 
-    public void loadPrefernce() {
+    public void loadPreference() {
         SharedPreferenceUtil spf = SharedPreferenceUtil.getInstance();
         boot = (boolean) spf.get(this, Constants.PREF_BOOT, Constants.DEFAULT_VALUE_PREF_BOOT);
         default_silent = (boolean) spf.get(this, Constants.PREF_DEFAULT_SILENT, Constants.DEFAULT_VALUE_PREF_DEFAULT_SILENT);
-        float_service = (boolean) spf.get(this,Constants.PREF_FLOAT_SERVICE,Constants.DEFAULT_VALUE_PREF_FLOAT_SERVICE);
+        float_service = (boolean) spf.get(this, Constants.PREF_FLOAT_SERVICE, Constants.DEFAULT_VALUE_PREF_FLOAT_SERVICE);
+        exclude_from_recent = (boolean) spf.get(this, Constants.PREF_EXCLUDE_FROM_RECENT, Constants.DEFAULT_VALUE_PREF_EXCLUDE_FROM_RECENT);
     }
 
-    public void registReceivers() {
+    public void registerReceivers() {
         IntentFilter ifil = new IntentFilter();
         ifil.addAction(Constants.BROADCAST_ACTION_UPDATE_PREFERENCES);
         updatePreferenceReceiver = new UpdatePreferenceReceiver();
@@ -85,7 +96,7 @@ public class CompatWithPipeActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public void threadSleep(){
+    public void threadSleep() {
         try {
             Thread.sleep(500L);
         } catch (InterruptedException e) {
@@ -93,7 +104,26 @@ public class CompatWithPipeActivity extends AppCompatActivity {
         }
     }
 
-    public void setupTransition(){
+    private void setupStatusBarAntiColor() {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        View decorView = getWindow().getDecorView();
+        Configuration mConfiguration = this.getResources().getConfiguration();
+        int vis = decorView.getSystemUiVisibility();
+        switch (mConfiguration.uiMode & Configuration.UI_MODE_NIGHT_MASK) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                StatusBarUtil.setColor(this, Color.parseColor("#212121"),0);
+                vis &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                decorView.setSystemUiVisibility(vis);
+                break;
+            case Configuration.UI_MODE_NIGHT_NO:
+                StatusBarUtil.setColor(this, Color.WHITE);
+                vis |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                decorView.setSystemUiVisibility(vis);
+                break;
+        }
+    }
+
+    public void setupTransition() {
         Transition slide_right = TransitionInflater.from(this).inflateTransition(android.R.transition.slide_right);
         Transition slide_left = TransitionInflater.from(this).inflateTransition(android.R.transition.slide_right);
         getWindow().setEnterTransition(slide_right);
@@ -101,7 +131,7 @@ public class CompatWithPipeActivity extends AppCompatActivity {
         getWindow().setReturnTransition(slide_right);
     }
 
-    public void setupExplodeTransition(){
+    public void setupExplodeTransition() {
         Transition explode = TransitionInflater.from(this).inflateTransition(android.R.transition.explode);
         getWindow().setEnterTransition(explode);
         getWindow().setExitTransition(explode);
@@ -132,7 +162,7 @@ public class CompatWithPipeActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            loadPrefernce();
+            loadPreference();
             onReloadPreferenceDone();
         }
     }
