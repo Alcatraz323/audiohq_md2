@@ -14,18 +14,20 @@ import java.util.Map;
 
 import io.alcatraz.audiohq.Constants;
 import io.alcatraz.audiohq.R;
+import io.alcatraz.audiohq.extended.CompatWithPipeActivity;
 
 public class AuthorAdapter extends BaseAdapter {
     private Map<Integer, List<String>> data;
     private List<Integer> img;
-    private Context c;
+    private CompatWithPipeActivity activity;
     private LayoutInflater lf;
+    private TextView anniversary;
 
-    public AuthorAdapter(Context c, Map<Integer, List<String>> data, List<Integer> img) {
+    public AuthorAdapter(CompatWithPipeActivity activity, Map<Integer, List<String>> data, List<Integer> img) {
         this.data = data;
-        this.c = c;
+        this.activity = activity;
         this.img = img;
-        lf = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        lf = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -57,9 +59,11 @@ public class AuthorAdapter extends BaseAdapter {
         txv2.setText(data.get(p1).get(1));
         if(p1 == 0) {
             if(Constants.ANNIVERSARY_1ST){
-                TextView txv3 = p2.findViewById(R.id.authoritemTextView3);
-                txv3.setVisibility(View.VISIBLE);
-                txv3.setText(R.string.au_l_1st_anniversary_version);
+                anniversary = p2.findViewById(R.id.authoritemTextView3);
+                anniversary.setVisibility(View.VISIBLE);
+                anniversary.setTextColor(activity.color);
+                anniversary.setText(R.string.au_l_1st_anniversary_version);
+                anniversary.append(" ");
             }
         }
         if (p1 == 2)
@@ -67,6 +71,10 @@ public class AuthorAdapter extends BaseAdapter {
         else
             txv2.setVisibility(View.VISIBLE);
         return p2;
+    }
+
+    public TextView getAnniversary() {
+        return anniversary;
     }
 
 }

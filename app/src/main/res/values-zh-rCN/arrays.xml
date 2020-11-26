@@ -6,6 +6,22 @@
         <item>英文</item>
     </string-array>
 
+    <string-array name="entries_for_theme">
+        <item>Pixel蓝</item>
+        <item>老版橙色</item>
+        <item>樱花粉</item>
+        <item>紫色</item>
+        <item>亮蓝</item>
+        <item>叶绿</item>
+    </string-array>
+
+    <string-array name="entries_for_dark_mode">
+        <item>跟随系统</item>
+        <item>浅色</item>
+        <item>深色</item>
+        <item>低电量深色</item>
+    </string-array>
+
     <string-array name="entries_for_float_gravity">
         <item>左上</item>
         <item>右上</item>

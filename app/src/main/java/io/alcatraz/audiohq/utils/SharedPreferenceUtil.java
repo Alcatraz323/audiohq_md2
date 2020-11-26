@@ -21,7 +21,7 @@ public final class SharedPreferenceUtil {
         return mInstance;
     }
 
-    public void put(Context context, String key, Object value){
+    public boolean put(Context context, String key, Object value){
         //判断类型
         String type = value.getClass().getSimpleName();
         SharedPreferences sharedPreferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
@@ -38,6 +38,7 @@ public final class SharedPreferenceUtil {
             editor.putString(key,(String) value);
         }
         editor.apply();
+        return false;
     }
 
     @Nullable

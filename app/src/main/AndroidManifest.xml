@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Setup">
         <activity
             android:name=".activities.SetupActivity">
             <intent-filter>
@@ -47,6 +47,7 @@
         <activity
             android:name=".activities.LogActivity" />
         <activity android:name=".activities.AppPickActivity" />
+        <activity android:name=".activities.Quiz2020Activity" />
 
         <receiver android:name=".BootReceiver">
             <intent-filter>

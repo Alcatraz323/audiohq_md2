@@ -7,7 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.transition.Transition;
@@ -18,10 +20,14 @@ import android.widget.Toast;
 
 import com.alcatraz.support.v4.appcompat.StatusBarUtil;
 
+import java.util.Locale;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
+import io.alcatraz.audiohq.AudioHQApplication;
 import io.alcatraz.audiohq.Constants;
 import io.alcatraz.audiohq.R;
 import io.alcatraz.audiohq.utils.PermissionInterface;
@@ -41,8 +47,11 @@ public class CompatWithPipeActivity extends AppCompatActivity {
     public boolean default_silent;
     public boolean boot;
     public boolean float_service;
-    public String language = "";
     public boolean exclude_from_recent;
+    public String theme;
+    public String dark_mode;
+    public int color;
+    public boolean show_anniversary_2020_foreground;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -54,8 +63,9 @@ public class CompatWithPipeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         loadPreference();
+        setTheme();
+        super.onCreate(savedInstanceState);
         setupStatusBarAntiColor();
         setupTransition();
         registerReceivers();
@@ -81,6 +91,9 @@ public class CompatWithPipeActivity extends AppCompatActivity {
         default_silent = (boolean) spf.get(this, Constants.PREF_DEFAULT_SILENT, Constants.DEFAULT_VALUE_PREF_DEFAULT_SILENT);
         float_service = (boolean) spf.get(this, Constants.PREF_FLOAT_SERVICE, Constants.DEFAULT_VALUE_PREF_FLOAT_SERVICE);
         exclude_from_recent = (boolean) spf.get(this, Constants.PREF_EXCLUDE_FROM_RECENT, Constants.DEFAULT_VALUE_PREF_EXCLUDE_FROM_RECENT);
+        theme = (String) spf.get(this, Constants.PREF_THEME, Constants.DEFAULT_VALUE_PREF_THEME);
+        dark_mode = (String) spf.get(this, Constants.PREF_DARK_MODE, Constants.DEFAULT_VALUE_PREF_DARK_MODE);
+        show_anniversary_2020_foreground = (boolean) spf.get(this, Constants.PREF_SHOW_ANNIVERSARY_2020_FOREGROUND, Constants.DEFAULT_VALUE_PREF_SHOW_ANNIVERSARY_2020_FOREGROUND);
     }
 
     public void registerReceivers() {
@@ -96,6 +109,26 @@ public class CompatWithPipeActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferenceUtil spf = SharedPreferenceUtil.getInstance();
+        String language = (String) spf.get(newBase, Constants.PREF_LANGUAGE, Constants.DEFAULT_VALUE_PREF_LANGUAGE);
+        assert language != null;
+        Locale togo;
+        switch (language) {
+            case "中文":
+                togo = Locale.CHINESE;
+                break;
+            case "English":
+                togo = Locale.ENGLISH;
+                break;
+            default:
+                togo = Locale.getDefault();
+                break;
+        }
+        super.attachBaseContext(MyContextWrapper.wrap(newBase, togo));
+    }
+
     public void threadSleep() {
         try {
             Thread.sleep(500L);
@@ -104,14 +137,14 @@ public class CompatWithPipeActivity extends AppCompatActivity {
         }
     }
 
-    private void setupStatusBarAntiColor() {
+    public void setupStatusBarAntiColor() {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         View decorView = getWindow().getDecorView();
         Configuration mConfiguration = this.getResources().getConfiguration();
         int vis = decorView.getSystemUiVisibility();
         switch (mConfiguration.uiMode & Configuration.UI_MODE_NIGHT_MASK) {
             case Configuration.UI_MODE_NIGHT_YES:
-                StatusBarUtil.setColor(this, Color.parseColor("#212121"),0);
+                StatusBarUtil.setColor(this, Color.parseColor("#212121"), 0);
                 vis &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
                 decorView.setSystemUiVisibility(vis);
                 break;
@@ -119,6 +152,50 @@ public class CompatWithPipeActivity extends AppCompatActivity {
                 StatusBarUtil.setColor(this, Color.WHITE);
                 vis |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
                 decorView.setSystemUiVisibility(vis);
+                break;
+        }
+    }
+
+    public void setTheme() {
+        switch (theme) {
+            case "Pixel":
+                setTheme(R.style.AppTheme);
+                color = getColor(R.color.colorAccent);
+                break;
+            case "Original":
+                setTheme(R.style.Original);
+                color = getColor(R.color.umr_colorPrimary);
+                break;
+            case "Sakura":
+                setTheme(R.style.Sakura);
+                color = getColor(R.color.sakura_colorPrimaryDark);
+                break;
+            case "Purple":
+                setTheme(R.style.Purple);
+                color = getColor(R.color.purple_colorPrimary);
+                break;
+            case "LightBlue":
+                setTheme(R.style.LightBlue);
+                color = getColor(R.color.addedblue_colorPrimary);
+                break;
+            case "Leaf":
+                setTheme(R.style.Leaf);
+                color = getColor(R.color.leaf_colorPrimaryDark);
+                break;
+        }
+        AudioHQApplication.color = color;
+        switch (dark_mode) {
+            case "Auto":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                break;
+            case "Light":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+            case "Dark":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+            case "LowBattery Dark":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY);
                 break;
         }
     }
@@ -139,11 +216,23 @@ public class CompatWithPipeActivity extends AppCompatActivity {
     }
 
     public void toast(String str) {
-        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, str, Toast.LENGTH_LONG).show();
     }
 
     public void toast(int resId) {
-        Toast.makeText(this, resId, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, resId, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void setContentView(int layoutResID) {
+        if (show_anniversary_2020_foreground) {
+            View contentView = getLayoutInflater().inflate(layoutResID, null);
+            Drawable drawable = getDrawable(R.drawable.audiohq_2020_easter_foreground);
+            contentView.setForeground(drawable);
+            setContentView(contentView);
+        }else {
+            super.setContentView(layoutResID);
+        }
     }
 
     @SuppressWarnings("unchecked")

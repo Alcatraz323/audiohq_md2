@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [
     <!ENTITY current_match_version "0.91">
-    <!ENTITY current_match_version_code "1">
-    <!ENTITY current_match_date "2020.3.16">]>
+    <!ENTITY current_match_version_code "1">]>
 <resources>
     <!-- 更新修改部分 -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_title">20201120 stable_7_anniversary_f0531c9</string>
+    <string name="update_date">20201126</string>
+    <string name="update_title">20201126 stable_7_anniversary_f0531c9</string>
     <string name="update_info">
         1.悬浮窗/"正在播放"固定应用(点击图钉)\n
         2.无障碍服务版按键响应\n
         3.可设置的后台隐藏\n
         4.全root执行选项\n
-        5.回答几个常见问题\n
+        5.图标变更\n
+        6.Android 11支持(需要Github release最新模块)\n
+        7.默认强调色变更\n
+        8.添加一周年版本特别内容\n
+        9.设置向导变更，网页下载变更\n
+        10.主页性能优化\n
+        11.回答几个常见问题\n
         a.软件是否需要后台\n
         只有悬浮窗功能需要保留apk 后台，底层服务不需要apk后台\n
         b.微信，钉钉等语音或者退出时显示悬浮窗\n
@@ -63,6 +69,7 @@
     <string name="ad_nb2">否</string>
     <string name="ad_nb3">关闭</string>
     <string name="ad_nb4">清除</string>
+    <string name="ad_never_again">不再显示</string>
     <string name="ad_processing">进行中…</string>
     <string name="empty_view">无结果</string>
 
@@ -135,7 +142,7 @@
     <string name="setup_step_next">下一步</string>
     <string name="setup_step_next_final">完成</string>
     <string name="setup_step_before">上一步</string>
-    <string name="setup_1_intro">你好朋友,在正式开始之前,让我们花一些时间完成设置</string>
+    <string name="setup_1_intro">你好朋友,在正式开始之前,让我们花一些时间完成设置\n\n这是一个音量控制器，允许在多个音轨在同时播放的情况下调节每个音轨(进程)独立的(左右)音量，并支持在底层执行未知应用和已知应用的静音操作</string>
     <string name="setup_2_warning_vendor_system_title">警告！</string>
     <string name="setup_2_warning_vendor_system_info">本软件(模块)将尝试重定向一些系统关键库，这将会带来卡在开机界面
         以及音频系统异常的风险，如果你知道你在做什么并且懂得怎么通过twrp删除模块，你可以继续操作，并且！！！请确保你的SeLinux
@@ -149,11 +156,13 @@
     <string name="setup_check_deny">未通过</string>
     <string name="setup_3_install_title">安装</string>
     <string name="setup_3_install_info">在网页下载模块后进行安装，这个操作可能损害你的系统，在安装前请确保你知道怎么恢复系统</string>
-    <string name="setup_3_install_page">网页下载</string>
+    <string name="setup_3_install_github_down">Github下载</string>
+    <string name="setup_3_install_fastgit_down">Fastgit下载</string>
     <string name="setup_3_installed">我确认已经安装了对应版本模块</string>
     <string name="setup_3_installed_title">Magisk模块安装版本</string>
     <string name="setup_3_installed_summary">当前apk适用模块原生文件版本 : &current_match_version;</string>
-    <string name="setup_3_installed_detected">检测到 : %s</string>
+    <string name="setup_3_current_installed">当前安装: \n%s</string>
+    <string name="setup_3_not_detected">获取信息失败，未安装或SeLinux阻止</string>
     <string name="setup_4_modify_rc_title">修改audioserver.rc(需要重启)</string>
     <string name="setup_4_modify_rc_info">修改/system/etc/init/audioserver.rc,
         为audioserver获取读取/proc的权限以启用内置服务器,注意:若rc文件打包在.img中或/system不允许写入,则此项无效(对于后者可选择在recovery中写入)</string>
@@ -203,6 +212,10 @@
     <string name="pref_3_6">语言</string>
     <string name="pref_3_7">后台隐藏</string>
     <string name="pref_3_7_summary">启用后将不会出现在最近任务中</string>
+    <string name="pref_3_8">主题</string>
+    <string name="pref_3_9">深色模式</string>
+    <string name="pref_3_10">周年庆覆盖</string>
+    <string name="pref_3_10_summary">选择是否启用周年庆覆盖</string>
     <string name="pref_4_t">悬浮窗</string>
     <string name="pref_4_t_summary">悬浮窗开关和自定义选项</string>
     <string name="pref_4_1">窗口对齐</string>
@@ -247,14 +260,38 @@
     <string name="pref_clear_profile_confirm">你正在清除配置，执行?</string>
     <string name="profile_configure_app_pick">选择App</string>
 
+    <string name="morse_2020_failure">啊, 你输错了, 一周年啊(1st), 你知道的，对吧?</string>
+    <string name="morse_2020_success_1">你听见一个声音"有什么东西出现在了"其他"设置中"</string>
+    <string name="quiz_2020_title">奇@#怪\?的^~东/西*/</string>
+    <string name="quiz_2020_summary">..---/-----/..---/-----</string>
+    <string name="quiz_2020_math_et_hint">答案?(不想计算?提示:答案就在应用之中)</string>
+    <string name="quiz_2020_sudoku_instruction">请按行依次填写，只填入缺失的数字，数字间不要空格，如"12345"</string>
+    <string name="quiz_2020_intro">你跟随未知的声音从神秘的摩斯电码发射台离开来到了这里，这里有一个上锁的柜子，你注意到下面有2个机关和一些文字，看起来你只需要解开一个便可以打开柜子，你开始思考如何打开这个柜子</string>
+    <string name="quiz_2020_failure">结果不匹配</string>
+    <string name="quiz_2020_success">有些东西被激活了,回到其他设置看看吧\n----感谢你的耐心游玩</string>
+    <string name="quiz_2020_guess_success">有些东西被激活了，回到其他设置看看吧\n----我知道你没算，直接猜的(</string>
+    <string name="anniversary_2020_notice_message">不知不觉已经一周年了, 我为你准备了一些特别功能. 想要解锁，你需要找到入口并且完成一些挑战，现在，开始你伟大的探索吧(\n提示：Android系统的彩蛋位置\n\n交流群:917523469</string>
+
+    <string name="sudoku_row_1">第一行</string>
+    <string name="sudoku_row_2">第二行</string>
+    <string name="sudoku_row_3">第三行</string>
+    <string name="sudoku_row_4">第四行</string>
+    <string name="sudoku_row_5">第五行</string>
+    <string name="sudoku_row_6">第六行</string>
+    <string name="sudoku_row_7">第七行</string>
+    <string name="sudoku_row_8">第八行</string>
+    <string name="sudoku_row_9">第九行</string>
+
     <!--关于-->
     <string name="au_l_1">版本</string>
     <string name="au_l_1st_anniversary_version">一周年至尊纪念版(</string>
     <string name="au_l_2">开发者</string>
-    <string name="au_l_2_1">AlcatrazDev,Mr_Dennis</string>
+    <string name="au_l_2_1">AlcatrazDev, Mr_Dennis</string>
     <string name="au_l_3">查看源码</string>
     <string name="au_l_4">开放源代码许可</string>
     <string name="au_l_4_1">向开源致敬</string>
+    <string name="au_l_5">更新日志</string>
+    <string name="au_l_6">重新执行向导</string>
     <string name="au_osp">开源相关</string>
 
     <string name="lib_version_mismatch">Lib文件版本与Apk兼容不符，当前apk适用于lib[&current_match_version;],11.23.21,elf 0.9.2</string>
@@ -269,7 +306,7 @@
         自动备份文件位置:/sdcard/audiohq_backups-->
     </string>
     <string name="install_title">原生文件未安装</string>
-    <string name="install_not_installed">请刷入原生文件/模块安装后再打开本应用,若已安装，请检查模块位数,版本以及SeLinux状态，当前apk对应模块版本: &current_match_version; ,网页文件日期: &current_match_date;</string>
+    <string name="install_not_installed">请刷入原生文件/模块安装后再打开本应用,若已安装，请检查模块位数,版本以及SeLinux状态，当前apk对应模块版本: &current_match_version;</string>
     <string name="install_confirm_title">安装?</string>
     <string name="install_confirm_support">支持: "32-bit LSB arm" /system/bin/audioserver 可执行文件,自动备份位置/sdcard/audiohq_backups,自动备份可能失效，请确认手动备份文件存在,安装成功后将自动重启!!!</string>
     <string name="install_confirm_detect">当前: </string>

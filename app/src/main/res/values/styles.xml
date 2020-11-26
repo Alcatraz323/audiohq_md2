@@ -11,6 +11,65 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
+    <style name="Setup" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+
+    <style name="Original" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="colorAccent">@color/umr_colorPrimary</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Sakura" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="colorAccent">@color/sakura_colorPrimaryDark</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Purple" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="colorAccent">@color/purple_colorPrimary</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="LightBlue" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="colorAccent">@color/addedblue_colorPrimary</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Leaf" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="colorAccent">@color/leaf_colorPrimaryDark</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
     <style name="ChipReq" parent="Theme.MaterialComponents.NoActionBar"/>
 
     <style name="NightMode.Base" parent="Theme.AppCompat.NoActionBar">

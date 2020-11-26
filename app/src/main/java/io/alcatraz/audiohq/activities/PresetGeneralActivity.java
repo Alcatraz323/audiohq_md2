@@ -84,7 +84,7 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
                 updateData();
                 doneFirstInitialize = true;
             }
-        },300);
+        }, 1000);
     }
 
     private void findViews() {
@@ -96,12 +96,13 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
         preset_add = findViewById(R.id.preset_general_precise_add);
     }
 
-    private void initViews(){
+    private void initViews() {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setImmersive(true);
         shared_counter.setText(getIntent().getStringExtra(KEY_PROFILE_COUNT));
+        tabLayout.setSelectedTabIndicatorColor(color);
 
         preset_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,19 +114,19 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
         initPager();
     }
 
-    private void initPager(){
-        View root1 = getLayoutInflater().inflate(R.layout.preset_recycler_view,null);
-        View root2 = getLayoutInflater().inflate(R.layout.preset_recycler_view,null);
+    private void initPager() {
+        View root1 = getLayoutInflater().inflate(R.layout.preset_recycler_view, null);
+        View root2 = getLayoutInflater().inflate(R.layout.preset_recycler_view, null);
         recycler_for_all = root1.findViewById(R.id.preset_general_recycler);
         recycler_for_set = root2.findViewById(R.id.preset_general_recycler);
-        all_adapter = new PresetGeneralRecyclerAdapter(this,all_data,preset_add);
-        set_adapter = new PresetGeneralRecyclerAdapter(this,set_data,preset_add);
+        all_adapter = new PresetGeneralRecyclerAdapter(this, all_data, preset_add);
+        set_adapter = new PresetGeneralRecyclerAdapter(this, set_data, preset_add);
         recycler_for_all.setAdapter(all_adapter);
         recycler_for_all.setLayoutManager(new LinearLayoutManager(this));
         recycler_for_set.setAdapter(set_adapter);
         recycler_for_set.setLayoutManager(new LinearLayoutManager(this));
 
-        controller= AnimationUtils.loadLayoutAnimation(this, R.anim.layout_fall_down);
+        controller = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_fall_down);
         recycler_for_all.setLayoutAnimation(controller);
         recycler_for_set.setLayoutAnimation(controller);
         recycler_for_all.setItemViewCacheSize(20);
@@ -139,7 +140,7 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
         List<NormalViewPage> pages = new LinkedList<>();
         pages.add(page1);
         pages.add(page2);
-        SimplePagerAdapter adapter = new SimplePagerAdapter(this,pages);
+        SimplePagerAdapter adapter = new SimplePagerAdapter(this, pages);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
@@ -151,7 +152,7 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
 
             @Override
             public void onPageSelected(int position) {
-                switch (position){
+                switch (position) {
                     case 0:
                         updateData();
                         break;
@@ -168,7 +169,7 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
         });
     }
 
-    public void updateData(){
+    public void updateData() {
         showProcessing();
         all_data.clear();
         all_adapter.notifyDataSetChanged();
@@ -178,12 +179,12 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
                 @Override
                 public void onSuccess(PresetSystem result) {
                     List<PackageInfo> infos = getPackageManager().getInstalledPackages(0);
-                    for(PackageInfo i: infos){
-                        PackageProfileQuery query = presetSystem.getPresetStatus(i.packageName);
+                    for (PackageInfo i : infos) {
+                        PackageProfileQuery query = presetSystem.getPresetStatus(PresetGeneralActivity.this, i.packageName);
                         ControlElement element =
                                 new ControlElement(PackageCtlUtils.getLabel(PresetGeneralActivity.this, i.packageName),
-                                        query.getText(),i.packageName,true,
-                                        PackageCtlUtils.getIcon(PresetGeneralActivity.this,i.packageName),query.getColor());
+                                        query.getText(), i.packageName, true,
+                                        PackageCtlUtils.getIcon(PresetGeneralActivity.this, i.packageName), query.getColor());
                         all_data.add(element);
                     }
                     runOnUiThread(() -> {
@@ -203,7 +204,7 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
         }).start();
     }
 
-    public void updateHasSet(){
+    public void updateHasSet() {
         showProcessing();
         set_data.clear();
         set_adapter.notifyDataSetChanged();
@@ -214,7 +215,7 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
                 presetSystem.update(new AudioHQNativeInterface<PresetSystem>() {
                     @Override
                     public void onSuccess(PresetSystem result) {
-                        set_data.addAll(presetSystem.getSetData());
+                        set_data.addAll(presetSystem.getSetData(PresetGeneralActivity.this));
                         runOnUiThread(() -> {
                             set_adapter.notifyDataSetChanged();
                             recycler_for_set.scheduleLayoutAnimation();
@@ -236,13 +237,13 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater mi = new MenuInflater(this);
-        mi.inflate(R.menu.activity_preset_general_menu,menu);
+        mi.inflate(R.menu.activity_preset_general_menu, menu);
         searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        View underline =searchView.findViewById(R.id.search_plate);
+        View underline = searchView.findViewById(R.id.search_plate);
         underline.setBackgroundColor(Color.TRANSPARENT);
         progressBar = (ProgressBar) menu.findItem(R.id.action_progress_bar).getActionView();
-        int dp24 = Utils.Dp2Px(this,24);
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(dp24,dp24);
+        int dp24 = Utils.Dp2Px(this, 24);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(dp24, dp24);
         progressBar.setLayoutParams(params);
         searchView.setQueryHint(getString(R.string.preset_search_hint));
 
@@ -256,7 +257,7 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
             public boolean onQueryTextChange(String s) {
                 if (TextUtils.isEmpty(s)) {
                     // Clear the text filter.
-                    switch (viewPager.getCurrentItem()){
+                    switch (viewPager.getCurrentItem()) {
                         case 0:
                             all_adapter.onTextChanged("");
                             break;
@@ -267,7 +268,7 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
 
                 } else {
                     // Sets the initial value for the text filter.
-                    switch (viewPager.getCurrentItem()){
+                    switch (viewPager.getCurrentItem()) {
                         case 0:
                             all_adapter.onTextChanged(s);
                             break;
@@ -283,7 +284,7 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void showProcessing(){
+    public void showProcessing() {
         progressBar.post(new Runnable() {
             @Override
             public void run() {
@@ -293,7 +294,7 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
 
     }
 
-    public void hideProcessing(){
+    public void hideProcessing() {
         progressBar.post(new Runnable() {
             @Override
             public void run() {
@@ -302,11 +303,11 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
         });
     }
 
-    public void updateIndicator(){
+    public void updateIndicator() {
         AudioHQApis.getOverallStatus(this, new AudioHQNativeInterface<OverallStatus>() {
             @Override
             public void onSuccess(OverallStatus result) {
-                shared_counter.setText(String.format(getString(R.string.main_card_preset_indicator),result.getProfileCount()));
+                shared_counter.setText(String.format(getString(R.string.main_card_preset_indicator), result.getProfileCount()));
             }
 
             @Override
@@ -320,7 +321,7 @@ public class PresetGeneralActivity extends CompatWithPipeActivity {
     protected void onResume() {
         super.onResume();
         preset_add.setTransitionName(getString(R.string.transition_preset_fab));
-        if(doneFirstInitialize) {
+        if (doneFirstInitialize) {
             updateIndicator();
             switch (viewPager.getCurrentItem()) {
                 case 0:

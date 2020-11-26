@@ -7,6 +7,22 @@
         <item>English</item>
     </string-array>
 
+    <string-array name="entries_for_theme">
+        <item>Pixel</item>
+        <item>Original</item>
+        <item>Sakura</item>
+        <item>Purple</item>
+        <item>LightBlue</item>
+        <item>Leaf</item>
+    </string-array>
+
+    <string-array name="entries_for_dark_mode">
+        <item>Auto</item>
+        <item>Light</item>
+        <item>Dark</item>
+        <item>LowBattery Dark</item>
+    </string-array>
+
     <string-array name="entries_for_float_gravity">
         <item>Start Top</item>
         <item>End Top</item>
@@ -28,9 +44,25 @@
     </string-array>
 
     <string-array name="entryvalue_for_language">
-        <item>auto</item>
-        <item>zh</item>
-        <item>en</item>
+        <item>Auto</item>
+        <item>中文</item>
+        <item>English</item>
+    </string-array>
+
+    <string-array name="entryvalue_for_theme">
+        <item>Pixel</item>
+        <item>Original</item>
+        <item>Sakura</item>
+        <item>Purple</item>
+        <item>LightBlue</item>
+        <item>Leaf</item>
+    </string-array>
+
+    <string-array name="entryvalue_for_dark_mode">
+        <item>Auto</item>
+        <item>Light</item>
+        <item>Dark</item>
+        <item>LowBattery Dark</item>
     </string-array>
 
     <string-array name="preference_keys" tools:ignore="MissingTranslation">

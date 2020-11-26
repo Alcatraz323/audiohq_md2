@@ -36,6 +36,7 @@ public class ControlPanelFragment extends Fragment implements SeekBar.OnSeekBarC
     LinearLayout mute;
     Switch mute_switch;
     ProgressBar ready_indicator;
+    TextView category_1, category_2, category_3;
 
     ControlElement dataParam;
     StringProfile profile;
@@ -107,6 +108,9 @@ public class ControlPanelFragment extends Fragment implements SeekBar.OnSeekBarC
         mute = root.findViewById(R.id.panel_control_mute);
         mute_switch = root.findViewById(R.id.panel_control_mute_switch);
         ready_indicator = root.findViewById(R.id.panel_control_ready_indicator);
+        category_1 = root.findViewById(R.id.panel_control_category_1);
+        category_2 = root.findViewById(R.id.panel_control_category_2);
+        category_3 = root.findViewById(R.id.panel_control_category_3);
     }
 
     @SuppressLint("SetTextI18n")
@@ -120,6 +124,9 @@ public class ControlPanelFragment extends Fragment implements SeekBar.OnSeekBarC
     }
 
     private void initViews() {
+        category_1.setTextColor(AudioHQApplication.color);
+        category_2.setTextColor(AudioHQApplication.color);
+        category_3.setTextColor(AudioHQApplication.color);
         general_seek.setOnSeekBarChangeListener(this);
         left_seek.setOnSeekBarChangeListener(this);
         right_seek.setOnSeekBarChangeListener(this);

@@ -88,7 +88,7 @@ public class FloatAdapter extends BaseAdapter {
         ImageView pinImage = view.findViewById(R.id.float_list_item_pin_image);
 
         if(pkgs.isSticky()) {
-            Utils.setImageWithTint(pinImage, R.drawable.ic_pin, context.getColor(R.color.colorAccent));
+            Utils.setImageWithTint(pinImage, R.drawable.ic_pin, AudioHQApplication.color);
         }else{
             pinImage.setImageResource(R.drawable.ic_pin_off);
         }
@@ -103,7 +103,7 @@ public class FloatAdapter extends BaseAdapter {
                     pkgs.setSticky(false);
                 } else {
                     application.getPlayingSystem().addStickyApp(pkgs.getPkg());
-                    Utils.setImageWithTint(pinImage, R.drawable.ic_pin, context.getColor(R.color.colorAccent));
+                    Utils.setImageWithTint(pinImage, R.drawable.ic_pin, AudioHQApplication.color);
                     pkgs.setSticky(true);
                 }
             }

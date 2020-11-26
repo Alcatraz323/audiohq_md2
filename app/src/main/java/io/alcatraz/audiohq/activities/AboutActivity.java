@@ -5,12 +5,12 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.alcatraz.audiohq.Constants;
-import io.alcatraz.audiohq.Easter;
+import io.alcatraz.audiohq.Easter2020;
 import io.alcatraz.audiohq.R;
 import io.alcatraz.audiohq.adapters.AuthorAdapter;
 import io.alcatraz.audiohq.adapters.QueryElementAdapter;
@@ -36,12 +36,11 @@ import io.alcatraz.audiohq.utils.PackageCtlUtils;
 import io.alcatraz.audiohq.utils.Utils;
 
 public class AboutActivity extends CompatWithPipeActivity {
-    private List<Integer> imgs = new ArrayList<Integer>();
+    private List<Integer> images = new ArrayList<Integer>();
     @SuppressLint("UseSparseArrays")
     private Map<Integer, List<String>> data = new HashMap<>();
-    private ListView lv;
-    private Toolbar tb;
-    private Easter easter;
+    AuthorAdapter authorAdapter;
+    private Easter2020 easter2020;
     private Vibrator vibrator;
 
     @Override
@@ -50,7 +49,7 @@ public class AboutActivity extends CompatWithPipeActivity {
         setContentView(R.layout.activity_about);
         initData();
         initViews();
-        easter = new Easter(this);
+        easter2020 = new Easter2020(this);
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
     }
 
@@ -65,55 +64,71 @@ public class AboutActivity extends CompatWithPipeActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finishAfterTransition();
-                break;
+        if (item.getItemId() == android.R.id.home) {
+            finishAfterTransition();
         }
         return super.onOptionsItemSelected(item);
     }
 
     public void initViews() {
-        tb = findViewById(R.id.about_toolbar);
-        setSupportActionBar(tb);
+        Toolbar toolbar = findViewById(R.id.about_toolbar);
+        setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        lv = findViewById(R.id.authorcontentListView1);
-        AuthorAdapter aa = new AuthorAdapter(this, data, imgs);
-        lv.setAdapter(aa);
-        lv.setOnItemClickListener((p1, p2, p3, p4) -> {
-            if (p1.getItemAtPosition(p3).toString().equals(getString(R.string.au_l_3))) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Alcatraz323/audiohq_md2")));
-            } else if (p1.getItemAtPosition(p3).toString().equals(getString(R.string.au_l_4))) {
-                showOSPDialog();
-            } else if (p1.getItemAtPosition(p3).toString().equals(getString(R.string.au_l_2))) {
-                showDetailDev();
-            }else {
-                if(vibrator.hasVibrator()){
-                    p2.post(() -> {
-                        vibrator.cancel();
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            vibrator.vibrate(VibrationEffect.createOneShot(100,VibrationEffect.DEFAULT_AMPLITUDE));
-                        }else {
-                            vibrator.vibrate(100);
+        ListView listView = findViewById(R.id.authorcontentListView1);
+        authorAdapter = new AuthorAdapter(this, data, images);
+        listView.setAdapter(authorAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        if (vibrator.hasVibrator()) {
+                            view.post(() -> {
+                                vibrator.cancel();
+                                vibrator.vibrate(
+                                        VibrationEffect.createOneShot(
+                                                100,
+                                                VibrationEffect.DEFAULT_AMPLITUDE
+                                        )
+                                );
+                            });
                         }
-                    });
 
+                        authorAdapter.getAnniversary().append(".");
+                        easter2020.shortClick();
+                        break;
+                    case 1:
+                        showDetailDev();
+                        break;
+                    case 2:
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Alcatraz323/audiohq_md2")));
+                        break;
+                    case 3:
+                        showOSPDialog();
+                    case 4:
+                        Intent intent = new Intent(AboutActivity.this, SetupActivity.class);
+                        intent.putExtra(SetupActivity.KEY_SETUP_START_UP_TYPE, SetupActivity.STARTUP_FORCE_SHOW_UPDATE);
+                        startActivity(intent);
+                        break;
                 }
-                easter.shortClick();
             }
         });
 
-        lv.setOnItemLongClickListener((adapterView, view, i, l) -> {
-            if(i == 0){
+        listView.setOnItemLongClickListener((adapterView, view, i, l) -> {
+            if (i == 0) {
                 view.post(() -> {
                     vibrator.cancel();
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
-                    } else {
-                        vibrator.vibrate(200);
-                    }
+                    vibrator.vibrate(
+                            VibrationEffect.createOneShot(
+                                    200,
+                                    VibrationEffect.DEFAULT_AMPLITUDE
+                            )
+                    );
                 });
+
+                authorAdapter.getAnniversary().append("-");
+                easter2020.longClick();
             }
             return true;
         });
@@ -135,12 +150,12 @@ public class AboutActivity extends CompatWithPipeActivity {
                 Utils.Dp2Px(this, 8), Color.parseColor("#eeeeee")));
     }
 
-
     public void initData() {
-        imgs.add(R.drawable.ic_info_outline_black_24dp);
-        imgs.add(R.drawable.ic_account_circle_black_24dp);
-        imgs.add(R.drawable.ic_code_black_24dp);
-        imgs.add(R.drawable.ic_open_in_new_black_24dp);
+        images.add(R.drawable.ic_info_outline_black_24dp);
+        images.add(R.drawable.ic_account_circle_black_24dp);
+        images.add(R.drawable.ic_code_black_24dp);
+        images.add(R.drawable.ic_open_in_new_black_24dp);
+        images.add(R.drawable.history);
         List<String> l1 = new ArrayList<>();
         l1.add(getString(R.string.au_l_1));
         l1.add(PackageCtlUtils.getVersionName(this));
@@ -153,10 +168,18 @@ public class AboutActivity extends CompatWithPipeActivity {
         List<String> l4 = new ArrayList<>();
         l4.add(getString(R.string.au_l_4));
         l4.add(getString(R.string.au_l_4_1));
+        List<String> l5 = new ArrayList<>();
+        l5.add(getString(R.string.au_l_5));
+        l5.add(getString(R.string.update_date));
         data.put(0, l1);
         data.put(1, l2);
         data.put(2, l3);
         data.put(3, l4);
+        data.put(4, l5);
+    }
 
+    public void clearAnniversaryCode() {
+        authorAdapter.getAnniversary().setText(R.string.au_l_1st_anniversary_version);
+        authorAdapter.getAnniversary().append(" ");
     }
 }

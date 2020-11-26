@@ -9,8 +9,8 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -18,9 +18,10 @@ import java.util.List;
 import androidx.cardview.widget.CardView;
 import androidx.viewpager.widget.ViewPager;
 import io.alcatraz.audiohq.R;
+import io.alcatraz.audiohq.beans.AudioHQNativeInterface;
 import io.alcatraz.audiohq.beans.SetupPage;
+import io.alcatraz.audiohq.core.utils.AudioHQApis;
 import io.alcatraz.audiohq.core.utils.CheckUtils;
-import io.alcatraz.audiohq.core.utils.ShellUtils;
 import io.alcatraz.audiohq.extended.SetupWizardBaseActivity;
 import io.alcatraz.audiohq.utils.AnimateUtils;
 import io.alcatraz.audiohq.utils.Utils;
@@ -73,7 +74,6 @@ public class SetupActivity extends SetupWizardBaseActivity {
     @Override
     public void onUpdate(List<SetupPage> pages) {
         SetupPage page = new SetupPage(getResources().getString(R.string.setup_current_update), R.layout.setup_6);
-        pages.add(getSelinuxCheckPage());
         pages.add(getPermissionPage());
         pages.add(page);
     }
@@ -90,6 +90,16 @@ public class SetupActivity extends SetupWizardBaseActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void setTheme() {
+        setTheme(R.style.Setup);
+    }
+
+    @Override
+    public void setupStatusBarAntiColor() {
+
     }
 
     @Override
@@ -120,8 +130,11 @@ public class SetupActivity extends SetupWizardBaseActivity {
 
         View root_view = getPageList().get(2).getRootView();
 
-        Button btn_go_website = root_view.findViewById(R.id.setup_3_go_website);
+        Button btn_go_website_github = root_view.findViewById(R.id.setup_3_go_website_github);
+        Button btn_go_website_fastgit = root_view.findViewById(R.id.setup_3_go_website_fastgit);
         CheckBox installed = root_view.findViewById(R.id.setup_3_installed);
+        TextView current_installed = root_view.findViewById(R.id.setup_3_installed_info);
+        ImageButton refresh = root_view.findViewById(R.id.setup_3_installed_refresh);
 
         //Initial state setup
         installed.setChecked(false);
@@ -129,13 +142,50 @@ public class SetupActivity extends SetupWizardBaseActivity {
         endPending();
         banNextStep();
 
-        btn_go_website.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW,
-                Uri.parse("https://alcatraz323.github.io/audiohq"))));
+        btn_go_website_github.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW,
+                Uri.parse(getString(R.string.setup_module_download_url_github)))));
+        btn_go_website_fastgit.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW,
+                Uri.parse(getString(R.string.setup_module_download_url_fastgit)))));
         installed.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 restoreState();
             } else {
                 banNextStep();
+            }
+        });
+
+        AudioHQApis.getAudioHQNativeInfo(this, new AudioHQNativeInterface<String[]>() {
+            @Override
+            public void onSuccess(String[] result) {
+                installed.setChecked(true);
+                current_installed.setText(String.format(getString(R.string.setup_3_current_installed),
+                        result[0]));
+            }
+
+            @Override
+            public void onFailure(String reason) {
+                current_installed.setText(String.format(getString(R.string.setup_3_current_installed),
+                        getString(R.string.setup_3_not_detected)));
+            }
+        });
+
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AudioHQApis.getAudioHQNativeInfo(SetupActivity.this, new AudioHQNativeInterface<String[]>() {
+                    @Override
+                    public void onSuccess(String[] result) {
+                        installed.setChecked(true);
+                        current_installed.setText(String.format(getString(R.string.setup_3_current_installed),
+                                result[0]));
+                    }
+
+                    @Override
+                    public void onFailure(String reason) {
+                        current_installed.setText(String.format(getString(R.string.setup_3_current_installed),
+                                getString(R.string.setup_3_not_detected)));
+                    }
+                });
             }
         });
     }
@@ -150,65 +200,20 @@ public class SetupActivity extends SetupWizardBaseActivity {
         //Find views
         View root_view = getPageList().get(1).getRootView();
 
-//        CardView vendor_warning = root_view.findViewById(R.id.setup_2_vendor_system_warning);
-//        CardView root_check = root_view.findViewById(R.id.setup_2_root_check);
-//        CardView audioserver_check = root_view.findViewById(R.id.setup_2_audioserver_check);
         CardView api_check = root_view.findViewById(R.id.setup_2_api_check);
         CardView requirements_not_meet = root_view.findViewById(R.id.setup_2_requirements_not_meet);
 
         Button requirement_unlock = root_view.findViewById(R.id.setup_2_requirements_not_meet_unlock);
 
-//        TextView root_check_title = root_view.findViewById(R.id.setup_2_root_check_title);
-//        TextView root_check_state = root_view.findViewById(R.id.setup_2_root_check_state);
-//        ImageView root_check_indicator = root_view.findViewById(R.id.setup_2_root_check_indicator);
-//
-//        TextView audioserver_check_title = root_view.findViewById(R.id.setup_2_audioserver_check_title);
-//        TextView audioserver_check_state = root_view.findViewById(R.id.setup_2_audioserver_check_state);
-//        ImageView audioserver_check_indicator = root_view.findViewById(R.id.setup_2_audioserver_check_indicator);
-
         TextView api_check_title = root_view.findViewById(R.id.setup_2_api_check_title);
         TextView api_check_state = root_view.findViewById(R.id.setup_2_api_check_state);
         ImageView api_check_indicator = root_view.findViewById(R.id.setup_2_api_check_indicator);
 
+        setupSelinuxCard(root_view);
+
         //Initial state setup
-//        root_check.setVisibility(View.GONE);
-//        audioserver_check.setVisibility(View.GONE);
         api_check.setVisibility(View.GONE);
         requirements_not_meet.setVisibility(View.GONE);
-
-//        if (!ShellUtils.hasRootPermission()) {
-//            root_check_title.setTextColor(color_red);
-//            root_check_state.setText(R.string.setup_check_deny);
-//            Utils.setImageWithTint(root_check_indicator, R.drawable.ic_close, color_red);
-//            can_go_next = false;
-//        }
-//        AnimateUtils.playstart(root_check, () -> {
-//        });
-//
-//        String audioserver_info = CheckUtils.getAudioServerInfo();
-//        if (audioserver_info != null) {
-//            if (audioserver_info.split("dynamic")[0].contains("64") && Build.VERSION.SDK_INT == 28) {
-//                audioserver_check_title.setTextColor(color_red);
-//                Utils.setImageWithTint(audioserver_check_indicator, R.drawable.ic_close, color_red);
-//                can_go_next = false;
-//            }
-//            try {
-//                String[] audioserver_info_processed = audioserver_info.split(":")[1].split(",");
-//                audioserver_check_state.setText(audioserver_info_processed[0] + "," + audioserver_info_processed[1]);
-//            }catch (Exception e){
-//                audioserver_check_state.setText("Cant retreive audioserver info!");
-//            }
-//
-//            AnimateUtils.playstart(audioserver_check, () -> {
-//            });
-//        } else {
-//            audioserver_check_title.setTextColor(color_red);
-//            Utils.setImageWithTint(audioserver_check_indicator, R.drawable.ic_close, color_red);
-//            can_go_next = false;
-//            audioserver_check_state.setText(R.string.setup_check_deny);
-//            AnimateUtils.playstart(audioserver_check, () -> {
-//            });
-//        }
 
         if (!CheckUtils.getIfSupported()) {
             api_check_title.setTextColor(color_red);
@@ -246,31 +251,30 @@ public class SetupActivity extends SetupWizardBaseActivity {
         });
     }
 
-    public SetupPage getSelinuxCheckPage() {
-        SetupPage page = new SetupPage(getString(R.string.setup_selinux_check), R.layout.setup_7);
-        View root = getLayoutInflater().inflate(R.layout.setup_7, null);
-        LinearLayout background = root.findViewById(R.id.setup_selinux_background);
-        TextView status = root.findViewById(R.id.setup_selinux_status);
-        ImageView indicator = root.findViewById(R.id.setup_selinux_indicator);
+    public void setupSelinuxCard(View root) {
+        TextView title = root.findViewById(R.id.setup_2_selinux_check_title);
+        TextView status = root.findViewById(R.id.setup_2_selinux_check_state);
+        ImageView indicator = root.findViewById(R.id.setup_2_selinux_check_indicator);
 
         String enforcing = CheckUtils.getSeLinuxEnforce();
         if (enforcing != null) {
-            boolean isEnforcing = enforcing.contains("Enforcing");
+            boolean isPermissive = enforcing.contains("Permissive");
 
             status.setText(enforcing);
-            if (!isEnforcing) {
-                background.setBackgroundColor(getColor(R.color.green_colorPrimary));
-                indicator.setImageResource(R.drawable.ic_check_black_24dp);
+            if (isPermissive) {
+                title.setTextColor(getColor(R.color.green_colorPrimary));
+                indicator.setImageResource(R.drawable.ic_check_green_24dp);
+            }else {
+                title.setTextColor(getColor(R.color.orange_colorPrimary));
+                Utils.setImageWithTint(indicator, R.drawable.ic_alert, getColor(R.color.orange_colorPrimary));
             }
 
         }
-        page.setRootView(root);
-        return page;
     }
 
     public SetupPage getPermissionPage() {
-        SetupPage page = new SetupPage(getString(R.string.setup_permissions), R.layout.setup_8);
-        View root = getLayoutInflater().inflate(R.layout.setup_8, null);
+        SetupPage page = new SetupPage(getString(R.string.setup_permissions), R.layout.setup_7);
+        View root = getLayoutInflater().inflate(R.layout.setup_7, null);
         Button request_battery_ignore = root.findViewById(R.id.request_battery_ignore);
         Button request_overlay = root.findViewById(R.id.request_overlay);
         request_battery_ignore.setOnClickListener(new View.OnClickListener() {

@@ -1,14 +1,20 @@
 package io.alcatraz.audiohq.beans.preset;
 
+import android.app.Activity;
 import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import io.alcatraz.audiohq.Constants;
 import io.alcatraz.audiohq.R;
 import io.alcatraz.audiohq.beans.AudioHQNativeInterface;
 import io.alcatraz.audiohq.core.utils.AudioHQApis;
+import io.alcatraz.audiohq.extended.CompatWithPipeActivity;
+import io.alcatraz.audiohq.extended.MyContextWrapper;
 import io.alcatraz.audiohq.utils.PackageCtlUtils;
+import io.alcatraz.audiohq.utils.SharedPreferenceUtil;
 import io.alcatraz.audiohq.utils.Utils;
 
 public class PresetSystem {
@@ -55,33 +61,33 @@ public class PresetSystem {
         });
     }
 
-    public PackageProfileQuery getPresetStatus(String process) {
-        String profile_status = context.getString(R.string.preset_status_no_profile);
+    public PackageProfileQuery getPresetStatus(CompatWithPipeActivity activity, String process) {
+        String profile_status = activity.getString(R.string.preset_status_no_profile);
         PackageProfileQuery query = new PackageProfileQuery();
         if (w_profiles.contains(process)) {
-            query.setColor(context.getColor(R.color.colorAccent));
-            profile_status = context.getString(R.string.preset_status_has_profile);
+            query.setColor(activity.color);
+            profile_status = activity.getString(R.string.preset_status_has_profile);
         }
-        String muted_status = context.getString(R.string.preset_status_unmuted);
+        String muted_status = activity.getString(R.string.preset_status_unmuted);
         if (w_muted.contains(process)) {
-            query.setColor(context.getColor(R.color.colorAccent));
-            muted_status = context.getString(R.string.preset_status_muted);
+            query.setColor(activity.color);
+            muted_status = activity.getString(R.string.preset_status_muted);
         }
         query.setText(profile_status + muted_status);
         return query;
     }
 
-    public PackageProfileQuery getPresetStatusProcess(String process) {
-        String profile_status = context.getString(R.string.preset_status_no_profile);
+    public PackageProfileQuery getPresetStatusProcess(CompatWithPipeActivity activity, String process) {
+        String profile_status = activity.getString(R.string.preset_status_no_profile);
         PackageProfileQuery query = new PackageProfileQuery();
         if (p_profiles.contains(process)) {
-            query.setColor(context.getColor(R.color.colorAccent));
-            profile_status = context.getString(R.string.preset_status_has_profile);
+            query.setColor(activity.color);
+            profile_status = activity.getString(R.string.preset_status_has_profile);
         }
-        String muted_status = context.getString(R.string.preset_status_unmuted);
+        String muted_status = activity.getString(R.string.preset_status_unmuted);
         if (p_muted.contains(process)) {
-            query.setColor(context.getColor(R.color.colorAccent));
-            muted_status = context.getString(R.string.preset_status_muted);
+            query.setColor(activity.color);
+            muted_status = activity.getString(R.string.preset_status_muted);
         }
         query.setText(profile_status + muted_status);
         return query;
@@ -95,11 +101,11 @@ public class PresetSystem {
         }
     }
 
-    public List<ControlElement> getSetData() {
+    public List<ControlElement> getSetData(CompatWithPipeActivity activity) {
         List<ControlElement> output = new ArrayList<>();
         List<String> all_weaks = new ArrayList<>();
         for (String i : w_profiles) {
-            PackageProfileQuery query = getPresetStatus(i);
+            PackageProfileQuery query = getPresetStatus(activity, i);
             ControlElement element = new ControlElement(PackageCtlUtils.getLabel(context, i),
                     query.getText(), i, true, PackageCtlUtils.getIcon(context, i), query.getColor());
             output.add(element);
@@ -108,7 +114,7 @@ public class PresetSystem {
         for (String i : w_muted) {
             if (w_profiles.contains(i))
                 continue;
-            PackageProfileQuery query = getPresetStatus(i);
+            PackageProfileQuery query = getPresetStatus(activity, i);
             ControlElement element = new ControlElement(PackageCtlUtils.getLabel(context, i),
                     query.getText(), i, true, PackageCtlUtils.getIcon(context, i), query.getColor());
             output.add(element);
@@ -116,7 +122,7 @@ public class PresetSystem {
         }
 
         for (String i : p_profiles) {
-            PackageProfileQuery query = getPresetStatusProcess(i);
+            PackageProfileQuery query = getPresetStatusProcess(activity, i);
             String pkg = Utils.extractPackageName(i);
             ControlElement element = new ControlElement(i,
                     query.getText(), pkg, false, PackageCtlUtils.getIcon(context, pkg), query.getColor());
@@ -129,7 +135,7 @@ public class PresetSystem {
         for (String i : p_muted) {
             if (p_profiles.contains(i))
                 continue;
-            PackageProfileQuery query = getPresetStatusProcess(i);
+            PackageProfileQuery query = getPresetStatusProcess(activity, i);
             String pkg = Utils.extractPackageName(i);
             ControlElement element = new ControlElement(i,
                     query.getText(), pkg, false, PackageCtlUtils.getIcon(context, pkg), query.getColor());

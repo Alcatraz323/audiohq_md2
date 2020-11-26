@@ -19,284 +19,37 @@
             app:layout_collapseMode="pin"
             app:title="@string/app_name" />
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/main_card_status"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:stateListAnimator="@animator/raise"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="2dp"
-            app:cardMaxElevation="5dp">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ProgressBar
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_margin="16dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="1dp"
-                            android:text="@string/check_daemon_status"
-                            android:textAllCaps="false"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/main_card_status_querying" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/main_card_status_overlay"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/colorAccent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:id="@+id/main_card_status_indicator_image"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_margin="16dp"
-                        android:tint="#ffffff"
-                        android:transitionName="@string/transition_status_image"
-                        app:srcCompat="@drawable/ic_check_circle_black_24dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="1dp"
-                            android:text="@string/check_daemon_status"
-                            android:textAllCaps="false"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"
-                            android:textColor="#FFFFFF"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:id="@+id/main_card_status_vinfo"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="#D8D8D8" />
-
-                        <TextView
-                            android:id="@+id/main_card_status_indicator"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/check_daemon_status_alive"
-                            android:textColor="#FFFFFF"
-                            android:transitionName="@string/transition_status_indicator" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </FrameLayout>
-
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/main_card_playing"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:stateListAnimator="@animator/raise"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="2dp"
-            app:cardMaxElevation="5dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/main_card_playing_indicator_image"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_margin="16dp"
-                    android:tint="#A5A5A5"
-                    android:transitionName="@string/transition_playing_image"
-                    app:srcCompat="@drawable/ic_playlist_play_black_24dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="1dp"
-                        android:text="@string/main_card_playing"
-                        android:textAllCaps="false"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/main_card_playing_indicator"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/main_card_playing_indicator"
-                        android:transitionName="@string/transition_playing_indicator" />
-                </LinearLayout>
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/main_card_preset"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:stateListAnimator="@animator/raise"
-                app:cardCornerRadius="8dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/main_card_preset_indicator_image"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_margin="16dp"
-                        android:tint="#A5A5A5"
-                        android:transitionName="@string/transition_preset_image"
-                        app:srcCompat="@drawable/ic_apps_black_24dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="1dp"
-                            android:text="@string/main_card_preset"
-                            android:textAllCaps="false"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:id="@+id/main_card_preset_indicator"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/main_card_preset_indicator"
-                            android:transitionName="@string/transition_preset_indicator" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="48dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/card_boarder"
-                android:orientation="vertical"
-                android:paddingBottom="16dp">
+                android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/main_card_setting"
+                    android:id="@+id/main_card_status"
                     android:layout_width="match_parent"
-                    android:layout_height="54dp"
+                    android:layout_height="120dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
-                    app:cardBackgroundColor="@android:color/transparent"
+                    android:stateListAnimator="@animator/raise"
                     app:cardCornerRadius="8dp"
-                    app:cardElevation="0dp">
+                    app:cardElevation="2dp"
+                    app:cardMaxElevation="5dp">
 
-                    <LinearLayout
+                    <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_margin="16dp"
-                            android:tint="#A5A5A5"
-                            app:srcCompat="@drawable/ic_cog" />
+                        android:layout_height="match_parent">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="64dp"
                             android:gravity="center_vertical"
                             android:orientation="vertical">
 
@@ -304,30 +57,87 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="1dp"
-                                android:text="@string/main_menu_1"
+                                android:text="@string/check_daemon_status"
                                 android:textAllCaps="false"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"
                                 android:textSize="18sp" />
 
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/main_card_status_querying" />
                         </LinearLayout>
 
-                    </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/main_card_status_overlay"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorAccent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
+
+                            <ImageView
+                                android:id="@+id/main_card_status_indicator_image"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_margin="16dp"
+                                android:tint="#ffffff"
+                                android:transitionName="@string/transition_status_image"
+                                app:srcCompat="@drawable/ic_check_circle_black_24dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="8dp"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="1dp"
+                                    android:text="@string/check_daemon_status"
+                                    android:textAllCaps="false"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="18sp" />
+
+                                <TextView
+                                    android:id="@+id/main_card_status_vinfo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#D8D8D8" />
+
+                                <TextView
+                                    android:id="@+id/main_card_status_indicator"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/check_daemon_status_alive"
+                                    android:textColor="#FFFFFF"
+                                    android:transitionName="@string/transition_status_indicator" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </FrameLayout>
+
 
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-
-                    android:id="@+id/main_card_help"
+                    android:id="@+id/main_card_playing"
                     android:layout_width="match_parent"
-                    android:layout_height="54dp"
+                    android:layout_height="80dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
-                    app:cardBackgroundColor="@android:color/transparent"
+                    android:stateListAnimator="@animator/raise"
                     app:cardCornerRadius="8dp"
-                    app:cardElevation="0dp">
+                    app:cardElevation="2dp"
+                    app:cardMaxElevation="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -336,11 +146,13 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/main_card_playing_indicator_image"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_margin="16dp"
                             android:tint="#A5A5A5"
-                            app:srcCompat="@drawable/ic_help_outline_black_24dp" />
+                            android:transitionName="@string/transition_playing_image"
+                            app:srcCompat="@drawable/ic_playlist_play_black_24dp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -353,23 +165,198 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="1dp"
-                                android:text="@string/main_card_help"
+                                android:text="@string/main_card_playing"
                                 android:textAllCaps="false"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"
                                 android:textSize="18sp" />
 
+                            <TextView
+                                android:id="@+id/main_card_playing_indicator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/main_card_playing_indicator"
+                                android:transitionName="@string/transition_playing_indicator" />
                         </LinearLayout>
 
                     </LinearLayout>
-
                 </androidx.cardview.widget.CardView>
 
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:orientation="vertical">-->
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/main_card_preset"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:stateListAnimator="@animator/raise"
+                        app:cardCornerRadius="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/main_card_preset_indicator_image"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_margin="16dp"
+                                android:tint="#A5A5A5"
+                                android:transitionName="@string/transition_preset_image"
+                                app:srcCompat="@drawable/ic_apps_black_24dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="8dp"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="1dp"
+                                    android:text="@string/main_card_preset"
+                                    android:textAllCaps="false"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"
+                                    android:textSize="18sp" />
+
+                                <TextView
+                                    android:id="@+id/main_card_preset_indicator"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/main_card_preset_indicator"
+                                    android:transitionName="@string/transition_preset_indicator" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="48dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/card_boarder"
+                        android:orientation="vertical"
+                        android:paddingBottom="16dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/main_card_setting"
+                            android:layout_width="match_parent"
+                            android:layout_height="54dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            app:cardBackgroundColor="@android:color/transparent"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_margin="16dp"
+                                    android:tint="#A5A5A5"
+                                    app:srcCompat="@drawable/ic_cog" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="8dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="1dp"
+                                        android:text="@string/main_menu_1"
+                                        android:textAllCaps="false"
+                                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"
+                                        android:textSize="18sp" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+
+                            android:id="@+id/main_card_help"
+                            android:layout_width="match_parent"
+                            android:layout_height="54dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            app:cardBackgroundColor="@android:color/transparent"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_margin="16dp"
+                                    android:tint="#A5A5A5"
+                                    app:srcCompat="@drawable/ic_help_outline_black_24dp" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="8dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="1dp"
+                                        android:text="@string/main_card_help"
+                                        android:textAllCaps="false"
+                                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"
+                                        android:textSize="18sp" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+<!--                </LinearLayout>-->
             </LinearLayout>
 
-        </LinearLayout>
-            </LinearLayout>
-
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
 
@@ -385,4 +372,5 @@
         app:layout_anchor="@id/main_card_preset"
         app:layout_anchorGravity="bottom|end"
         app:srcCompat="@drawable/ic_pencil_black_24dp" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

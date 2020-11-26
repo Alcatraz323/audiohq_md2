@@ -63,6 +63,7 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/panel_control_category_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="64dp"
@@ -118,6 +119,7 @@
             android:background="?android:attr/listDivider" />
 
         <TextView
+            android:id="@+id/panel_control_category_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="64dp"
@@ -214,6 +216,7 @@
             android:background="?android:attr/listDivider" />
 
         <TextView
+            android:id="@+id/panel_control_category_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="64dp"

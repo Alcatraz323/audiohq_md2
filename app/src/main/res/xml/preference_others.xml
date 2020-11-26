@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory android:title="@string/pref_3_t">
-<!--        <ListPreference-->
-<!--            android:defaultValue="auto"-->
-<!--            android:dialogTitle="@string/pref_3_6"-->
-<!--            android:entries="@array/entries_for_language"-->
-<!--            android:entryValues="@array/entryvalue_for_language"-->
-<!--            android:key="language"-->
-<!--            android:title="@string/pref_4_1" />-->
+        <ListPreference
+            android:dialogTitle="@string/pref_3_6"
+            android:entries="@array/entries_for_language"
+            android:entryValues="@array/entryvalue_for_language"
+            android:key="language"
+            android:title="@string/pref_3_6"
+            app:defaultValue="Auto" />
+        <ListPreference
+            android:dialogTitle="@string/pref_3_8"
+            android:entries="@array/entries_for_theme"
+            android:entryValues="@array/entryvalue_for_theme"
+            android:key="theme"
+            android:title="@string/pref_3_8"
+            app:defaultValue="Pixel"
+            app:isPreferenceVisible="false" />
+        <ListPreference
+            android:dialogTitle="@string/pref_3_9"
+            android:entries="@array/entries_for_dark_mode"
+            android:entryValues="@array/entryvalue_for_dark_mode"
+            android:key="dark_mode"
+            android:title="@string/pref_3_9"
+            app:defaultValue="Auto"
+            app:isPreferenceVisible="false" />
+        <CheckBoxPreference
+            android:key="anniversary_2020_foreground"
+            android:summary="@string/pref_3_10_summary"
+            android:title="@string/pref_3_10"
+            app:isPreferenceVisible="false" />
         <CheckBoxPreference
             android:key="exclude_from_recent"
             android:summary="@string/pref_3_7_summary"
@@ -21,5 +43,15 @@
         <PreferenceScreen
             android:key="uninstall_native"
             android:title="@string/pref_3_3" />
+        <PreferenceScreen
+            app:icon="@drawable/ic_phonelink_setup_black_24dp"
+            android:key="rerun_setup"
+            android:title="@string/au_l_6"
+            android:summary="@string/app_name"/>
+        <PreferenceScreen
+            android:key="anniversary_2020_quiz"
+            android:summary="@string/quiz_2020_summary"
+            android:title="@string/quiz_2020_title"
+            app:isPreferenceVisible="false" />
     </PreferenceCategory>
 </PreferenceScreen>

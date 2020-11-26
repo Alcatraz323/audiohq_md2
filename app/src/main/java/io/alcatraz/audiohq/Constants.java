@@ -21,7 +21,23 @@ public class Constants {
     public static final String PREF_FLOAT_SERVICE = "float_service";
     public static final boolean DEFAULT_VALUE_PREF_FLOAT_SERVICE = false;
     public static final String PREF_LANGUAGE = "language";
-    public static final String DEFAULT_VALUE_PREF_LANGUAGE = "auto";
+    public static final String DEFAULT_VALUE_PREF_LANGUAGE = "Auto";
+    public static final String PREF_THEME = "theme";
+    public static final String DEFAULT_VALUE_PREF_THEME = "Pixel";
+    public static final String PREF_DARK_MODE = "dark_mode";
+    public static final String DEFAULT_VALUE_PREF_DARK_MODE = "Auto";
+    public static final String PREF_RERUN_SETUP = "rerun_setup";
+
+
+    public static final String PREF_SHOW_THEME_SETTINGS = "show_theme_settings";
+    public static final boolean DEFAULT_VALUE_PREF_SHOW_THEME_SETTINGS = false;
+    public static final String PREF_SHOW_ANNIVERSARY_2020_QUIZ_CONTENT = "anniversary_2020_quiz";
+    public static final boolean DEFAULT_VALUE_PREF_SHOW_ANNIVERSARY_2020_QUIZ_CONTENT = false;
+    public static final String PREF_SHOW_ANNIVERSARY_2020_FOREGROUND = "anniversary_2020_foreground";
+    public static final boolean DEFAULT_VALUE_PREF_SHOW_ANNIVERSARY_2020_FOREGROUND = false;
+    public static final String PREF_SHOW_ANNIVERSARY_2020_INTRO = "show_anniversary_2020_intro";
+    public static final boolean DEFAULT_VALUE_PREF_SHOW_ANNIVERSARY_2020_INTRO = true;
+
 
     public static final String PREF_FLOAT_WINDOW_GRAVITY = "float_gravity";
     public static final String DEFAULT_VALUE_PREF_FLOAT_WINDOW_GRAVITY = "start_top";

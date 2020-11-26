@@ -63,7 +63,7 @@ public class PlayingRecyclerAdapter extends RecyclerView.Adapter<PlayingRecycler
         holder.label.setText(label);
         holder.pkg.setText(element.getPkg());
         if(element.isSticky()){
-            Utils.setImageWithTint(holder.pin, R.drawable.ic_pin, activity.getColor(R.color.colorAccent));
+            Utils.setImageWithTint(holder.pin, R.drawable.ic_pin, activity.color);
         }else{
             holder.pin.setImageResource(R.drawable.ic_pin_off);
         }
@@ -101,7 +101,7 @@ public class PlayingRecyclerAdapter extends RecyclerView.Adapter<PlayingRecycler
                     element.setSticky(false);
                 } else {
                     application.getPlayingSystem().addStickyApp(element.getPkg());
-                    Utils.setImageWithTint(holder.pin, R.drawable.ic_pin, activity.getColor(R.color.colorAccent));
+                    Utils.setImageWithTint(holder.pin, R.drawable.ic_pin, activity.color);
                     element.setSticky(true);
                 }
             }

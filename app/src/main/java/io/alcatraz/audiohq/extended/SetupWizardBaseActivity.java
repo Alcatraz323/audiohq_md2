@@ -2,6 +2,7 @@ package io.alcatraz.audiohq.extended;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -25,6 +26,11 @@ public abstract class SetupWizardBaseActivity extends CompatWithPipeActivity {
     public static final String PREF_ACTION_HAS_RUN_FULL_SETUP = "has_run_full_setup";
     public static final String PREF_ACTION_PREVIOUS_VERSIONCODE = "previous_version_code";
 
+    public static final String KEY_SETUP_START_UP_TYPE = "key_setup_start_up_type";
+    public static final String STARTUP_DEFAULT = "default";
+    public static final String STARTUP_FORCE_SHOW_UPDATE = "force_show_update";
+    public static final String STARTUP_FORCE_SHOW_FULL_SETUP = "force_show_full_setup";
+
     private String setup_pref_prefix = "alc_setup_";
     private SharedPreferenceUtil spf = SharedPreferenceUtil.getInstance();
 
@@ -44,6 +50,8 @@ public abstract class SetupWizardBaseActivity extends CompatWithPipeActivity {
     //Prefs
     int versionCode;
     boolean hasRunFullSetup;
+
+    String startUpType;
 
     @Override
     protected final void onCreate(Bundle savedInstanceState) {
@@ -175,6 +183,10 @@ public abstract class SetupWizardBaseActivity extends CompatWithPipeActivity {
     private void initPrefs() {
         versionCode = (int) spf.get(this, createPrefKey(PREF_ACTION_PREVIOUS_VERSIONCODE), getVersionCode());
         hasRunFullSetup = (boolean) spf.get(this, createPrefKey(PREF_ACTION_HAS_RUN_FULL_SETUP), false);
+        startUpType = getIntent().getStringExtra(KEY_SETUP_START_UP_TYPE);
+        if(TextUtils.isEmpty(startUpType)){
+            startUpType = STARTUP_DEFAULT;
+        }
     }
 
     private void findViews() {
@@ -240,10 +252,10 @@ public abstract class SetupWizardBaseActivity extends CompatWithPipeActivity {
 
     private void initPages() {
         pages.clear();
-        if (!hasRunFullSetup) {
+        if (!hasRunFullSetup || startUpType.equals(STARTUP_FORCE_SHOW_FULL_SETUP)) {
             onSetupPageInit(pages);
             onUpdate(pages);
-        } else if (getVersionCode() > versionCode)
+        } else if (getVersionCode() > versionCode || startUpType.equals(STARTUP_FORCE_SHOW_UPDATE))
             onUpdate(pages);
         if (pages.size() == 0) {
             onFinishSetup();

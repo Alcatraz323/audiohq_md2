@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.2"
+        android:scrollX="160dp"
+        android:scrollY="40dp"
+        android:tint="#676767"
+        app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/quiz_2020_sudoku_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:tint="#606060"
+                    app:srcCompat="@drawable/audiohq_2020_quiz_sudoku" />
+
+                <TextView
+                    android:id="@+id/quiz_2020_sudoku_instruction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/quiz_2020_sudoku_image"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/quiz_2020_sudoku_instruction" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/quiz_2020_sudoku_instruction"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="72dp"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/quiz_2020_sudoku_row_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/sudoku_row_1"
+                        android:inputType="numberDecimal" />
+
+                    <EditText
+                        android:id="@+id/quiz_2020_sudoku_row_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/sudoku_row_2"
+                        android:inputType="numberDecimal" />
+
+                    <EditText
+                        android:id="@+id/quiz_2020_sudoku_row_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/sudoku_row_3"
+                        android:inputType="numberDecimal" />
+
+                    <EditText
+                        android:id="@+id/quiz_2020_sudoku_row_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/sudoku_row_5"
+                        android:inputType="numberDecimal" />
+
+                    <EditText
+                        android:id="@+id/quiz_2020_sudoku_row_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/sudoku_row_6"
+                        android:inputType="numberDecimal" />
+
+                    <EditText
+                        android:id="@+id/quiz_2020_sudoku_row_7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/sudoku_row_7"
+                        android:inputType="numberDecimal" />
+
+                    <EditText
+                        android:id="@+id/quiz_2020_sudoku_row_8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/sudoku_row_8"
+                        android:inputType="numberDecimal" />
+
+                    <EditText
+                        android:id="@+id/quiz_2020_sudoku_row_9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/sudoku_row_9"
+                        android:inputType="numberDecimal" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+        </ScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/quiz_2020_sudoku_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            app:srcCompat="@drawable/ic_check_black_24dp" />
+
+    </RelativeLayout>
+
+</FrameLayout>

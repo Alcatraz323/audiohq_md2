@@ -26,6 +26,8 @@ import io.alcatraz.audiohq.extended.CompatWithPipeActivity;
 import io.alcatraz.audiohq.utils.Utils;
 
 public class CheckActivity extends CompatWithPipeActivity {
+    public static final String KEY_PRE_KNOWN_STATUS = "key_pre_known_status";
+
     ProgressBar progressBar;
     AppBarLayout appBarLayout;
     CollapsingToolbarLayout collapsingToolbarLayout;
@@ -54,19 +56,37 @@ public class CheckActivity extends CompatWithPipeActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        boolean pre_status = getIntent().getBooleanExtra(KEY_PRE_KNOWN_STATUS, true);
+        if(pre_status){
+            appBarLayout.setBackgroundColor(color);
+            collapsingToolbarLayout.setContentScrimColor(color);
+            StatusBarUtil.setColor(CheckActivity.this, color, 0);
+        }else {
+            appBarLayout.setBackgroundColor(getColor(R.color.base_gray_tint));
+            StatusBarUtil.setColor(CheckActivity.this, getColor(R.color.base_gray_tint), 0);
+            indicator.setText(R.string.check_daemon_status_dead);
+            indicator_image.setImageResource(R.drawable.ic_close);
+        }
+
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
-        toolbar.post(new Runnable() {
-            @Override
-            public void run() {
-                loadCheckPanel();
-            }
+        toolbar.post(() -> {
+            showProcessing();
+            new Thread(() -> {
+                try {
+                    Thread.sleep(1000);
+                    runOnUiThread(this::loadCheckPanel);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+
         });
     }
 
     @SuppressLint("SetTextI18n")
     public void loadCheckPanel() {
-        showProessing();
+
         TextView root = findViewById(R.id.check_root);
         TextView selinux = findViewById(R.id.check_selinux);
         TextView supported = findViewById(R.id.check_supported);
@@ -84,9 +104,9 @@ public class CheckActivity extends CompatWithPipeActivity {
         AudioHQApis.getAudioHQNativeInfo(this, new AudioHQNativeInterface<String[]>() {
             @Override
             public void onSuccess(String[] result) {
-                appBarLayout.setBackgroundColor(getColor(R.color.colorAccent));
-                collapsingToolbarLayout.setContentScrimColor(getColor(R.color.colorAccent));
-                StatusBarUtil.setColor(CheckActivity.this, getColor(R.color.colorAccent), 0);
+                appBarLayout.setBackgroundColor(color);
+                collapsingToolbarLayout.setContentScrimColor(color);
+                StatusBarUtil.setColor(CheckActivity.this, color, 0);
                 elf_info.setText(result[0] + result[1]);
             }
 
@@ -108,7 +128,7 @@ public class CheckActivity extends CompatWithPipeActivity {
         hideProcessing();
     }
 
-    public void showProessing() {
+    public void showProcessing() {
         progressBar.post(new Runnable() {
             @Override
             public void run() {
@@ -147,7 +167,8 @@ public class CheckActivity extends CompatWithPipeActivity {
                 new ViewGroup.LayoutParams(dp24 + Utils.Dp2Px(this, 16), dp24);
         progressBar.setLayoutParams(params);
         progressBar.setPadding(0, 0, Utils.Dp2Px(this, 16), 0);
-
+        progressBar.getIndeterminateDrawable().setColorFilter(0xFFffffff,
+                android.graphics.PorterDuff.Mode.MULTIPLY);
         return super.onCreateOptionsMenu(menu);
     }
 

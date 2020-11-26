@@ -15,6 +15,8 @@
     <color name="orange_colorPrimaryDark">#F57c00</color>
     <color name="leaf_colorPrimary">#8bc34a</color>
     <color name="leaf_colorPrimaryDark">#689f38</color>
+    <color name="sakura_colorPrimaryDark">#F198BE</color>
+    <color name="purple_colorPrimary">#673AB7</color>
 
     <color name="status_back">#e64a19</color>
 
