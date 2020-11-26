@@ -17,6 +17,7 @@ import java.util.List;
 
 import androidx.cardview.widget.CardView;
 import androidx.viewpager.widget.ViewPager;
+import io.alcatraz.audiohq.BuildConfig;
 import io.alcatraz.audiohq.R;
 import io.alcatraz.audiohq.beans.AudioHQNativeInterface;
 import io.alcatraz.audiohq.beans.SetupPage;
@@ -103,8 +104,7 @@ public class SetupActivity extends SetupWizardBaseActivity {
     }
 
     @Override
-    public int getVersionCode() {
-        return 27;
+    public int getVersionCode() { return BuildConfig.VERSION_CODE;
     }
 
     private void onSelectSetup4_Apply() {

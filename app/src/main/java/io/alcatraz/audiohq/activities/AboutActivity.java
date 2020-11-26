@@ -24,6 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import io.alcatraz.audiohq.BuildConfig;
 import io.alcatraz.audiohq.Constants;
 import io.alcatraz.audiohq.Easter2020;
 import io.alcatraz.audiohq.R;
@@ -158,7 +159,7 @@ public class AboutActivity extends CompatWithPipeActivity {
         images.add(R.drawable.history);
         List<String> l1 = new ArrayList<>();
         l1.add(getString(R.string.au_l_1));
-        l1.add(PackageCtlUtils.getVersionName(this));
+        l1.add(BuildConfig.VERSION_NAME);
         List<String> l2 = new ArrayList<>();
         l2.add(getString(R.string.au_l_2));
         l2.add(getString(R.string.au_l_2_1));
