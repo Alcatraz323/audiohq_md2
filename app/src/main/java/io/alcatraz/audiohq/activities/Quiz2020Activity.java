@@ -31,17 +31,18 @@ public class Quiz2020Activity extends CompatWithPipeActivity {
     private final String MATH_QUIZ_EXACT_TOKEN_2 = "80bf0d3dcfa49c6b0cced600033998f7";
     private final String MATH_QUIZ_GUESSING_TOKEN = "357b64393204e754d2717c28a792a47f";
 
-    private final String SUDOKU_QUIZ_ROW_1_TOKEN = "842ce50feec765a3cf81f15214549471";
-    private final String SUDOKU_QUIZ_ROW_2_TOKEN = "6491bcab2f606cd51cdf242ac4bc2416";
-    private final String SUDOKU_QUIZ_ROW_3_TOKEN = "237363c8e521a932a879af06886274ec";
-    private final String SUDOKU_QUIZ_ROW_5_TOKEN = "99de63fe34c5046d056cce790159343c";
-    private final String SUDOKU_QUIZ_ROW_6_TOKEN = "f9411ca6b95f30948007690b8940c52d";
-    private final String SUDOKU_QUIZ_ROW_7_TOKEN = "e79666cba57e6b3748e17760f242f891";
-    private final String SUDOKU_QUIZ_ROW_8_TOKEN = "cbecf35fbba47bdfd08453bef14f1a9b";
-    private final String SUDOKU_QUIZ_ROW_9_TOKEN = "71ae9da085f2f3494ae32e0b2c0dd2c8";
+    private final String SUDOKU_QUIZ_ROW_1_TOKEN = "990d956a581566e2318a6f6241a63da3";
+    private final String SUDOKU_QUIZ_ROW_2_TOKEN = "3ec589ab33b15ffbdeaf4c11c60260fd";
+    private final String SUDOKU_QUIZ_ROW_3_TOKEN = "657dbe953a08fe4c261c68fa06261303";
+    private final String SUDOKU_QUIZ_ROW_4_TOKEN = "c81fb13777b701cb8ce6cdb7f0661f1b";
+    private final String SUDOKU_QUIZ_ROW_5_TOKEN = "8469f2e6f30190f98e23abb5f2bcff38";
+    private final String SUDOKU_QUIZ_ROW_6_TOKEN = "e6b34e9a0311a7f829e09d2d7c4b313e";
+    private final String SUDOKU_QUIZ_ROW_7_TOKEN = "011ecee7d295c066ae68d4396215c3d0";
+    private final String SUDOKU_QUIZ_ROW_8_TOKEN = "51b78a2e93d7db57447aae3686202e57";
+    private final String SUDOKU_QUIZ_ROW_9_TOKEN = "e39a411b54c3ce46fd382fef7f632157";
 
-    private final String[] SUDOKU_KEY = {SUDOKU_QUIZ_ROW_1_TOKEN, SUDOKU_QUIZ_ROW_2_TOKEN,
-            SUDOKU_QUIZ_ROW_3_TOKEN, SUDOKU_QUIZ_ROW_5_TOKEN, SUDOKU_QUIZ_ROW_6_TOKEN,
+    private final String[] SUDOKU_KEY = {SUDOKU_QUIZ_ROW_1_TOKEN, SUDOKU_QUIZ_ROW_2_TOKEN, SUDOKU_QUIZ_ROW_3_TOKEN,
+            SUDOKU_QUIZ_ROW_4_TOKEN, SUDOKU_QUIZ_ROW_5_TOKEN, SUDOKU_QUIZ_ROW_6_TOKEN,
             SUDOKU_QUIZ_ROW_7_TOKEN, SUDOKU_QUIZ_ROW_8_TOKEN, SUDOKU_QUIZ_ROW_9_TOKEN};
 
     //Math
@@ -52,6 +53,7 @@ public class Quiz2020Activity extends CompatWithPipeActivity {
     EditText row_1;
     EditText row_2;
     EditText row_3;
+    EditText row_4;
     EditText row_5;
     EditText row_6;
     EditText row_7;
@@ -103,6 +105,7 @@ public class Quiz2020Activity extends CompatWithPipeActivity {
         row_1 = root2.findViewById(R.id.quiz_2020_sudoku_row_1);
         row_2 = root2.findViewById(R.id.quiz_2020_sudoku_row_2);
         row_3 = root2.findViewById(R.id.quiz_2020_sudoku_row_3);
+        row_4 = root2.findViewById(R.id.quiz_2020_sudoku_row_4);
         row_5 = root2.findViewById(R.id.quiz_2020_sudoku_row_5);
         row_6 = root2.findViewById(R.id.quiz_2020_sudoku_row_6);
         row_7 = root2.findViewById(R.id.quiz_2020_sudoku_row_7);
@@ -111,6 +114,7 @@ public class Quiz2020Activity extends CompatWithPipeActivity {
         et_rows.add(row_1);
         et_rows.add(row_2);
         et_rows.add(row_3);
+        et_rows.add(row_4);
         et_rows.add(row_5);
         et_rows.add(row_6);
         et_rows.add(row_7);

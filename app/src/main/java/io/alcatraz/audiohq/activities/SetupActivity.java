@@ -104,7 +104,8 @@ public class SetupActivity extends SetupWizardBaseActivity {
     }
 
     @Override
-    public int getVersionCode() { return BuildConfig.VERSION_CODE;
+    public int getVersionCode() {
+        return BuildConfig.VERSION_CODE;
     }
 
     private void onSelectSetup4_Apply() {
@@ -257,19 +258,17 @@ public class SetupActivity extends SetupWizardBaseActivity {
         ImageView indicator = root.findViewById(R.id.setup_2_selinux_check_indicator);
 
         String enforcing = CheckUtils.getSeLinuxEnforce();
-        if (enforcing != null) {
-            boolean isPermissive = enforcing.contains("Permissive");
+        boolean isPermissive = enforcing.contains("Permissive");
 
-            status.setText(enforcing);
-            if (isPermissive) {
-                title.setTextColor(getColor(R.color.green_colorPrimary));
-                indicator.setImageResource(R.drawable.ic_check_green_24dp);
-            }else {
-                title.setTextColor(getColor(R.color.orange_colorPrimary));
-                Utils.setImageWithTint(indicator, R.drawable.ic_alert, getColor(R.color.orange_colorPrimary));
-            }
-
+        status.setText(enforcing.equals("") ? "Unknown" : enforcing);
+        if (isPermissive) {
+            title.setTextColor(getColor(R.color.green_colorPrimary));
+            indicator.setImageResource(R.drawable.ic_check_green_24dp);
+        } else {
+            title.setTextColor(getColor(R.color.orange_colorPrimary));
+            Utils.setImageWithTint(indicator, R.drawable.ic_alert, getColor(R.color.orange_colorPrimary));
         }
+
     }
 
     public SetupPage getPermissionPage() {

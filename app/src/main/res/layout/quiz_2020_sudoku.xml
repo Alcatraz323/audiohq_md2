@@ -78,6 +78,14 @@
                         android:inputType="numberDecimal" />
 
                     <EditText
+                        android:id="@+id/quiz_2020_sudoku_row_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/sudoku_row_4"
+                        android:inputType="numberDecimal" />
+
+                    <EditText
                         android:id="@+id/quiz_2020_sudoku_row_5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

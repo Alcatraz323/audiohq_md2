@@ -64,7 +64,7 @@ public class MainActivity extends CompatWithPipeActivity implements View.OnClick
         initViews();
         initData();
         startFloatingService();
-        if(showAnniversary2020Intro){
+        if (showAnniversary2020Intro) {
             Panels.getAnniversary2020Intro(this).show();
         }
     }
@@ -98,7 +98,7 @@ public class MainActivity extends CompatWithPipeActivity implements View.OnClick
         help = findViewById(R.id.main_card_help);
 
         SharedPreferenceUtil sharedPreferenceUtil = SharedPreferenceUtil.getInstance();
-        showAnniversary2020Intro = (boolean) sharedPreferenceUtil.get(this, Constants.PREF_SHOW_ANNIVERSARY_2020_INTRO,Constants.DEFAULT_VALUE_PREF_SHOW_ANNIVERSARY_2020_INTRO);
+        showAnniversary2020Intro = (boolean) sharedPreferenceUtil.get(this, Constants.PREF_SHOW_ANNIVERSARY_2020_INTRO, Constants.DEFAULT_VALUE_PREF_SHOW_ANNIVERSARY_2020_INTRO);
     }
 
     private void initViews() {
@@ -213,11 +213,7 @@ public class MainActivity extends CompatWithPipeActivity implements View.OnClick
                 }
                 break;
             case R.id.main_card_setting:
-                if (isFunctionValid) {
-                    startActivity(new Intent(MainActivity.this, PreferenceActivity.class));
-                } else {
-                    toast(R.string.main_card_invalid);
-                }
+                startActivity(new Intent(MainActivity.this, PreferenceActivity.class));
                 break;
             case R.id.main_card_help:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://alcatraz323.github.io/audiohq")));
