@@ -107,6 +107,7 @@ public class AboutActivity extends CompatWithPipeActivity {
                         break;
                     case 3:
                         showOSPDialog();
+                        break;
                     case 4:
                         Intent intent = new Intent(AboutActivity.this, SetupActivity.class);
                         intent.putExtra(SetupActivity.KEY_SETUP_START_UP_TYPE, SetupActivity.STARTUP_FORCE_SHOW_UPDATE);

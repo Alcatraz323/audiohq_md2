@@ -7,7 +7,7 @@ android {
         minSdkVersion 26
         targetSdkVersion 29
         versionCode 28
-        versionName "0.8_2020_11_26_stable_7_anniversary_81ec80f"
+        versionName "0.8_2020_11_26_stable_7_anniversary_081e45d"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

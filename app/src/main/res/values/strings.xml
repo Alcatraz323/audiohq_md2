@@ -9,7 +9,7 @@
     <string name="setup_module_download_url_github" translatable="false">https://github.com/Alcatraz323/audiohq_module/releases</string>
     <string name="setup_module_download_url_fastgit" translatable="false">https://hub.fastgit.org/Alcatraz323/audiohq_module/releases</string>
     <string name="update_date">20201126</string>
-    <string name="update_title">20201126 stable_7_anniversary_81ec80f</string>
+    <string name="update_title">20201126 stable_7_anniversary_081e45d</string>
     <string name="update_info">
         1.Pin apps to float window and Playing section even if it is not playing\n
         2.Direct trigger(Accessibility Service)\n
