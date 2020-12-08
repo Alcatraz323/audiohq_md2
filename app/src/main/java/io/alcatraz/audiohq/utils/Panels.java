@@ -18,8 +18,9 @@ import io.alcatraz.audiohq.extended.CompatWithPipeActivity;
 
 public class Panels {
     private static AlertDialog notInstalledPanel;
+
     public static AlertDialog getNotInstalledPanel(Context context) {
-        if(notInstalledPanel == null){
+        if (notInstalledPanel == null) {
             notInstalledPanel = new AlertDialog.Builder(context)
                     .setTitle(R.string.install_title)
                     .setMessage(R.string.install_not_installed)
@@ -49,45 +50,69 @@ public class Panels {
         return notInstalledPanel;
     }
 
-    public static AlertDialog getManualAddPanel(CompatWithPipeActivity activity){
-        View root = activity.getLayoutInflater().inflate(R.layout.panel_manual_add,null);
+    public static AlertDialog getManualAddPanel(CompatWithPipeActivity activity) {
+        View root = activity.getLayoutInflater().inflate(R.layout.panel_manual_add, null);
         TextInputEditText editText = root.findViewById(R.id.manual_add_edittext);
         return new AlertDialog.Builder(activity)
                 .setTitle(R.string.preset_manual_add)
                 .setView(root)
-                .setNegativeButton(R.string.ad_nb,null)
+                .setNegativeButton(R.string.ad_nb, null)
                 .setPositiveButton(R.string.ad_pb, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String process = editText.getText().toString();
-                        if(Utils.isStringNotEmpty(process)){
-                            ControlElement controlElement = new ControlElement(process,null,process,false,
-                                    null,0);
+                        if (Utils.isStringNotEmpty(process)) {
+                            ControlElement controlElement = new ControlElement(process, null, process, false,
+                                    null, 0);
                             Intent intent = new Intent(activity, PresetInnerActivity.class);
-                            intent.putExtra(PresetInnerActivity.KEY_INNER_PRESET,controlElement);
+                            intent.putExtra(PresetInnerActivity.KEY_INNER_PRESET, controlElement);
                             activity.startTransition(intent);
-                        }else {
+                        } else {
                             editText.setError(activity.getString(R.string.preset_manual_error));
                         }
                     }
                 }).create();
     }
 
-    public static AlertDialog getAnniversary2020Intro(CompatWithPipeActivity activity){
+    public static void showPickerManualPanel(CompatWithPipeActivity activity, ManualInterface manualInterface) {
+        View root = activity.getLayoutInflater().inflate(R.layout.panel_manual_add, null);
+        TextInputEditText editText = root.findViewById(R.id.manual_add_edittext);
+        new AlertDialog.Builder(activity)
+                .setTitle(R.string.preset_manual_add)
+                .setView(root)
+                .setNegativeButton(R.string.ad_nb, null)
+                .setPositiveButton(R.string.ad_pb, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String process = editText.getText().toString();
+                        if (Utils.isStringNotEmpty(process)) {
+                            manualInterface.onResult(process);
+                        } else {
+                            editText.setError(activity.getString(R.string.preset_manual_error));
+                        }
+                    }
+                }).show();
+    }
+
+    public static AlertDialog getAnniversary2020Intro(CompatWithPipeActivity activity) {
         View root = activity.getLayoutInflater().inflate(R.layout.item_my_github, null);
         return new AlertDialog.Builder(activity)
                 .setTitle(R.string.pref_float_set_notice_title)
                 .setMessage(R.string.anniversary_2020_notice_message)
                 .setView(root)
-                .setNegativeButton(R.string.ad_nb,null)
+                .setNegativeButton(R.string.ad_nb, null)
                 .setPositiveButton(R.string.ad_pb, null)
                 .setNeutralButton(R.string.ad_never_again, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         SharedPreferenceUtil sharedPreferenceUtil = SharedPreferenceUtil.getInstance();
-                        sharedPreferenceUtil.put(activity, Constants.PREF_SHOW_ANNIVERSARY_2020_INTRO,false);
+                        sharedPreferenceUtil.put(activity, Constants.PREF_SHOW_ANNIVERSARY_2020_INTRO, false);
                         dialog.dismiss();
                     }
                 }).create();
+    }
+
+    public interface ManualInterface {
+        void onResult(String input);
     }
 }

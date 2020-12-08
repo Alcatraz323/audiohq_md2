@@ -31,6 +31,7 @@ import io.alcatraz.audiohq.adapters.PackPickerAdapter;
 import io.alcatraz.audiohq.beans.PickerPack;
 import io.alcatraz.audiohq.extended.CompatWithPipeActivity;
 import io.alcatraz.audiohq.utils.PackageCtlUtils;
+import io.alcatraz.audiohq.utils.Panels;
 import io.alcatraz.audiohq.utils.SharedPreferenceUtil;
 import io.alcatraz.audiohq.utils.Utils;
 
@@ -46,6 +47,7 @@ public class AppPickActivity extends CompatWithPipeActivity {
 
     List<PickerPack> data = new ArrayList<>();
     List<String> picked = new ArrayList<>();
+    List<String> notInstalled = new ArrayList<>();
     PackPickerAdapter adapter;
 
     SearchView searchView;
@@ -60,7 +62,14 @@ public class AppPickActivity extends CompatWithPipeActivity {
         setContentView(R.layout.activity_profile_pick_app);
         initViews();
         toolbar.post(() -> {
-            initData();
+            new Thread(() -> {
+                try {
+                    Thread.sleep(500);
+                    runOnUiThread(this::initData);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
             doneFirstInitialize = true;
         });
     }
@@ -84,6 +93,8 @@ public class AppPickActivity extends CompatWithPipeActivity {
         new Thread(() -> {
             data.clear();
             picked.clear();
+            notInstalled.clear();
+
             SharedPreferenceUtil sharedPreferenceUtil = SharedPreferenceUtil.getInstance();
             String raw = "";
             switch (pickerType) {
@@ -102,6 +113,7 @@ public class AppPickActivity extends CompatWithPipeActivity {
             if (raw != null && !raw.equals("")) {
                 String[] filter_cooking = raw.split(",");
                 Collections.addAll(picked, filter_cooking);
+                Collections.addAll(notInstalled, filter_cooking);
             }
 
             //Add 'system_server' manually
@@ -113,9 +125,17 @@ public class AppPickActivity extends CompatWithPipeActivity {
             for (PackageInfo i : packageInfo) {
                 String label = PackageCtlUtils.getLabel(AppPickActivity.this, i.applicationInfo);
                 Drawable icon = PackageCtlUtils.getIcon(AppPickActivity.this, i.applicationInfo);
-                PickerPack current = new PickerPack(i.packageName, label, icon, picked.contains(i.packageName));
-                data.add(current);
+                boolean currentPicked = picked.contains(i.packageName);
+                PickerPack current = new PickerPack(i.packageName, label, icon, currentPicked);
+                notInstalled.remove(i.packageName);
+                if (currentPicked) {
+                    data.add(0, current);
+                } else {
+                    data.add(current);
+                }
             }
+
+            addNotInstalledButSelectedPacks();
 
             runOnUiThread(() -> {
                 adapter.notifyDataSetChanged();
@@ -130,32 +150,8 @@ public class AppPickActivity extends CompatWithPipeActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater mi = new MenuInflater(this);
         mi.inflate(R.menu.activity_preset_general_menu, menu);
-        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        View underline = searchView.findViewById(R.id.search_plate);
-        underline.setBackgroundColor(Color.TRANSPARENT);
-        progressBar = (ProgressBar) menu.findItem(R.id.action_progress_bar).getActionView();
-        int dp24 = Utils.Dp2Px(this, 24);
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(dp24, dp24);
-        progressBar.setLayoutParams(params);
-        searchView.setQueryHint(getString(R.string.preset_search_hint));
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                if (TextUtils.isEmpty(s)) {
-                    adapter.onTextChanged("");
-                } else {
-                    adapter.onTextChanged(s);
-                }
-                return false;
-            }
-        });
-
+        menu.add(R.string.preset_manual_add);
+        setupProcessingProgress(menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -203,6 +199,42 @@ public class AppPickActivity extends CompatWithPipeActivity {
         return out.toString();
     }
 
+    private void addNotInstalledButSelectedPacks() {
+        for (String i : notInstalled) {
+            PickerPack target = new PickerPack(i, i, null, true);
+            data.add(0, target);
+        }
+    }
+
+    private void setupProcessingProgress(Menu menu) {
+        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        View underline = searchView.findViewById(R.id.search_plate);
+        underline.setBackgroundColor(Color.TRANSPARENT);
+        progressBar = (ProgressBar) menu.findItem(R.id.action_progress_bar).getActionView();
+        int dp24 = Utils.Dp2Px(this, 24);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(dp24, dp24);
+        progressBar.setLayoutParams(params);
+        hideProcessing();
+
+        searchView.setQueryHint(getString(R.string.preset_search_hint));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                if (TextUtils.isEmpty(s)) {
+                    adapter.onTextChanged("");
+                } else {
+                    adapter.onTextChanged(s);
+                }
+                return false;
+            }
+        });
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -211,7 +243,6 @@ public class AppPickActivity extends CompatWithPipeActivity {
 
     public void showProcessing() {
         progressBar.post(() -> progressBar.setVisibility(View.VISIBLE));
-
     }
 
     public void hideProcessing() {
@@ -219,9 +250,22 @@ public class AppPickActivity extends CompatWithPipeActivity {
     }
 
     @Override
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        hideProcessing();
+        return super.onMenuOpened(featureId, menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finishAfterTransition();
+        } else if(item.getTitle().equals(getString(R.string.preset_manual_add))){
+            Panels.showPickerManualPanel(this, new Panels.ManualInterface() {
+                @Override
+                public void onResult(String input) {
+                    pickerAdd(input);
+                }
+            });
         }
         return super.onOptionsItemSelected(item);
     }

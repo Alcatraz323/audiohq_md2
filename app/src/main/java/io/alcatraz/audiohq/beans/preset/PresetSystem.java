@@ -93,11 +93,11 @@ public class PresetSystem {
         return query;
     }
 
-    public boolean getMuted(String process, boolean isweakkey){
-        if(isweakkey){
-            return w_muted.contains(process);
-        }else{
-            return p_muted.contains(process);
+    public boolean getMuted(String process, boolean isweakkey) {
+        if (isweakkey) {
+            return w_muted != null && w_muted.contains(process);
+        } else {
+            return p_muted != null && p_muted.contains(process);
         }
     }
 
