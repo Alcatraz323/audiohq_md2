@@ -97,9 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="48dp"
-                        android:layout_marginRight="48dp"
                         android:layout_toEndOf="@id/playing_why_no_icon"
-                        android:layout_toRightOf="@id/playing_why_no_icon"
                         android:gravity="center_vertical"
                         android:orientation="vertical">
 
@@ -129,10 +127,8 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginRight="16dp"
+                        android:layout_marginEnd="8dp"
                         android:tint="@color/base_gray_tint"
                         app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp" />
 
