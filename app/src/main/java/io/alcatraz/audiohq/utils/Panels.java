@@ -17,26 +17,36 @@ import io.alcatraz.audiohq.beans.preset.ControlElement;
 import io.alcatraz.audiohq.extended.CompatWithPipeActivity;
 
 public class Panels {
+    private static AlertDialog notInstalledPanel;
     public static AlertDialog getNotInstalledPanel(Context context) {
-        return new AlertDialog.Builder(context)
-                .setTitle(R.string.install_title)
-                .setMessage(R.string.install_not_installed)
-                .setPositiveButton(R.string.ad_pb, null)
-                .setPositiveButton(R.string.setup_3_install_github_down, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        context.startActivity(new Intent(Intent.ACTION_VIEW,
-                                Uri.parse(context.getString(R.string.setup_module_download_url_github))));
-                    }
-                })
-                .setNegativeButton(R.string.setup_3_install_fastgit_down, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        context.startActivity(new Intent(Intent.ACTION_VIEW,
-                                Uri.parse(context.getString(R.string.setup_module_download_url_fastgit))));
-                    }
-                })
-                .create();
+        if(notInstalledPanel == null){
+            notInstalledPanel = new AlertDialog.Builder(context)
+                    .setTitle(R.string.install_title)
+                    .setMessage(R.string.install_not_installed)
+                    .setPositiveButton(R.string.ad_pb, null)
+                    .setPositiveButton(R.string.setup_3_install_github_down, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            context.startActivity(new Intent(Intent.ACTION_VIEW,
+                                    Uri.parse(context.getString(R.string.setup_module_download_url_github))));
+                        }
+                    })
+                    .setNegativeButton(R.string.setup_3_install_fastgit_down, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            context.startActivity(new Intent(Intent.ACTION_VIEW,
+                                    Uri.parse(context.getString(R.string.setup_module_download_url_fastgit))));
+                        }
+                    })
+                    .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            notInstalledPanel = null;
+                        }
+                    })
+                    .create();
+        }
+        return notInstalledPanel;
     }
 
     public static AlertDialog getManualAddPanel(CompatWithPipeActivity activity){

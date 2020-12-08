@@ -24,7 +24,7 @@ public class Discharger extends AccessibilityService {
 
     @Override
     public void onInterrupt() {
-
+        mService = null;
     }
 
     @Override

@@ -140,7 +140,7 @@ public class FloatPanelService extends Service {
         observer.setOnVolumeChangeListener(new VolumeChangeObserver.OnVolumeChangeListener() {
             @Override
             public void onVolumeChange() {
-                if (!direct_react) {
+                if (!direct_react || Discharger.mService == null) {
                     handler.removeCallbacks(cleaner);
                     showPanel();
                     handler.postDelayed(cleaner, Integer.parseInt(dismiss_delay));
@@ -459,7 +459,7 @@ public class FloatPanelService extends Service {
                     ViewGroup.LayoutParams params = listView.getLayoutParams();
                     params.width = Utils.Dp2Px(FloatPanelService.this, 240);
                     listView.setLayoutParams(params);
-                    root.addView(listView,1);
+                    root.addView(listView, 1);
                 }
                 adapter.notifyDataSetChanged();
                 listView.scheduleLayoutAnimation();
