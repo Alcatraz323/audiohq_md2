@@ -39,7 +39,7 @@
 
     <ListView
         android:id="@+id/audiohq_float_list"
-        android:layout_width="0dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/audiohq_float_trigger"
         android:divider="@null"

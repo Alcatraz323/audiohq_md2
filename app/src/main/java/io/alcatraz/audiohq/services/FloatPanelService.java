@@ -196,7 +196,7 @@ public class FloatPanelService extends Service {
         layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH |
                 WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED;
-        layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
         if (gravity.equals("start_top"))
             layoutParams.gravity = Gravity.START | Gravity.TOP;
@@ -268,9 +268,10 @@ public class FloatPanelService extends Service {
             @Override
             public void onAnimationEnd(Animation animation) {
                 clearList();
-                ViewGroup.LayoutParams params = listView.getLayoutParams();
-                params.width = Utils.Dp2Px(FloatPanelService.this, 0);
-                listView.setLayoutParams(params);
+//                ViewGroup.LayoutParams params = listView.getLayoutParams();
+//                params.width = Utils.Dp2Px(FloatPanelService.this, 0);
+//                listView.setLayoutParams(params);
+                listView.setVisibility(View.GONE);
             }
 
             @Override
@@ -454,13 +455,14 @@ public class FloatPanelService extends Service {
                         data.add(i);
                     }
                 }
-                if (data.size() > 0) {
-                    root.removeView(listView);
-                    ViewGroup.LayoutParams params = listView.getLayoutParams();
-                    params.width = Utils.Dp2Px(FloatPanelService.this, 240);
-                    listView.setLayoutParams(params);
-                    root.addView(listView, 1);
-                }
+//                if (data.size() > 0) {
+//                    root.removeView(listView);
+//                    ViewGroup.LayoutParams params = listView.getLayoutParams();
+//                    params.width = Utils.Dp2Px(FloatPanelService.this, 240);
+//                    listView.setLayoutParams(params);
+//                    root.addView(listView, 0);
+//                }
+                listView.setVisibility(View.VISIBLE);
                 adapter.notifyDataSetChanged();
                 listView.scheduleLayoutAnimation();
             }
