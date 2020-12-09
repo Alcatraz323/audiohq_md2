@@ -233,7 +233,7 @@
     <string name="pref_4_10">侧面修正距离(dp)</string>
     <string name="pref_4_11">按钮圆角半径(dp)(不要设置过大)</string>
     <string name="pref_4_12">卡片圆角半径(dp)</string>
-    <string name="pref_4_13">拖动条颜色(若使用主题,此项可能不生效)</string>
+    <string name="pref_4_13">拖动条颜色</string>
     <string name="pref_4_14">按键响应直接调出悬浮窗</string>
     <string name="pref_4_14_summary">(实验性)监听getevent输出以实现功能，但部分设备不可用</string>
     <string name="pref_4_15">横屏侧面修正距离(dp)</string>

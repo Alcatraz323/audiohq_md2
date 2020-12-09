@@ -135,7 +135,7 @@ public class FloatAdapter extends BaseAdapter {
             }
         });
 
-        full_seek_indicator.setBackgroundColor(AudioHQApplication.color);
+        full_seek_indicator.setBackgroundColor(getCardSeekBarColor());
 
         if (pkgs.isSticky()) {
             Utils.setImageWithTint(pinImage, R.drawable.ic_pin, AudioHQApplication.color);
@@ -143,19 +143,16 @@ public class FloatAdapter extends BaseAdapter {
             pinImage.setImageResource(R.drawable.ic_pin_off);
         }
 
-        pin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AudioHQApplication application = (AudioHQApplication) service.getApplication();
-                if (pkgs.isSticky()) {
-                    application.getPlayingSystem().removeStickyApp(pkgs.getPkg());
-                    pinImage.setImageResource(R.drawable.ic_pin_off);
-                    pkgs.setSticky(false);
-                } else {
-                    application.getPlayingSystem().addStickyApp(pkgs.getPkg());
-                    Utils.setImageWithTint(pinImage, R.drawable.ic_pin, AudioHQApplication.color);
-                    pkgs.setSticky(true);
-                }
+        pin.setOnClickListener(v -> {
+            AudioHQApplication application = (AudioHQApplication) service.getApplication();
+            if (pkgs.isSticky()) {
+                application.getPlayingSystem().removeStickyApp(pkgs.getPkg());
+                pinImage.setImageResource(R.drawable.ic_pin_off);
+                pkgs.setSticky(false);
+            } else {
+                application.getPlayingSystem().addStickyApp(pkgs.getPkg());
+                Utils.setImageWithTint(pinImage, R.drawable.ic_pin, AudioHQApplication.color);
+                pkgs.setSticky(true);
             }
         });
 
