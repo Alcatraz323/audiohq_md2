@@ -99,7 +99,7 @@ public class PlayingSystem {
     }
 
     private void createStickyAppBean(String packageName, List<Pkgs> target) {
-        AudioHQApis.getProfile(context, packageName, false, new AudioHQNativeInterface<StringProfile>() {
+        AudioHQApis.getProfile(context, packageName, true, new AudioHQNativeInterface<StringProfile>() {
             @Override
             public void onSuccess(StringProfile result) {
                 boolean muted = application.getPresetSystem().getMuted(packageName, true);
