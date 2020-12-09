@@ -20,7 +20,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -28,7 +27,6 @@ import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -50,10 +48,12 @@ import io.alcatraz.audiohq.utils.Utils;
 
 public class FloatPanelService extends Service {
     public static final String AHQ_FLOAT_TRIGGER_ACTION = "ahq_float_trigger";
-    public static final String AHQ_FLOAT_DISCHAGE_ACTION = "ahq_float_discharge";
+    public static final String AHQ_FLOAT_DISCHARGE_ACTION = "ahq_float_discharge";
+    public int DP_240 = 0;
+
     UpdatePreferenceReceiver updatePreferenceReceiver;
     FloatWindowTrigger trigger;
-    FloatWindowDischarger discharger;
+    FloatWindowDischarger discharge;
     HomeKeyEventBroadCastReceiver homeKeyEventBroadCastReceiver;
     private String notificationId = "audiohq_floater";
 
@@ -125,7 +125,7 @@ public class FloatPanelService extends Service {
         initialize();
         loadPreference();
         initializeWindow();
-        registReceivers();
+        registerReceivers();
     }
 
     @SuppressLint("SetTextI18n")
@@ -136,6 +136,7 @@ public class FloatPanelService extends Service {
         layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         AudioHQApplication application = (AudioHQApplication) getApplication();
         playingSystem = application.getPlayingSystem();
+        DP_240 = Utils.Dp2Px(this, 240);
 
         observer.setOnVolumeChangeListener(new VolumeChangeObserver.OnVolumeChangeListener() {
             @Override
@@ -155,6 +156,7 @@ public class FloatPanelService extends Service {
             String notificationName = "AudioHQ Foreground";
             NotificationChannel channel =
                     new NotificationChannel(notificationId, notificationName, NotificationManager.IMPORTANCE_HIGH);
+            assert notificationManager != null;
             notificationManager.createNotificationChannel(channel);
         }
 
@@ -169,14 +171,11 @@ public class FloatPanelService extends Service {
     }
 
     private void initKeyListener() {
-        listener = new KeyListener(this, new KeyListener.KeyListenInterface() {
-            @Override
-            public void onKilled() {
-                try {
-                    listener_thread.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        listener = new KeyListener(this, () -> {
+            try {
+                listener_thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }, handler, cleaner);
         listener_thread = new Thread(listener);
@@ -194,8 +193,7 @@ public class FloatPanelService extends Service {
         layoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
         layoutParams.format = PixelFormat.RGBA_8888;
         layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH |
-                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED;
+                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH | WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED;
         layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
         if (gravity.equals("start_top"))
@@ -208,7 +206,7 @@ public class FloatPanelService extends Service {
             startForeground(1, getNotification());
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint({"ClickableViewAccessibility", "InflateParams"})
     private void initViews() {
         if (gravity.equals("start_top")) {
             root = (LinearLayout) layoutInflater.inflate(R.layout.panel_float, null);
@@ -246,8 +244,13 @@ public class FloatPanelService extends Service {
             @Override
             public void onAnimationEnd(Animation animation) {
                 try {
-                    windowManager.removeViewImmediate(root);
-                } catch (Exception e) {
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            windowManager.removeViewImmediate(root);
+                        }
+                    }, 10);
+                } catch (Exception ignored) {
 
                 }
                 hasShownPanel = false;
@@ -268,10 +271,8 @@ public class FloatPanelService extends Service {
             @Override
             public void onAnimationEnd(Animation animation) {
                 clearList();
-//                ViewGroup.LayoutParams params = listView.getLayoutParams();
-//                params.width = Utils.Dp2Px(FloatPanelService.this, 0);
-//                listView.setLayoutParams(params);
-                listView.setVisibility(View.GONE);
+                ;
+//                listView.setVisibility(View.GONE);
             }
 
             @Override
@@ -455,14 +456,7 @@ public class FloatPanelService extends Service {
                         data.add(i);
                     }
                 }
-//                if (data.size() > 0) {
-//                    root.removeView(listView);
-//                    ViewGroup.LayoutParams params = listView.getLayoutParams();
-//                    params.width = Utils.Dp2Px(FloatPanelService.this, 240);
-//                    listView.setLayoutParams(params);
-//                    root.addView(listView, 0);
-//                }
-                listView.setVisibility(View.VISIBLE);
+//                listView.setVisibility(View.VISIBLE);
                 adapter.notifyDataSetChanged();
                 listView.scheduleLayoutAnimation();
             }
@@ -481,11 +475,7 @@ public class FloatPanelService extends Service {
 
     @Override
     public void onDestroy() {
-        observer.unregisterVolumeReceiver();
-        unregisterReceiver(updatePreferenceReceiver);
-        unregisterReceiver(trigger);
-        unregisterReceiver(discharger);
-        unregisterReceiver(homeKeyEventBroadCastReceiver);
+        unregisterReceivers();
         killKeyListener();
         super.onDestroy();
     }
@@ -552,21 +542,29 @@ public class FloatPanelService extends Service {
         return builder.build();
     }
 
-    public void registReceivers() {
-        IntentFilter ifil = new IntentFilter();
-        ifil.addAction(Constants.BROADCAST_ACTION_UPDATE_PREFERENCES);
+    private void registerReceivers() {
+        IntentFilter update_fil = new IntentFilter();
+        update_fil.addAction(Constants.BROADCAST_ACTION_UPDATE_PREFERENCES);
         updatePreferenceReceiver = new UpdatePreferenceReceiver();
-        registerReceiver(updatePreferenceReceiver, ifil);
+        registerReceiver(updatePreferenceReceiver, update_fil);
         IntentFilter tr_fil = new IntentFilter();
         tr_fil.addAction(AHQ_FLOAT_TRIGGER_ACTION);
         trigger = new FloatWindowTrigger();
         registerReceiver(trigger, tr_fil);
         IntentFilter dis_fil = new IntentFilter();
-        tr_fil.addAction(AHQ_FLOAT_DISCHAGE_ACTION);
-        discharger = new FloatWindowDischarger();
-        registerReceiver(discharger, dis_fil);
+        tr_fil.addAction(AHQ_FLOAT_DISCHARGE_ACTION);
+        discharge = new FloatWindowDischarger();
+        registerReceiver(discharge, dis_fil);
         homeKeyEventBroadCastReceiver = new HomeKeyEventBroadCastReceiver();
         registerReceiver(homeKeyEventBroadCastReceiver, new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+    }
+
+    private void unregisterReceivers() {
+        observer.unregisterVolumeReceiver();
+        unregisterReceiver(updatePreferenceReceiver);
+        unregisterReceiver(trigger);
+        unregisterReceiver(discharge);
+        unregisterReceiver(homeKeyEventBroadCastReceiver);
     }
 
     class UpdatePreferenceReceiver extends BroadcastReceiver {
@@ -586,6 +584,7 @@ public class FloatPanelService extends Service {
         }
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
     class FloatWindowDischarger extends BroadcastReceiver {
 
         @Override
@@ -602,6 +601,7 @@ public class FloatPanelService extends Service {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
+            assert action != null;
             if (action.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)) {
                 String reason = intent.getStringExtra(SYSTEM_REASON);
                 if (reason != null) {

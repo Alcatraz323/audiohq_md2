@@ -18,20 +18,12 @@ public class AudioHQApis {
                                   float prog_right,
                                   boolean split_control,
                                   boolean isweakkey) {
-        if (CheckUtils.checkAndWarnMismatch()) {
-            Panels.getNotInstalledPanel(context).show();
-        } else {
-            new Thread(() -> AudioHQRaw.setProfile(process_name, prog_general, prog_left, prog_right, split_control, isweakkey)).start();
-        }
+        new Thread(() -> AudioHQRaw.setProfile(process_name, prog_general, prog_left, prog_right, split_control, isweakkey)).start();
     }
 
     public static void unsetProfile(Context context, String process_name,
                                     boolean isweakkey) {
-        if (CheckUtils.checkAndWarnMismatch()) {
-            Panels.getNotInstalledPanel(context).show();
-        } else {
-            AudioHQRaw.unsetProfile(process_name, isweakkey);
-        }
+        AudioHQRaw.unsetProfile(process_name, isweakkey);
     }
 
     public static void getSwitches(Context context, AudioHQNativeInterface<SwitchConfigurations> nativeInterface) {
@@ -50,29 +42,20 @@ public class AudioHQApis {
     }
 
     public static void getAllPlayingClient(Context context, AudioHQNativeInterface<PlayingData> nativeInterface) {
-        if (CheckUtils.checkAndWarnMismatch()) {
-            Panels.getNotInstalledPanel(context).show();
-            nativeInterface.onFailure("Installation failure!");
-        } else {
             ShellUtils.CommandResult result = AudioHQRaw.getAllPlayingClients();
-            nativeInterface.onSuccess(Utils.json2Object(result.responseMsg, PlayingData.class));
-        }
+            try {
+                nativeInterface.onSuccess(Utils.json2Object(result.responseMsg, PlayingData.class));
+            }catch (Exception e){
+                nativeInterface.onFailure("Installation failure!");
+            }
     }
 
     public static void clearAllSetting(Context context) {
-        if (CheckUtils.checkAndWarnMismatch()) {
-            Panels.getNotInstalledPanel(context).show();
-        } else {
-            AudioHQRaw.clearAllNativeSettings();
-        }
+        AudioHQRaw.clearAllNativeSettings();
     }
 
     public static void setDefaultSilentState(Context context, boolean defs) {
-        if (CheckUtils.checkAndWarnMismatch()) {
-            Panels.getNotInstalledPanel(context).show();
-        } else {
-            AudioHQRaw.setDefaultSilentState(defs);
-        }
+        AudioHQRaw.setDefaultSilentState(defs);
     }
 
     @Deprecated
@@ -85,19 +68,11 @@ public class AudioHQApis {
     }
 
     public static void muteProcess(Context context, String process, boolean isweakkey) {
-        if (CheckUtils.checkAndWarnMismatch()) {
-            Panels.getNotInstalledPanel(context).show();
-        } else {
-            AudioHQRaw.muteProcess(process, isweakkey);
-        }
+        AudioHQRaw.muteProcess(process, isweakkey);
     }
 
     public static void unmuteProcess(Context context, String process, boolean isweakkey) {
-        if (CheckUtils.checkAndWarnMismatch()) {
-            Panels.getNotInstalledPanel(context).show();
-        } else {
-            AudioHQRaw.unmuteProcess(process, isweakkey);
-        }
+        AudioHQRaw.unmuteProcess(process, isweakkey);
     }
 
     public static void startNativeService(Context context) {
@@ -126,7 +101,7 @@ public class AudioHQApis {
             ShellUtils.CommandResult result = AudioHQRaw.getProfile(process, isweakkey);
             String[] process_0 = result.responseMsg.split(",");
             StringProfile profile = new StringProfile();
-            if(!result.responseMsg.equals("__NO_PROFILE")) {
+            if (!result.responseMsg.equals("__NO_PROFILE")) {
                 profile.setRaw(result.responseMsg);
                 profile.setLeft(Float.parseFloat(process_0[0]));
                 profile.setRight(Float.parseFloat(process_0[1]));
@@ -158,14 +133,10 @@ public class AudioHQApis {
                                          float prog_left,
                                          float prog_right,
                                          boolean split_control) {
-        if (CheckUtils.checkAndWarnMismatch()) {
-            Panels.getNotInstalledPanel(context).show();
-        } else {
-            AudioHQRaw.setDefaultProfile(prog_general, prog_left, prog_right, split_control);
-        }
+        AudioHQRaw.setDefaultProfile(prog_general, prog_left, prog_right, split_control);
     }
 
-    public static void listProfiles(Context context, AudioHQNativeInterface<ListProfiles> nativeInterface){
+    public static void listProfiles(Context context, AudioHQNativeInterface<ListProfiles> nativeInterface) {
         if (CheckUtils.checkAndWarnMismatch()) {
             Panels.getNotInstalledPanel(context).show();
             nativeInterface.onFailure("Installation failure!");
@@ -175,7 +146,7 @@ public class AudioHQApis {
         }
     }
 
-    public static void listMuted(Context context, AudioHQNativeInterface<ListMuted> nativeInterface){
+    public static void listMuted(Context context, AudioHQNativeInterface<ListMuted> nativeInterface) {
         if (CheckUtils.checkAndWarnMismatch()) {
             //Panels.getNotInstalledPanel(context).show();
             nativeInterface.onFailure("Installation failure!");
@@ -185,7 +156,7 @@ public class AudioHQApis {
         }
     }
 
-    public static void getAudioHQNativeInfo(Context context, AudioHQNativeInterface<String[]> nativeInterface){
+    public static void getAudioHQNativeInfo(Context context, AudioHQNativeInterface<String[]> nativeInterface) {
         if (CheckUtils.checkAndWarnMismatch()) {
             Panels.getNotInstalledPanel(context).show();
             nativeInterface.onFailure("Installation failure!");

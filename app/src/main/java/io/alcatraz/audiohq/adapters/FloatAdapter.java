@@ -1,7 +1,6 @@
 package io.alcatraz.audiohq.adapters;
 
 import android.annotation.SuppressLint;
-import android.app.Service;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
@@ -14,7 +13,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -25,12 +23,13 @@ import io.alcatraz.audiohq.Constants;
 import io.alcatraz.audiohq.R;
 import io.alcatraz.audiohq.beans.playing.Pkgs;
 import io.alcatraz.audiohq.core.utils.AudioHQApis;
+import io.alcatraz.audiohq.services.FloatPanelService;
 import io.alcatraz.audiohq.utils.PackageCtlUtils;
 import io.alcatraz.audiohq.utils.Utils;
 
 public class FloatAdapter extends BaseAdapter {
     private List<Pkgs> data;
-    private Service context;
+    private FloatPanelService service;
     private LayoutInflater inflater;
 
     private Handler cleaner;
@@ -52,11 +51,11 @@ public class FloatAdapter extends BaseAdapter {
 
     private int delayed = 3000;
 
-    public FloatAdapter(Service context, List<Pkgs> data, Handler cleaner, Runnable cleanTask, ListView parent) {
+    public FloatAdapter(FloatPanelService service, List<Pkgs> data, Handler cleaner, Runnable cleanTask, ListView parent) {
         this.data = data;
-        this.context = context;
+        this.service = service;
         this.parent = parent;
-        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater = (LayoutInflater) service.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.cleaner = cleaner;
         this.cleanTask = cleanTask;
     }
@@ -87,9 +86,8 @@ public class FloatAdapter extends BaseAdapter {
 
         ImageView aplc_icon = view.findViewById(R.id.float_list_item_icon);
         TextView aplc_label = view.findViewById(R.id.float_list_item_label);
-        SeekBar seekBar = view.findViewById(R.id.float_list_item_general_seek);
         CardView cardView = view.findViewById(R.id.float_list_item_card);
-        LinearLayout back_tint = view.findViewById(R.id.float_item_back_tint);
+        FrameLayout back_tint = view.findViewById(R.id.float_item_back_tint);
 
         FrameLayout pin = view.findViewById(R.id.float_list_item_pin);
         ImageView pinImage = view.findViewById(R.id.float_list_item_pin_image);
@@ -109,13 +107,15 @@ public class FloatAdapter extends BaseAdapter {
                         ViewGroup.LayoutParams params = full_seek_indicator.getLayoutParams();
                         params.width = (int) (event.getX() - full_seek_indicator.getX());
                         full_seek_indicator.setLayoutParams(params);
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                AudioHQApis.setProfile(context, pkgs.getPkg(), params.width / v.getWidth() * 0.0001f, (float) pkgs.getLeft(),
-                                        (float) pkgs.getRight(), true, true);
-                            }
-                        }).start();
+
+                        float ratio = (event.getX() - full_seek_indicator.getX()) / back_tint.getWidth();
+                        if(ratio < 0){
+                            ratio = 0.0f;
+                        }else if(ratio > 1) {
+                            ratio = 1.0f;
+                        }
+                        AudioHQApis.setProfile(service, pkgs.getPkg(), ratio, (float) pkgs.getLeft(),
+                                (float) pkgs.getRight(), true, true);
 
                         break;
                     case MotionEvent.ACTION_UP:
@@ -126,6 +126,17 @@ public class FloatAdapter extends BaseAdapter {
             }
         });
 
+        full_seek_indicator.post(new Runnable() {
+            @Override
+            public void run() {
+                ViewGroup.LayoutParams params = full_seek_indicator.getLayoutParams();
+                params.width = (int) (service.DP_240 * pkgs.getGeneral());
+                full_seek_indicator.setLayoutParams(params);
+            }
+        });
+
+        full_seek_indicator.setBackgroundColor(AudioHQApplication.color);
+
         if (pkgs.isSticky()) {
             Utils.setImageWithTint(pinImage, R.drawable.ic_pin, AudioHQApplication.color);
         } else {
@@ -135,7 +146,7 @@ public class FloatAdapter extends BaseAdapter {
         pin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AudioHQApplication application = (AudioHQApplication) context.getApplication();
+                AudioHQApplication application = (AudioHQApplication) service.getApplication();
                 if (pkgs.isSticky()) {
                     application.getPlayingSystem().removeStickyApp(pkgs.getPkg());
                     pinImage.setImageResource(R.drawable.ic_pin_off);
@@ -152,31 +163,8 @@ public class FloatAdapter extends BaseAdapter {
         back_tint.setBackgroundColor(getCardBackground());
 
         aplc_label.setTextColor(getFontColor());
-        aplc_icon.setImageDrawable(PackageCtlUtils.getIcon(context, pkgs.getPkg()));
-        aplc_label.setText(PackageCtlUtils.getLabel(context, pkgs.getPkg()));
-
-        seekBar.setProgress((int) (pkgs.getGeneral() * 10000));
-        Utils.setSeekBarColor(seekBar, getCardSeekBarColor());
-
-//        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-//                if (b) {
-//                    AudioHQApis.setProfile(context, pkgs.getPkg(), i * 0.0001f, (float) pkgs.getLeft(),
-//                            (float) pkgs.getRight(), true, true);
-//                }
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//                cleaner.removeCallbacks(cleanTask);
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//                cleaner.postDelayed(cleanTask, delayed);
-//            }
-//        });
+        aplc_icon.setImageDrawable(PackageCtlUtils.getIcon(service, pkgs.getPkg()));
+        aplc_label.setText(PackageCtlUtils.getLabel(service, pkgs.getPkg()));
 
         return view;
     }
