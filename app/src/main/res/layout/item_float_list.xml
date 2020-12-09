@@ -12,6 +12,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="4dp"
+        android:stateListAnimator="@animator/raise"
         app:cardElevation="2dp"
         app:cardMaxElevation="4dp"
         app:cardPreventCornerOverlap="true"
@@ -103,11 +104,9 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/float_list_full_seek_listener"
+                    android:id="@+id/float_list_item_full_seek_listener"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
                     android:orientation="horizontal" />
             </FrameLayout>
 

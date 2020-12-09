@@ -219,7 +219,7 @@ public class FloatPanelService extends Service {
         listView = root.findViewById(R.id.audiohq_float_list);
         toggle = root.findViewById(R.id.audiohq_float_trigger);
         toggle_icon = root.findViewById(R.id.audiohq_float_toggle_icon);
-        adapter = new FloatAdapter(this, data, handler, cleaner);
+        adapter = new FloatAdapter(this, data, handler, cleaner, listView);
 
         if (gravity.equals("start_top")) {
 //            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) toggle.getLayoutParams();
