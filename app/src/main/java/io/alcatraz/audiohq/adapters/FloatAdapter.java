@@ -75,7 +75,7 @@ public class FloatAdapter extends BaseAdapter {
         return i;
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint({"ClickableViewAccessibility", "SetTextI18n"})
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (view == null) {
@@ -83,6 +83,7 @@ public class FloatAdapter extends BaseAdapter {
         }
         //Current Data Node
         Pkgs pkgs = data.get(i);
+        String label = PackageCtlUtils.getLabel(service, pkgs.getPkg());
 
         ImageView aplc_icon = view.findViewById(R.id.float_list_item_icon);
         TextView aplc_label = view.findViewById(R.id.float_list_item_label);
@@ -109,11 +110,13 @@ public class FloatAdapter extends BaseAdapter {
                         full_seek_indicator.setLayoutParams(params);
 
                         float ratio = (event.getX() - full_seek_indicator.getX()) / back_tint.getWidth();
-                        if(ratio < 0){
+                        if (ratio < 0) {
                             ratio = 0.0f;
-                        }else if(ratio > 1) {
+                        } else if (ratio > 1) {
                             ratio = 1.0f;
                         }
+                        aplc_label.setText("(" + (int) (ratio * 100) + "%)" + label);
+
                         AudioHQApis.setProfile(service, pkgs.getPkg(), ratio, (float) pkgs.getLeft(),
                                 (float) pkgs.getRight(), true, true);
 
@@ -161,7 +164,7 @@ public class FloatAdapter extends BaseAdapter {
 
         aplc_label.setTextColor(getFontColor());
         aplc_icon.setImageDrawable(PackageCtlUtils.getIcon(service, pkgs.getPkg()));
-        aplc_label.setText(PackageCtlUtils.getLabel(service, pkgs.getPkg()));
+        aplc_label.setText("(" + (int) (pkgs.getGeneral() * 100) + "%)" + label);
 
         return view;
     }

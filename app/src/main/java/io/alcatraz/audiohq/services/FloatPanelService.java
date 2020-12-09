@@ -20,6 +20,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -27,6 +28,7 @@ import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -220,16 +222,16 @@ public class FloatPanelService extends Service {
         adapter = new FloatAdapter(this, data, handler, cleaner, listView);
 
         if (gravity.equals("start_top")) {
-//            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) toggle.getLayoutParams();
-//            lp.setMarginStart(Utils.Dp2Px(this, Integer.parseInt(side_margin)));
-//            toggle.setLayoutParams(lp);
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) toggle.getLayoutParams();
+            lp.setMarginStart(Utils.Dp2Px(this, Integer.parseInt(side_margin)));
+            toggle.setLayoutParams(lp);
             slide_in_animation = AnimationUtils.loadAnimation(this, R.anim.slide_left);
             slide_out_animation = AnimationUtils.loadAnimation(this, R.anim.slide_left_back);
             list_side_out_anim = AnimationUtils.loadAnimation(this, R.anim.slide_left_back);
         } else if (gravity.equals("end_top")) {
-//            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) toggle.getLayoutParams();
-//            lp.setMarginEnd(Utils.Dp2Px(this, Integer.parseInt(side_margin)));
-//            toggle.setLayoutParams(lp);
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) toggle.getLayoutParams();
+            lp.setMarginEnd(Utils.Dp2Px(this, Integer.parseInt(side_margin)));
+            toggle.setLayoutParams(lp);
             slide_in_animation = AnimationUtils.loadAnimation(this, R.anim.slide_right);
             slide_out_animation = AnimationUtils.loadAnimation(this, R.anim.slide_right_back);
             list_side_out_anim = AnimationUtils.loadAnimation(this, R.anim.slide_right_back);
