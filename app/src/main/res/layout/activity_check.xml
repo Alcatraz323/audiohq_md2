@@ -57,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:title="@string/check_daemon_status"
                 app:titleTextColor="#FFFFFF" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>

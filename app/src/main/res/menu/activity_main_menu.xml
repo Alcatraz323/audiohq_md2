@@ -9,7 +9,7 @@
         android:id="@+id/item3"
         android:icon="@drawable/ic_refresh_black_24dp"
         android:title="@string/main_menu_5"
-        android:iconTint="#ffffff"
+        android:iconTint="#9F9F9F"
         android:showAsAction="always" />
 
     <item

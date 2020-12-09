@@ -113,6 +113,7 @@ public class CheckActivity extends CompatWithPipeActivity {
             @Override
             public void onFailure(String reason) {
                 appBarLayout.setBackgroundColor(getColor(R.color.base_gray_tint));
+                collapsingToolbarLayout.setContentScrimColor(getColor(R.color.base_gray_tint));
                 StatusBarUtil.setColor(CheckActivity.this, getColor(R.color.base_gray_tint), 0);
                 indicator.setText(R.string.check_daemon_status_dead);
                 indicator_image.setImageResource(R.drawable.ic_close);
