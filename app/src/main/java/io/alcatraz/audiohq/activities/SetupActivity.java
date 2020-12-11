@@ -223,13 +223,13 @@ public class SetupActivity extends SetupWizardBaseActivity {
         }
         api_check_state.setText("Api:" + Build.VERSION.SDK_INT +
                 "(" + Utils.extractStringArr(CheckUtils.getSupportArch()) + ")");
-        AnimateUtils.playstart(api_check, () -> {
+        AnimateUtils.playStart(api_check, () -> {
         });
 
         endPending();
 
         if (!can_go_next) {
-            AnimateUtils.playstart(requirements_not_meet, () -> {
+            AnimateUtils.playStart(requirements_not_meet, () -> {
             });
             restoreState();
             banNextStep();

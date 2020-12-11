@@ -2,8 +2,6 @@ package io.alcatraz.audiohq.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -158,7 +156,7 @@ public class MainActivity extends CompatWithPipeActivity implements View.OnClick
     private void showStatusLayerAnim() {
         if (status_overlay.getVisibility() == View.GONE) {
             status_overlay.setVisibility(View.VISIBLE);
-            status_overlay.post(() -> AnimateUtils.playstart(status_overlay, () -> {
+            status_overlay.post(() -> AnimateUtils.playStart(status_overlay, () -> {
             }));
         }
     }

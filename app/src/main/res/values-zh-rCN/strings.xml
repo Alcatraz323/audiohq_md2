@@ -123,6 +123,7 @@
     <string name="panel_control_mute">将此程序静音</string>
     <string name="panel_control_tips_title">提示</string>
     <string name="panel_control_tips_message">下方的修改将作为因子参与应用程序音量计算,且声道音量将会根据主音量生效</string>
+    <string name="panel_control_operation">操作: </string>
 
     <string name="playing_filter">只显示已激活进程</string>
     <string name="playing_why_no_title">有些应用不出现在列表/悬浮窗？</string>

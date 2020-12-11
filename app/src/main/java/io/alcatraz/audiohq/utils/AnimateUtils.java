@@ -10,22 +10,26 @@ import android.view.animation.AnimationSet;
 import android.widget.TextView;
 
 public class AnimateUtils {
-    public static void playstart(final View v, SimpleAnimateInterface animateInterface) {
-        v.setVisibility(View.VISIBLE);
-        Animator a = ViewAnimationUtils.createCircularReveal(v, (int) v.getX(), (int) v.getY(), 0, (float) Math.hypot((double) v.getWidth(), (double) v.getHeight()));
+    public static void playStart(View view, SimpleAnimateInterface animateInterface) {
+        playStart(view, (int) view.getX(), (int) view.getY(), 660, animateInterface);
+    }
+
+    public static void playStart(final View view, int x, int y, int duration, SimpleAnimateInterface animateInterface) {
+        view.setVisibility(View.VISIBLE);
+        Animator a = ViewAnimationUtils.createCircularReveal(view, x, y, 0, (float) Math.hypot((double) view.getWidth(), (double) view.getHeight()));
         a.setInterpolator(new AccelerateInterpolator());
-        a.setDuration(600);
+        a.setDuration(duration);
         a.start();
         a.addListener(new Animator.AnimatorListener() {
 
             @Override
             public void onAnimationStart(Animator p1) {
-                v.setVisibility(View.VISIBLE);
+                view.setVisibility(View.VISIBLE);
                 AnimationSet as = new AnimationSet(true);
                 AlphaAnimation aa = new AlphaAnimation(0, 1);
-                aa.setDuration(700);
+                aa.setDuration(duration + 40);
                 as.addAnimation(aa);
-                v.startAnimation(as);
+                view.startAnimation(as);
                 as.setAnimationListener(new Animation.AnimationListener() {
 
                     @Override
@@ -46,7 +50,7 @@ public class AnimateUtils {
 
             @Override
             public void onAnimationEnd(Animator p1) {
-                v.setVisibility(View.VISIBLE);
+                view.setVisibility(View.VISIBLE);
                 animateInterface.onEnd();
             }
 

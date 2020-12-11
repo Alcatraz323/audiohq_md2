@@ -18,91 +18,158 @@
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="false">
 
-            <FrameLayout
-                android:id="@+id/float_item_back_tint"
+        <FrameLayout
+            android:id="@+id/float_item_back_tint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/float_list_item_full_seekbar_indicator"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:background="@color/colorAccent"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:descendantFocusability="blocksDescendants"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <io.alcatraz.audiohq.extended.LongClickOverrideFrameLayout
+                    android:id="@+id/float_list_item_pin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:paddingStart="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="8dp">
+
+                    <ImageView
+                        android:id="@+id/float_list_item_icon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:srcCompat="@mipmap/ic_launcher" />
+
+                    <ImageView
+                        android:id="@+id/float_list_item_pin_image"
+                        android:layout_width="15dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="bottom|end"
+                        android:src="@drawable/ic_pin"
+                        app:srcCompat="@drawable/ic_pin" />
+
+                </io.alcatraz.audiohq.extended.LongClickOverrideFrameLayout>
 
                 <LinearLayout
-                    android:id="@+id/float_list_item_full_seekbar_indicator"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="6.5"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/float_list_item_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="4dp"
+                        android:maxLines="1"
+                        android:textAllCaps="false"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch" />
+
+                    <!--                        <SeekBar-->
+                    <!--                            android:id="@+id/float_list_item_general_seek"-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:clickable="false"-->
+                    <!--                            android:focusable="false"-->
+                    <!--                            android:max="10000"-->
+                    <!--                            android:progress="10000"-->
+                    <!--                            android:visibility="gone" />-->
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/float_list_item_card_overlay_options"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"
+                app:cardBackgroundColor="@color/pink_colorPrimary"
+                app:cardElevation="4dp"
+                app:cardMaxElevation="4dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="false">
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:alpha="0.2"
-                    android:background="@color/colorAccent"
-                    android:orientation="horizontal" />
+                    android:gravity="center_vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:descendantFocusability="blocksDescendants"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:baselineAligned="false">
+                    <io.alcatraz.audiohq.extended.ClickOverrideImageButton
+                        android:id="@+id/float_list_item_card_overlay_options_back"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_centerVertical="true"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:scaleX="0.8"
+                        android:scaleY="0.8"
+                        android:src="@drawable/arrow_left"
+                        android:tint="#FFFFFF" />
 
-                    <FrameLayout
-                        android:id="@+id/float_list_item_pin"
+                    <TextView
+                        android:id="@+id/float_list_item_card_overlay_options_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:paddingStart="16dp"
-                        android:paddingTop="16dp"
-                        android:paddingBottom="8dp">
-
-                        <ImageView
-                            android:id="@+id/float_list_item_icon"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_marginBottom="8dp"
-                            app:srcCompat="@mipmap/ic_launcher" />
-
-                        <ImageView
-                            android:id="@+id/float_list_item_pin_image"
-                            android:layout_width="15dp"
-                            android:layout_height="14dp"
-                            android:layout_gravity="bottom|end"
-                            android:src="@drawable/ic_pin"
-                            app:srcCompat="@drawable/ic_pin" />
-
-                    </FrameLayout>
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:layout_toEndOf="@id/float_list_item_card_overlay_options_back"
+                        android:text="@string/panel_control_operation"
+                        android:textAllCaps="false"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"
+                        android:textColor="#FFFFFF" />
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="6.5"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="end"
+                        android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/float_list_item_label"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginBottom="4dp"
-                            android:maxLines="1"
-                            android:textAllCaps="false"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch" />
+                        <ImageButton
+                            android:id="@+id/float_list_item_card_overlay_options_operation_mute"
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="48dp"
+                            android:layout_height="match_parent"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:scaleX="0.8"
+                            android:scaleY="0.8"
+                            android:src="@drawable/ic_volume_off_black_24dp"
+                            android:tint="#FFFFFF" />
 
-<!--                        <SeekBar-->
-<!--                            android:id="@+id/float_list_item_general_seek"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:clickable="false"-->
-<!--                            android:focusable="false"-->
-<!--                            android:max="10000"-->
-<!--                            android:progress="10000"-->
-<!--                            android:visibility="gone" />-->
-
+                        <ImageButton
+                            android:id="@+id/float_list_item_card_overlay_options_opreation_ignore"
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="48dp"
+                            android:layout_height="match_parent"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:scaleX="0.8"
+                            android:scaleY="0.8"
+                            android:src="@drawable/layers_off"
+                            android:tint="#FFFFFF" />
                     </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/float_list_item_full_seek_listener"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal" />
-            </FrameLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </FrameLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

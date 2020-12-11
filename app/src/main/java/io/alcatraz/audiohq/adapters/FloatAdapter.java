@@ -18,12 +18,15 @@ import android.widget.TextView;
 import java.util.List;
 
 import androidx.cardview.widget.CardView;
+
 import io.alcatraz.audiohq.AudioHQApplication;
 import io.alcatraz.audiohq.Constants;
 import io.alcatraz.audiohq.R;
 import io.alcatraz.audiohq.beans.playing.Pkgs;
 import io.alcatraz.audiohq.core.utils.AudioHQApis;
+import io.alcatraz.audiohq.extended.LongClickOverrideFrameLayout;
 import io.alcatraz.audiohq.services.FloatPanelService;
+import io.alcatraz.audiohq.utils.AnimateUtils;
 import io.alcatraz.audiohq.utils.PackageCtlUtils;
 import io.alcatraz.audiohq.utils.Utils;
 
@@ -90,13 +93,13 @@ public class FloatAdapter extends BaseAdapter {
         CardView cardView = view.findViewById(R.id.float_list_item_card);
         FrameLayout back_tint = view.findViewById(R.id.float_item_back_tint);
 
-        FrameLayout pin = view.findViewById(R.id.float_list_item_pin);
+        LongClickOverrideFrameLayout pin = view.findViewById(R.id.float_list_item_pin);
         ImageView pinImage = view.findViewById(R.id.float_list_item_pin_image);
 
         LinearLayout full_seek_indicator = view.findViewById(R.id.float_list_item_full_seekbar_indicator);
-        LinearLayout full_seek_listener = view.findViewById(R.id.float_list_item_full_seek_listener);
+        CardView options_overlay = view.findViewById(R.id.float_list_item_card_overlay_options);
 
-        full_seek_listener.setOnTouchListener(new View.OnTouchListener() {
+        back_tint.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
@@ -156,6 +159,23 @@ public class FloatAdapter extends BaseAdapter {
                 application.getPlayingSystem().addStickyApp(pkgs.getPkg());
                 Utils.setImageWithTint(pinImage, R.drawable.ic_pin, AudioHQApplication.color);
                 pkgs.setSticky(true);
+            }
+        });
+
+        pin.setLongClickListener(new LongClickOverrideFrameLayout.LongClickListener() {
+            @Override
+            public boolean onLongClick(LongClickOverrideFrameLayout view, int x, int y) {
+                cleaner.removeCallbacks(cleanTask);
+                cleaner.postDelayed(cleanTask, delayed + 300);
+                options_overlay.setVisibility(View.VISIBLE);
+                options_overlay.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        AnimateUtils.playStart(options_overlay, x, y, 480, () -> {
+                        });
+                    }
+                });
+                return false;
             }
         });
 
