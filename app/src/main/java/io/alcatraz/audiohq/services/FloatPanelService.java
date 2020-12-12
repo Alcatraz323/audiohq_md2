@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -423,6 +424,11 @@ public class FloatPanelService extends Service {
                     case MotionEvent.ACTION_DOWN:
                     case MotionEvent.ACTION_MOVE:
                         handler.removeCallbacks(cleaner);
+                        if(data.size() == 0) {
+                            handler.removeCallbacks(cleaner);
+                            toggle.startAnimation(slide_out_animation);
+                            root.setOnTouchListener(null);
+                        }
                         break;
                     case MotionEvent.ACTION_UP:
                         handler.postDelayed(cleaner, dismiss_mills);
@@ -468,6 +474,7 @@ public class FloatPanelService extends Service {
         super.onDestroy();
     }
 
+    @SuppressWarnings("ConstantConditions")
     private void loadPreference() {
         SharedPreferenceUtil spf = SharedPreferenceUtil.getInstance();
         gravity = (String) spf.get(this, Constants.PREF_FLOAT_WINDOW_GRAVITY,
