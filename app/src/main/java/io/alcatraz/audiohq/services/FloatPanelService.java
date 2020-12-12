@@ -37,6 +37,7 @@ import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+
 import io.alcatraz.audiohq.AudioHQApplication;
 import io.alcatraz.audiohq.Constants;
 import io.alcatraz.audiohq.R;
@@ -58,7 +59,7 @@ public class FloatPanelService extends Service {
     FloatWindowTrigger trigger;
     FloatWindowDischarger discharge;
     HomeKeyEventBroadCastReceiver homeKeyEventBroadCastReceiver;
-    private String notificationId = "audiohq_floater";
+    private final String notificationId = "audiohq_floater";
 
     //Controllers
     WindowManager windowManager;
@@ -107,7 +108,6 @@ public class FloatPanelService extends Service {
     boolean direct_react;
     boolean no_empty_window;
     boolean default_expanded_panel;
-    List<String> filter = new ArrayList<>();
 
     Runnable cleaner = new Runnable() {
         @Override
@@ -275,8 +275,6 @@ public class FloatPanelService extends Service {
             @Override
             public void onAnimationEnd(Animation animation) {
                 clearList();
-                ;
-//                listView.setVisibility(View.GONE);
             }
 
             @Override
@@ -389,18 +387,10 @@ public class FloatPanelService extends Service {
     private void showFloatingWindow() {
         if (Settings.canDrawOverlays(this)) {
             if (no_empty_window) {
-                playingSystem.update(new AudioHQNativeInterface<PlayingSystem>() {
+                playingSystem.update(true,new AudioHQNativeInterface<PlayingSystem>() {
                     @Override
                     public void onSuccess(PlayingSystem result) {
-                        List<Pkgs> current_result = result.getData();
-                        List<Pkgs> new_list = new ArrayList<>();
-                        for (Pkgs i : current_result) {
-                            if (!filter.contains(i.getPkg())) {
-                                new_list.add(i);
-                            }
-                        }
-
-                        if (new_list.size() > 0) {
+                        if (result.getData().size() > 0) {
                             showFloatWindow_Impl();
                         }
                     }
@@ -450,17 +440,11 @@ public class FloatPanelService extends Service {
     }
 
     public void updateList() {
-        playingSystem.update(new AudioHQNativeInterface<PlayingSystem>() {
+        playingSystem.update(true, new AudioHQNativeInterface<PlayingSystem>() {
             @Override
             public void onSuccess(PlayingSystem result) {
                 data.clear();
-                List<Pkgs> current_result = result.getData();
-                for (Pkgs i : current_result) {
-                    if (!filter.contains(i.getPkg())) {
-                        data.add(i);
-                    }
-                }
-//                listView.setVisibility(View.VISIBLE);
+                data.addAll(result.getData());
                 adapter.notifyDataSetChanged();
                 listView.scheduleLayoutAnimation();
             }
@@ -527,13 +511,6 @@ public class FloatPanelService extends Service {
         default_expanded_panel = (boolean) spf.get(this, Constants.PREF_FLOAT_DEFAULT_EXPANDED_PANEL,
                 Constants.DEFAULT_VALUE_PREF_FLOAT_DEFAULT_EXPANDED_PANEL);
         listener.setDirect_react(direct_react);
-        String filter_raw = (String) spf.get(this, Constants.PREF_FLOAT_WINDOW_FILTER,
-                Constants.DEFAULT_VALUE_PREF_FLOAT_WINDOW_FILTER);
-        if (filter_raw != null && !filter_raw.equals("")) {
-            filter.clear();
-            String[] filter_cooking = filter_raw.split(",");
-            Collections.addAll(filter, filter_cooking);
-        }
     }
 
     private Notification getNotification() {
@@ -576,6 +553,7 @@ public class FloatPanelService extends Service {
         @Override
         public void onReceive(Context context, Intent intent) {
             loadPreference();
+            cleaner.run();
             initializeWindow();
         }
     }

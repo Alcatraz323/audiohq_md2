@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -53,12 +54,14 @@ public class AppPickActivity extends CompatWithPipeActivity {
     SearchView searchView;
     ProgressBar progressBar;
 
+    Handler mainAsyncHandler;
     int pickerType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         pickerType = getIntent().getIntExtra(KEY_PICKER_TYPE, PICKER_TYPE_NULL);
+        mainAsyncHandler = new Handler();
         setContentView(R.layout.activity_profile_pick_app);
         initViews();
         toolbar.post(() -> {
@@ -173,19 +176,30 @@ public class AppPickActivity extends CompatWithPipeActivity {
         switch (pickerType) {
             case PICKER_WHITE_LIST:
                 SharedPreferenceUtil.getInstance().put(this, Constants.PREF_FLOAT_WINDOW_FILTER, pickedPackToStr());
-                sendBroadcast(new Intent().setAction(Constants.BROADCAST_ACTION_UPDATE_PREFERENCES));
+                mainAsyncHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sendBroadcast(new Intent().setAction(Constants.BROADCAST_ACTION_UPDATE_PREFERENCES));
+                        notifyPlayingStickyUpdate();
+                    }
+                },30);
                 break;
             case PICKER_TYPE_STICKY_APPS:
                 SharedPreferenceUtil.getInstance().put(this, Constants.PREF_FLOAT_STICKY_APPS, pickedPackToStr());
-                sendBroadcast(new Intent().setAction(Constants.BROADCAST_ACTION_UPDATE_PREFERENCES));
-                notifyPlayingStickyUpdate();
+                mainAsyncHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sendBroadcast(new Intent().setAction(Constants.BROADCAST_ACTION_UPDATE_PREFERENCES));
+                        notifyPlayingStickyUpdate();
+                    }
+                },30);
                 break;
         }
     }
 
     private void notifyPlayingStickyUpdate() {
         AudioHQApplication application = (AudioHQApplication) getApplication();
-        application.getPlayingSystem().updateStickyApps();
+        application.getPlayingSystem().updateSpecialAppLists();
     }
 
     private String pickedPackToStr() {

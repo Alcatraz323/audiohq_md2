@@ -15,7 +15,7 @@ import io.alcatraz.audiohq.utils.SharedPreferenceUtil;
 public class AudioHQApplication extends Application {
     private Context mContext;
     private AtomicReference<PresetSystem> mPresetSystem;
-    private AtomicReference<PlayingSystem> mPlayingSystem;
+    private PlayingSystem mPlayingSystem;
 
     public static String theme = "";
     public static int color = 0;
@@ -26,7 +26,7 @@ public class AudioHQApplication extends Application {
     public void onCreate() {
         mContext = getApplicationContext();
         mPresetSystem = new AtomicReference<>(new PresetSystem(mContext));
-        mPlayingSystem = new AtomicReference<>(new PlayingSystem(mContext, this));
+        mPlayingSystem = new PlayingSystem(mContext, this);
         mPresetSystem.get().update(new AudioHQNativeInterface<PresetSystem>() {
             @Override
             public void onSuccess(PresetSystem result) {
@@ -50,7 +50,7 @@ public class AudioHQApplication extends Application {
     }
 
     public PlayingSystem getPlayingSystem() {
-        return mPlayingSystem.get();
+        return mPlayingSystem;
     }
 
     public Context getOverallContext() {

@@ -133,7 +133,7 @@ public class PlayingGeneralActivity extends CompatWithPipeActivity {
         data.clear();
         playingRecyclerAdapter.notifyDataSetChanged();
         recyclerView.scheduleLayoutAnimation();
-        playingSystem.update(new AudioHQNativeInterface<PlayingSystem>() {
+        playingSystem.update(false, new AudioHQNativeInterface<PlayingSystem>() {
             @Override
             public void onSuccess(PlayingSystem result) {
                 data.addAll(result.getData());

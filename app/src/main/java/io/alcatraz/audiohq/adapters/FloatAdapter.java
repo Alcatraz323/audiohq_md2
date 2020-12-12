@@ -160,6 +160,12 @@ public class FloatAdapter extends BaseAdapter {
             pinImage.setImageResource(R.drawable.ic_pin_off);
         }
 
+        if (pkgs.getMuted()) {
+            options_mute.setImageResource(R.drawable.ic_volume_off_black_24dp);
+        } else {
+            options_mute.setImageResource(R.drawable.volume_high);
+        }
+
         pin.setOnClickListener(v -> {
             AudioHQApplication application = (AudioHQApplication) service.getApplication();
             if (pkgs.isSticky()) {
@@ -177,13 +183,13 @@ public class FloatAdapter extends BaseAdapter {
             @Override
             public boolean onLongClick(LongClickOverrideFrameLayout view, int x, int y) {
                 cleaner.removeCallbacks(cleanTask);
-                cleaner.postDelayed(cleanTask, delayed + 300);
                 if (options_overlay.getVisibility() == View.GONE) {
                     options_overlay.setVisibility(View.VISIBLE);
                     options_overlay.post(new Runnable() {
                         @Override
                         public void run() {
                             AnimateUtils.playStart(options_overlay, x, y, 480, () -> {
+                                cleaner.postDelayed(cleanTask, delayed + 200);
                             });
                         }
                     });
@@ -196,7 +202,7 @@ public class FloatAdapter extends BaseAdapter {
             @Override
             public boolean onClick(ClickOverrideImageButton view, int x, int y) {
                 if (options_overlay.getVisibility() == View.VISIBLE) {
-                    AnimateUtils.playEnd(options_overlay, x, y, 480);
+                    AnimateUtils.playEnd(options_overlay, x, y, 430);
                 }
                 return false;
             }
@@ -206,13 +212,15 @@ public class FloatAdapter extends BaseAdapter {
             @Override
             public boolean onClick(ClickOverrideImageButton view, int x, int y) {
                 cleaner.removeCallbacks(cleanTask);
-                cleaner.postDelayed(cleanTask, delayed + 300);
                 if (ignore_confirm.getVisibility() == View.GONE) {
                     ignore_confirm.setVisibility(View.VISIBLE);
+                    AudioHQApplication application = (AudioHQApplication) service.getApplication();
+                    application.getPlayingSystem().addIgnoredApp(pkgs.getPkg());
                     ignore_confirm.post(new Runnable() {
                         @Override
                         public void run() {
-                            AnimateUtils.playStart(ignore_confirm, back_tint.getWidth() - x - service.DP_16 / 2, y, 480, () -> {
+                            AnimateUtils.playStart(ignore_confirm, back_tint.getWidth() - x - service.DP_16 / 2, y, 430, () -> {
+                                cleaner.postDelayed(cleanTask, delayed + 200);
                             });
                         }
                     });
@@ -221,15 +229,34 @@ public class FloatAdapter extends BaseAdapter {
             }
         });
 
+        options_mute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (pkgs.getMuted()) {
+                    options_mute.setImageResource(R.drawable.volume_high);
+                    AudioHQApis.unmuteProcess(service, pkgs.getPkg(), true);
+                    pkgs.setMuted(false);
+                } else {
+                    options_mute.setImageResource(R.drawable.ic_volume_off_black_24dp);
+                    AudioHQApis.muteProcess(service, pkgs.getPkg(), true);
+                    pkgs.setMuted(true);
+                }
+            }
+        });
+
         ignore_cancel.setClickListener(new ClickOverrideImageButton.ClickListener() {
             @Override
             public boolean onClick(ClickOverrideImageButton view, int x, int y) {
                 if (options_overlay.getVisibility() == View.VISIBLE) {
+                    AudioHQApplication application = (AudioHQApplication) service.getApplication();
+                    application.getPlayingSystem().removeIgnoredApp(pkgs.getPkg());
                     AnimateUtils.playEnd(ignore_confirm, back_tint.getWidth() - x - service.DP_16 / 2, y, 480);
                 }
                 return false;
             }
         });
+
+
 
         cardView.setRadius(getCardRadius());
         back_tint.setBackgroundColor(getCardBackground());
