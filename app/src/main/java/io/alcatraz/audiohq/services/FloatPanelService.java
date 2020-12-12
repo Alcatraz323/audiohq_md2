@@ -205,8 +205,6 @@ public class FloatPanelService extends Service {
             layoutParams.gravity = Gravity.START | Gravity.TOP;
         else if (gravity.equals("end_top"))
             layoutParams.gravity = Gravity.END | Gravity.TOP;
-        layoutParams.x = Utils.Dp2Px(this, Integer.parseInt(side_margin));
-        layoutParams.y = Utils.Dp2Px(this, Integer.parseInt(margin_top));
         if (foreground_service)
             startForeground(1, getNotification());
     }
@@ -225,16 +223,10 @@ public class FloatPanelService extends Service {
         adapter = new FloatAdapter(this, data, handler, cleaner, listView);
 
         if (gravity.equals("start_top")) {
-            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) toggle.getLayoutParams();
-            lp.setMarginStart(Utils.Dp2Px(this, Integer.parseInt(side_margin)));
-            toggle.setLayoutParams(lp);
             slide_in_animation = AnimationUtils.loadAnimation(this, R.anim.slide_left);
             slide_out_animation = AnimationUtils.loadAnimation(this, R.anim.slide_left_back);
             list_side_out_anim = AnimationUtils.loadAnimation(this, R.anim.slide_left_back);
         } else if (gravity.equals("end_top")) {
-            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) toggle.getLayoutParams();
-            lp.setMarginEnd(Utils.Dp2Px(this, Integer.parseInt(side_margin)));
-            toggle.setLayoutParams(lp);
             slide_in_animation = AnimationUtils.loadAnimation(this, R.anim.slide_right);
             slide_out_animation = AnimationUtils.loadAnimation(this, R.anim.slide_right_back);
             list_side_out_anim = AnimationUtils.loadAnimation(this, R.anim.slide_right_back);
@@ -364,10 +356,22 @@ public class FloatPanelService extends Service {
 
         if (ori == Configuration.ORIENTATION_LANDSCAPE) {
             layoutParams.y = Utils.Dp2Px(this, Integer.parseInt(margin_top_landscape));
-            layoutParams.x = Utils.Dp2Px(this, Integer.parseInt(side_margin_landscape));
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) toggle.getLayoutParams();
+            if (gravity.equals("start_top")) {
+                lp.setMarginStart(Utils.Dp2Px(this, Integer.parseInt(side_margin_landscape)));
+            } else if (gravity.equals("end_top")) {
+                lp.setMarginEnd(Utils.Dp2Px(this, Integer.parseInt(side_margin_landscape)));
+            }
+            toggle.setLayoutParams(lp);
         } else {
             layoutParams.y = Utils.Dp2Px(this, Integer.parseInt(margin_top));
-            layoutParams.x = Utils.Dp2Px(this, Integer.parseInt(side_margin));
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) toggle.getLayoutParams();
+            if (gravity.equals("start_top")) {
+                lp.setMarginStart(Utils.Dp2Px(this, Integer.parseInt(side_margin)));
+            } else if (gravity.equals("end_top")) {
+                lp.setMarginEnd(Utils.Dp2Px(this, Integer.parseInt(side_margin)));
+            }
+            toggle.setLayoutParams(lp);
         }
         switch (mConfiguration.uiMode & Configuration.UI_MODE_NIGHT_MASK) {
             case Configuration.UI_MODE_NIGHT_YES:

@@ -202,6 +202,7 @@ public class FloatAdapter extends BaseAdapter {
             @Override
             public boolean onClick(ClickOverrideImageButton view, int x, int y) {
                 if (options_overlay.getVisibility() == View.VISIBLE) {
+                    resetTimer();
                     AnimateUtils.playEnd(options_overlay, x, y, 430);
                 }
                 return false;
@@ -232,6 +233,7 @@ public class FloatAdapter extends BaseAdapter {
         options_mute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                resetTimer();
                 if (pkgs.getMuted()) {
                     options_mute.setImageResource(R.drawable.volume_high);
                     AudioHQApis.unmuteProcess(service, pkgs.getPkg(), true);
@@ -248,6 +250,7 @@ public class FloatAdapter extends BaseAdapter {
             @Override
             public boolean onClick(ClickOverrideImageButton view, int x, int y) {
                 if (options_overlay.getVisibility() == View.VISIBLE) {
+                    resetTimer();
                     AudioHQApplication application = (AudioHQApplication) service.getApplication();
                     application.getPlayingSystem().removeIgnoredApp(pkgs.getPkg());
                     AnimateUtils.playEnd(ignore_confirm, back_tint.getWidth() - x - service.DP_16 / 2, y, 480);
@@ -266,6 +269,11 @@ public class FloatAdapter extends BaseAdapter {
         aplc_label.setText("(" + (int) (pkgs.getGeneral() * 100) + "%)" + label);
 
         return view;
+    }
+
+    public void resetTimer() {
+        cleaner.removeCallbacks(cleanTask);
+        cleaner.postDelayed(cleanTask, delayed);
     }
 
     public int getFontColor() {
