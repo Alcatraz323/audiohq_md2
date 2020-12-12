@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -24,6 +25,7 @@ import io.alcatraz.audiohq.Constants;
 import io.alcatraz.audiohq.R;
 import io.alcatraz.audiohq.beans.playing.Pkgs;
 import io.alcatraz.audiohq.core.utils.AudioHQApis;
+import io.alcatraz.audiohq.extended.ClickOverrideImageButton;
 import io.alcatraz.audiohq.extended.LongClickOverrideFrameLayout;
 import io.alcatraz.audiohq.services.FloatPanelService;
 import io.alcatraz.audiohq.utils.AnimateUtils;
@@ -98,35 +100,44 @@ public class FloatAdapter extends BaseAdapter {
 
         LinearLayout full_seek_indicator = view.findViewById(R.id.float_list_item_full_seekbar_indicator);
         CardView options_overlay = view.findViewById(R.id.float_list_item_card_overlay_options);
+        CardView ignore_confirm = view.findViewById(R.id.float_list_item_card_overlay_ignore_confirm);
+
+        ClickOverrideImageButton options_back = options_overlay.findViewById(R.id.float_list_item_card_overlay_options_back);
+        ClickOverrideImageButton options_ignore = options_overlay.findViewById(R.id.float_list_item_card_overlay_options_opreation_ignore);
+        ImageButton options_mute = options_overlay.findViewById(R.id.float_list_item_card_overlay_options_operation_mute);
+
+        ClickOverrideImageButton ignore_cancel = ignore_confirm.findViewById(R.id.float_list_item_card_overlay_ignore_confirm_cancel);
 
         back_tint.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        parent.requestDisallowInterceptTouchEvent(true);
-                    case MotionEvent.ACTION_MOVE:
-                    case MotionEvent.ACTION_SCROLL:
-                        cleaner.removeCallbacks(cleanTask);
-                        ViewGroup.LayoutParams params = full_seek_indicator.getLayoutParams();
-                        params.width = (int) (event.getX() - full_seek_indicator.getX());
-                        full_seek_indicator.setLayoutParams(params);
+                if (options_overlay.getVisibility() != View.VISIBLE) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            parent.requestDisallowInterceptTouchEvent(true);
+                        case MotionEvent.ACTION_MOVE:
+                        case MotionEvent.ACTION_SCROLL:
+                            cleaner.removeCallbacks(cleanTask);
+                            ViewGroup.LayoutParams params = full_seek_indicator.getLayoutParams();
+                            params.width = (int) (event.getX() - full_seek_indicator.getX());
+                            full_seek_indicator.setLayoutParams(params);
 
-                        float ratio = (event.getX() - full_seek_indicator.getX()) / back_tint.getWidth();
-                        if (ratio < 0) {
-                            ratio = 0.0f;
-                        } else if (ratio > 1) {
-                            ratio = 1.0f;
-                        }
-                        aplc_label.setText("(" + (int) (ratio * 100) + "%)" + label);
+                            float ratio = (event.getX() - full_seek_indicator.getX()) / back_tint.getWidth();
+                            if (ratio < 0) {
+                                ratio = 0.0f;
+                            } else if (ratio > 1) {
+                                ratio = 1.0f;
+                            }
+                            aplc_label.setText("(" + (int) (ratio * 100) + "%)" + label);
 
-                        AudioHQApis.setProfile(service, pkgs.getPkg(), ratio, (float) pkgs.getLeft(),
-                                (float) pkgs.getRight(), true, true);
+                            AudioHQApis.setProfile(service, pkgs.getPkg(), ratio, (float) pkgs.getLeft(),
+                                    (float) pkgs.getRight(), true, true);
 
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        cleaner.postDelayed(cleanTask, delayed);
-                        break;
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            cleaner.postDelayed(cleanTask, delayed);
+                            break;
+                    }
                 }
                 return true;
             }
@@ -167,14 +178,55 @@ public class FloatAdapter extends BaseAdapter {
             public boolean onLongClick(LongClickOverrideFrameLayout view, int x, int y) {
                 cleaner.removeCallbacks(cleanTask);
                 cleaner.postDelayed(cleanTask, delayed + 300);
-                options_overlay.setVisibility(View.VISIBLE);
-                options_overlay.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        AnimateUtils.playStart(options_overlay, x, y, 480, () -> {
-                        });
-                    }
-                });
+                if (options_overlay.getVisibility() == View.GONE) {
+                    options_overlay.setVisibility(View.VISIBLE);
+                    options_overlay.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            AnimateUtils.playStart(options_overlay, x, y, 480, () -> {
+                            });
+                        }
+                    });
+                }
+                return false;
+            }
+        });
+
+        options_back.setClickListener(new ClickOverrideImageButton.ClickListener() {
+            @Override
+            public boolean onClick(ClickOverrideImageButton view, int x, int y) {
+                if (options_overlay.getVisibility() == View.VISIBLE) {
+                    AnimateUtils.playEnd(options_overlay, x, y, 480);
+                }
+                return false;
+            }
+        });
+
+        options_ignore.setClickListener(new ClickOverrideImageButton.ClickListener() {
+            @Override
+            public boolean onClick(ClickOverrideImageButton view, int x, int y) {
+                cleaner.removeCallbacks(cleanTask);
+                cleaner.postDelayed(cleanTask, delayed + 300);
+                if (ignore_confirm.getVisibility() == View.GONE) {
+                    ignore_confirm.setVisibility(View.VISIBLE);
+                    ignore_confirm.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            AnimateUtils.playStart(ignore_confirm, back_tint.getWidth() - x - service.DP_16 / 2, y, 480, () -> {
+                            });
+                        }
+                    });
+                }
+                return false;
+            }
+        });
+
+        ignore_cancel.setClickListener(new ClickOverrideImageButton.ClickListener() {
+            @Override
+            public boolean onClick(ClickOverrideImageButton view, int x, int y) {
+                if (options_overlay.getVisibility() == View.VISIBLE) {
+                    AnimateUtils.playEnd(ignore_confirm, back_tint.getWidth() - x - service.DP_16 / 2, y, 480);
+                }
                 return false;
             }
         });

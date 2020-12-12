@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -84,16 +85,6 @@
                         android:textAllCaps="false"
                         android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch" />
 
-                    <!--                        <SeekBar-->
-                    <!--                            android:id="@+id/float_list_item_general_seek"-->
-                    <!--                            android:layout_width="match_parent"-->
-                    <!--                            android:layout_height="wrap_content"-->
-                    <!--                            android:clickable="false"-->
-                    <!--                            android:focusable="false"-->
-                    <!--                            android:max="10000"-->
-                    <!--                            android:progress="10000"-->
-                    <!--                            android:visibility="gone" />-->
-
                 </LinearLayout>
             </LinearLayout>
 
@@ -101,12 +92,14 @@
                 android:id="@+id/float_list_item_card_overlay_options"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="invisible"
+                android:alpha="0.01"
+                android:visibility="gone"
                 app:cardBackgroundColor="@color/pink_colorPrimary"
                 app:cardElevation="4dp"
                 app:cardMaxElevation="4dp"
                 app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="false">
+                app:cardUseCompatPadding="false"
+                tools:visibility="gone">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -119,6 +112,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
                         android:background="?android:attr/selectableItemBackgroundBorderless"
                         android:scaleX="0.8"
                         android:scaleY="0.8"
@@ -157,7 +151,7 @@
                             android:src="@drawable/ic_volume_off_black_24dp"
                             android:tint="#FFFFFF" />
 
-                        <ImageButton
+                        <io.alcatraz.audiohq.extended.ClickOverrideImageButton
                             android:id="@+id/float_list_item_card_overlay_options_opreation_ignore"
                             style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="48dp"
@@ -166,6 +160,57 @@
                             android:scaleX="0.8"
                             android:scaleY="0.8"
                             android:src="@drawable/layers_off"
+                            android:tint="#FFFFFF" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/float_list_item_card_overlay_ignore_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.01"
+                android:visibility="gone"
+                app:cardBackgroundColor="@android:color/holo_green_light"
+                app:cardElevation="4dp"
+                app:cardMaxElevation="4dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="false">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/float_list_item_card_overlay_ignore_confirm_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="24dp"
+                        android:text="@string/panel_control_operation_ignore_confirm"
+                        android:textAllCaps="false"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Switch"
+                        android:textColor="#FFFFFF" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <io.alcatraz.audiohq.extended.ClickOverrideImageButton
+                            android:id="@+id/float_list_item_card_overlay_ignore_confirm_cancel"
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="48dp"
+                            android:layout_height="match_parent"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:scaleX="0.8"
+                            android:scaleY="0.8"
+                            android:src="@drawable/undo"
                             android:tint="#FFFFFF" />
                     </LinearLayout>
                 </RelativeLayout>

@@ -52,6 +52,7 @@ public class FloatPanelService extends Service {
     public static final String AHQ_FLOAT_TRIGGER_ACTION = "ahq_float_trigger";
     public static final String AHQ_FLOAT_DISCHARGE_ACTION = "ahq_float_discharge";
     public int DP_240 = 0;
+    public int DP_16 = 0;
 
     UpdatePreferenceReceiver updatePreferenceReceiver;
     FloatWindowTrigger trigger;
@@ -139,6 +140,7 @@ public class FloatPanelService extends Service {
         AudioHQApplication application = (AudioHQApplication) getApplication();
         playingSystem = application.getPlayingSystem();
         DP_240 = Utils.Dp2Px(this, 240);
+        DP_16 = Utils.Dp2Px(this, 16);
 
         observer.setOnVolumeChangeListener(new VolumeChangeObserver.OnVolumeChangeListener() {
             @Override

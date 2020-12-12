@@ -15,37 +15,14 @@ public class AnimateUtils {
     }
 
     public static void playStart(final View view, int x, int y, int duration, SimpleAnimateInterface animateInterface) {
-        view.setVisibility(View.VISIBLE);
         Animator a = ViewAnimationUtils.createCircularReveal(view, x, y, 0, (float) Math.hypot((double) view.getWidth(), (double) view.getHeight()));
         a.setInterpolator(new AccelerateInterpolator());
         a.setDuration(duration);
-        a.start();
         a.addListener(new Animator.AnimatorListener() {
 
             @Override
             public void onAnimationStart(Animator p1) {
-                view.setVisibility(View.VISIBLE);
-                AnimationSet as = new AnimationSet(true);
-                AlphaAnimation aa = new AlphaAnimation(0, 1);
-                aa.setDuration(duration + 40);
-                as.addAnimation(aa);
-                view.startAnimation(as);
-                as.setAnimationListener(new Animation.AnimationListener() {
 
-                    @Override
-                    public void onAnimationStart(Animation p1) {
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation p1) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation p1) {
-
-                    }
-                });
             }
 
             @Override
@@ -64,14 +41,18 @@ public class AnimateUtils {
 
             }
         });
-
+        view.setAlpha(1);
+        a.start();
     }
 
+    public static void playEnd(final View view) {
+        playEnd(view, (int) view.getX(), (int) view.getY(), 450);
+    }
 
-    public static void playEnd(final View v) {
-        Animator a1 = ViewAnimationUtils.createCircularReveal(v, (int) v.getX(), (int) v.getY(), (float) Math.hypot(v.getWidth(), v.getHeight()), 0);
+    public static void playEnd(final View view, int x, int y, int duration) {
+        Animator a1 = ViewAnimationUtils.createCircularReveal(view, x, y, (float) Math.hypot(view.getWidth(), view.getHeight()), 0);
         a1.setInterpolator(new AccelerateInterpolator());
-        a1.setDuration(450);
+        a1.setDuration(duration);
         a1.start();
         a1.addListener(new Animator.AnimatorListener() {
 
@@ -82,7 +63,7 @@ public class AnimateUtils {
 
             @Override
             public void onAnimationEnd(Animator p1) {
-                v.setVisibility(View.GONE);
+                view.setVisibility(View.GONE);
             }
 
             @Override

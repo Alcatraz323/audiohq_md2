@@ -121,6 +121,7 @@
     <string name="panel_control_tips_message">The modification below will be multiplied under system volume,
     and the channel volume will be multiplied under the general volume</string>
     <string name="panel_control_operation">Ops: </string>
+    <string name="panel_control_operation_ignore_confirm">Added to whitelist.</string>
 
     <string name="playing_filter">Show active process only</string>
     <string name="playing_why_no_title">Why some app is not in the list</string>
