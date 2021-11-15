@@ -2,6 +2,7 @@ package io.alcatraz.audiohq.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,12 +58,20 @@ public class AuthorAdapter extends BaseAdapter {
         iv.setImageResource(img.get(p1));
         txv1.setText(data.get(p1).get(0));
         txv2.setText(data.get(p1).get(1));
-        if(p1 == 0) {
-            if(Constants.ANNIVERSARY_1ST){
+        if (p1 == 0) {
+            if (Constants.ANNIVERSARY_INDICATOR) {
+                if (Constants.ANNIVERSARY_1ST) {
+                    anniversary = p2.findViewById(R.id.authoritemTextView3);
+                    anniversary.setVisibility(View.VISIBLE);
+                    anniversary.setTextColor(activity.color);
+                    anniversary.setText(R.string.au_l_1st_anniversary_version);
+                    anniversary.append(" ");
+                }
+            } else {
                 anniversary = p2.findViewById(R.id.authoritemTextView3);
                 anniversary.setVisibility(View.VISIBLE);
                 anniversary.setTextColor(activity.color);
-                anniversary.setText(R.string.au_l_1st_anniversary_version);
+                anniversary.setText("Api: " + Build.VERSION.SDK_INT);
                 anniversary.append(" ");
             }
         }

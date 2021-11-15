@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -17,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/Setup">
         <activity
-            android:name=".activities.SetupActivity">
+            android:name=".activities.SetupActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -25,30 +27,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.PresetGeneralActivity" />
-        <activity
-            android:name=".activities.PreferenceActivity" />
-        <activity
-            android:name=".activities.MainActivity" />
-        <activity
-            android:name=".activities.AboutActivity" />
-        <activity
-            android:name=".activities.PreferenceInnerActivity" />
-        <activity
-            android:name=".activities.PresetInnerActivity" />
-        <activity
-            android:name=".activities.PlayingGeneralActivity" />
-        <activity
-            android:name=".activities.DefaultProfileActivity" />
-        <activity
-            android:name=".activities.CheckActivity" />
-        <activity
-            android:name=".activities.LogActivity" />
+        <activity android:name=".activities.PresetGeneralActivity" />
+        <activity android:name=".activities.PreferenceActivity" />
+        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.AboutActivity" />
+        <activity android:name=".activities.PreferenceInnerActivity" />
+        <activity android:name=".activities.PresetInnerActivity" />
+        <activity android:name=".activities.PlayingGeneralActivity" />
+        <activity android:name=".activities.DefaultProfileActivity" />
+        <activity android:name=".activities.CheckActivity" />
+        <activity android:name=".activities.LogActivity" />
         <activity android:name=".activities.AppPickActivity" />
         <activity android:name=".activities.Quiz2020Activity" />
 
-        <receiver android:name=".BootReceiver">
+        <receiver android:name=".BootReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <category android:name="android.intent.category.HOME" />
@@ -57,15 +50,16 @@
 
         <service android:name=".services.FloatPanelService" />
         <service
-        android:name=".services.Discharger"
-        android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
-        <intent-filter>
-            <action android:name="android.accessibilityservice.AccessibilityService" />
-        </intent-filter>
-        <meta-data
-            android:name="android.accessibilityservice"
-            android:resource="@xml/accessibility_discharger" />
-    </service>
+            android:name=".services.Discharger"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_discharger" />
+        </service>
 
     </application>
 
