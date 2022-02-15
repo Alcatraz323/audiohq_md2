@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="entries_for_language">
+        <item>自動</item>
+        <item>中国語</item>
+        <item>英語</item>
+        <item>日本語</item>
+    </string-array>
+
+    <string-array name="entries_for_theme">
+        <item>Pixel</item>
+        <item>オリジナル</item>
+        <item>桜</item>
+        <item>紫</item>
+        <item>ライトブルー</item>
+        <item>緑</item>
+    </string-array>
+
+    <string-array name="entries_for_dark_mode">
+        <item>自動</item>
+        <item>ライト</item>
+        <item>ダーク</item>
+        <item>ブラック</item>
+    </string-array>
+
+    <string-array name="entries_for_float_gravity">
+        <item>左上</item>
+        <item>右上</item>
+    </string-array>
+
+    <string-array name="setup_page_titles">
+        <item>ようこそ</item>
+        <item>要求事項の確認</item>
+        <item>モジュールのインストール</item>
+        <item>しばらくお待ちください…</item>
+        <item>完了!</item>
+    </string-array>
+
+
+</resources>
