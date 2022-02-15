@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Projects/AppProjects/AudioHeadQuarter/app/src/main/res/menu/activity_log_menu.xml" value="0.11510416666666666" />
+        <entry key="..\:/Projects/AppProjects/AudioHeadQuarter/app/src/main/res/menu/activity_main_menu.xml" value="0.11510416666666666" />
+        <entry key="..\:/Projects/AppProjects/AudioHeadQuarter/app/src/main/res/menu/activity_playing_menu.xml" value="0.11510416666666666" />
+        <entry key="..\:/Projects/AppProjects/AudioHeadQuarter/app/src/main/res/menu/activity_preset_general_menu.xml" value="0.11510416666666666" />
+      </map>
+    </option>
+  </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
     <option name="myDefaultNotNull" value="androidx.annotation.NonNull" />

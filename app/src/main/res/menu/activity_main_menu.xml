@@ -1,4 +1,4 @@
-<menu
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
@@ -10,7 +10,7 @@
         android:icon="@drawable/ic_refresh_black_24dp"
         android:title="@string/main_menu_5"
         android:iconTint="#9F9F9F"
-        android:showAsAction="always" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/item4"
