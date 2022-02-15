@@ -122,6 +122,9 @@ public class CompatWithPipeActivity extends AppCompatActivity {
             case "English":
                 togo = Locale.ENGLISH;
                 break;
+            case "Japanese":
+                togo = Locale.JAPANESE;
+                break;
             default:
                 togo = Locale.getDefault();
                 break;
