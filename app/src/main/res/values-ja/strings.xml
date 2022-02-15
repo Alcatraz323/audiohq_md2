@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [
+    <!ENTITY current_match_version "0.91">
+    <!ENTITY current_match_version_code "1">]>
+<resources>
+    <!-- 更新修改部分 -->
+    <string name="support_lib_version">&current_match_version;</string>
+    <string name="update_date">20211115</string>
+    <string name="update_title">20211115 stable_8_a12</string>
+    <string name="update_info">
+        1.Android 12をサポート\n
+        2.よくある質問にお答えします\n
+        a.バックエンドは必要ですか？\n
+        ホバーウィンドウの機能だけがapkの背景を維持する必要があり、基盤となるサービスはapkの背景を必要としません。\n
+        b.WeChat、Pinningなどの音声や終了時にホバーウィンドウが表示されます。\n
+        これはバグではなく、これらのソフトウェアがボリュームを移動させたからです。\n
+        c.KuGouはプロセス名のみ表示しますか？\n
+        KuGouのパッケージ名は、標準化されていないプロセス名、デフォルトのアルゴリズムではプロセス名を読み取ることができません。\n
+        d.〇〇はサポートされていません。○○リストは利用できません。○○電話は利用できません。\n
+        画面の説明をよくお読みください。\n
+        e.同時に再生するにはどうすればよいですか？\n
+        再生開始時に人を止めるソフトのオーディオフォーカスを無効にする許可ソフトを使用し、そうでない場合は両方を無効化する
+    </string>
+
+    <!-- 一般 -->
+    <string name="app_name">Audio HeadQuarter</string>
+    <string name="activity_pref">Preferences</string>
+    <string name="main_menu_1">設定</string>
+    <string name="main_menu_2">About</string>
+    <string name="main_menu_3">サービスの開始</string>
+    <string name="main_menu_4">サービスの停止</string>
+    <string name="main_menu_5">リフレッシュ</string>
+    <string name="main_menu_6">コンソールを出力</string>
+    <string name="main_report_bug">エラーが発生した場合は下記に連絡してください。</string>
+    <string name="toast_no_root">Rootが無い場合はこのプログラムは動作しません。</string>
+    <string name="rc_modified_server_noneed">内蔵サービスがすでに使用されており、外部サービスの起動が許可されていません。</string>
+    <string name="toast_implementing">実装中</string>
+    <string name="service_toast_already_running">サービスは既に稼働しています。</string>
+    <string name="service_toast_already_killed">サービスが停止しました。</string>
+    <string name="adjust_title">精密な調整</string>
+    <string name="adjust_confirm">Apply</string>
+    <string name="til_err_parse">Not a float number</string>
+    <string name="til_err_ofr">Out of range</string>
+    <string name="read_profile_err">Read profile error</string>
+    <string name="java_server_running">Javaサーバーが起動しました</string>
+    <string name="accessibility_description">AudioHQ volume key listener, \'getevent\' ベースダイレクトトリガーを有効にした場合は、有効にしないでください。</string>
+
+    <string name="main_card_status_querying">Querying…</string>
+    <string name="main_card_playing">Playing</string>
+    <string name="main_card_playing_indicator">AudisMixerでは%sつのプロセスが再生されています。</string>
+    <string name="main_card_preset">アプリケーションのプリセット</string>
+    <string name="main_card_preset_indicator">%sつのアプリケーションにプロファイルが含まれています。</string>
+    <string name="main_card_help">ヘルプとサポート</string>
+    <string name="main_card_invalid">使用不可</string>
+
+    <string name="toast_copied">コピーしました</string>
+    <string name="ad_pb">はい</string>
+    <string name="ad_nb">キャンセル</string>
+    <string name="ad_pb2">はい</string>
+    <string name="ad_pb_no_rc_modify">インストール(コンテンツへの変更は無し)</string>
+    <string name="ad_nb2">いいえ</string>
+    <string name="ad_nb3">閉じる</string>
+    <string name="ad_nb4">クリア</string>
+    <string name="ad_never_again">再度表示しない</string>
+    <string name="ad_processing">処理中…</string>
+    <string name="empty_view">結果無し</string>
+
+    <string name="check_root">Root権限</string>
+    <string name="check_selinux">Selinux状態</string>
+    <string name="check_support">Api/Abiのサポート</string>
+    <string name="check_native_elf_info">ネイティブバージョン</string>
+    <string name="check_native_lib_info">ライブラリのバージョン</string>
+    <string name="check_audioserver_info">\'audioserver\'実行ファイル情報</string>
+    <string name="check_daemon_status">デーモンのステータス</string>
+    <string name="check_daemon_status_alive">動作中</string>
+    <string name="check_daemon_status_dead">停止</string>
+    <string name="check_daemon_restart">デーモンの再起動を試す</string>
+    <string name="aplc_split_control">デュアルチャンネル制御</string>
+    <string name="aplc_precise_control">精密な制御</string>
+    <string name="aplc_left">L[0,1]</string>
+    <string name="aplc_right">R[0,1]</string>
+    <string name="aplc_general">一般[0.1]</string>
+    <string name="aplc_use_process_control">プロセスコントロールの使用</string>
+
+    <string name="preset_disabled">プリセット機能は使用できません。</string>
+    <string name="preset_disabled_define">システムサービスが動作していません。</string>
+    <string name="preset_tutorial_title">チュートリアル</string>
+    <string name="preset_tutorial_content">io.alcatraz.audiohq:play というプロセスを設定したい場合を想定しています。\n
+        (注意!!!プロセス名はパッケージ名と同じ概念ではありません。実行中のプロセスのプロセス名はpsコマンドで確認できます)\n
+        次に残りのデータを入力し、正しいことを確認してApplyをクリックします \n
+        (Enable package name をキーワードに設定した場合、これはパッケージ名とすることができます)</string>
+    <string name="preset_process_name">プロセス名:</string>
+    <string name="preset_list_sum">%d アプリケーション</string>
+    <string name="preset_list_notice">注意: このリストでは、以前の設定を読み込むことはできません</string>
+    <string name="preset_loading">ロード中…</string>
+    <string name="preset_search_hint">アプリケーション名/パッケージ名</string>
+    <string name="preset_tab_all_apps">全部</string>
+    <string name="preset_tab_has_set">セットアップ</string>
+    <string name="preset_status_has_profile">プリセットプロファイルが存在する，</string>
+    <string name="preset_status_no_profile">プロファイル無し，</string>
+    <string name="preset_status_muted">ミュート</string>
+    <string name="preset_status_unmuted">アンミュート</string>
+    <string name="preset_action_search">検索</string>
+    <string name="preset_conflicted">\ \ この設定は、パケット名制御の設定が存在する場合は有効になりません</string>
+    <string name="preset_inner_title">プリセットコンフィグ</string>
+    <string name="preset_manual_add">手動で追加</string>
+    <string name="preset_manual_hint">プロセス名</string>
+    <string name="preset_manual_error">無効な文字!</string>
+
+    <string name="panel_control_title_1">音量</string>
+    <string name="panel_control_general">主音量</string>
+    <string name="panel_control_channel">チャンネル音量</string>
+    <string name="panel_control_left">左チャンネル</string>
+    <string name="panel_control_right">右チャンネル</string>
+    <string name="panel_control_mute">このプログラムをミュートする</string>
+    <string name="panel_control_tips_title">ヒント</string>
+    <string name="panel_control_tips_message">以下の変更がアプリケーションの音量計算に加味され、マスター音量に応じたチャンネル音量が有効になります。</string>
+    <string name="panel_control_operation">操作: </string>
+    <string name="panel_control_operation_ignore_confirm">ホワイトリスト</string>
+
+    <string name="playing_filter">アクティブなプロセスのみを表示する</string>
+    <string name="playing_why_no_title">一部のアプリがリスト/ホバーウィンドウに表示されない？</string>
+    <string name="playing_why_no_content">2つのケースがあります: \n
+    1.ゲームサウンドタイプのオーディオトラック：このタイプのオーディオトラックは、再生が完了した後に自動的に削除されます。あなたがそのような調整する必要がある場合は、プリセットを使用してください。 \n
+    2。ストレートアウトオーディオ：これは一般的にいくつかのプロのローカルプレーヤー、コール、外部デコード、qq8.0または上記の音声、互換性のための現在のバージョンで示し、システム内のオーディオのこの種は、別のコントロール（コールなど、あなたが同じ効果を達成するために他の制御可能な制御できるプレーヤー）を持っています。 \n
+        そのため、この部分の制御は破棄し、MIUIの互換性を考慮する必要がなくなったら復元を検討する予定です。
+    </string>
+
+    <string name="status_server">ネイティブサーバー</string>
+    <string name="status_track_ctl_position">トラックのコントロール位置</string>
+    <string name="status_auto_remove_flag">自動削除</string>
+    <string name="status_thread_count">既存のスレッド</string>
+    <string name="status_track_lock_ctl">トラック制御の種類</string>
+
+    <string name="toast_cant_overlay">アプリケーションの上段に表示されることを許可してください。</string>
+    <string name="notification_overlay">AudioHQのフォアグラウンド</string>
+
+    <!--向导-->
+    <string name="setup_step_next">次へ</string>
+    <string name="setup_step_next_final">完了</string>
+    <string name="setup_step_before">戻る</string>
+    <string name="setup_1_intro">こんにちは。使用する前にセットアップを完了しましょう。\n\nこれはmagiskモジュールと連携するソフトウェアで、アプリケーションのボリュームを個別に調整するために使用されます。</string>
+    <string name="setup_2_warning_vendor_system_title">警告！</string>
+    <string name="setup_2_warning_vendor_system_info">このソフトウェア（モジュール）は、システムの重要なライブラリの一部をリダイレクトしようとするため、起動時に画面が固まる危険性があります。\n
+    重要なシステムライブラリのインストールは、ブートアニメーションから抜け出せなくなったり、オーディオシステムを不安定にする可能性があります。\n
+    モジュールをフラッシュする前にリカバリーの方法を知っていることを確認し、また、クラッシュした場合SeLinuxを確認するようにしてください。</string>
+    <string name="setup_2_warning_vendor_system_unlock">リスクを理解し、解除する</string>
+    <string name="setup_2_requirements_not_meet_title">すべてのインストール要件を満たしていません</string>
+    <string name="setup_2_requirements_not_meet_info">インストールの実行には危険があります。\n
+    次のステップは、あなたが何をしているのか知っていて、リカバリからモジュールを削除する方法を知っている場合、ロックを解除することができます。</string>
+    <string name="setup_2_warning_delay">注意事項をよくお読みください。10秒経過するとロックが解除されます。</string>
+    <string name="setup_check_granted">付与</string>
+    <string name="setup_check_deny">却下</string>
+    <string name="setup_3_install_title">インストール</string>
+    <string name="setup_3_install_info">ウェブサイトからモジュールをダウンロードし、インストールしてください。\n この操作はシステムに損傷を与える可能性がありますので、インストールする前に復元方法を確認してください。</string>
+    <string name="setup_3_install_github_down">Githubでダウンロード</string>
+    <string name="setup_3_install_fastgit_down">Fastgitでダウンロード</string>
+    <string name="setup_3_installed">対応するバージョンのモジュールがインストールされていることを確認する</string>
+    <string name="setup_3_installed_title">Magisk用インストーラー</string>
+    <string name="setup_3_installed_summary">現在のapkはネイティブリビジョンに対応しています : &current_match_version;</string>
+    <string name="setup_3_current_installed">クライアントの状態: \n%s</string>
+    <string name="setup_3_not_detected">情報の取得に失敗しました。SeLinuxがインストールされていないか、ブロックされています。</string>
+    <string name="setup_4_modify_rc_title">audioserver.rcの修正(要再起動)</string>
+    <string name="setup_4_modify_rc_info">/system/etc/init/audioserver.rc の修正,
+        内蔵サーバを有効にするために、audioserverの/procへの読み込みアクセスを取得します。注意：rcファイルが.imgでパックされている場合や、/systemが書き込みを許可していない場合は動作しません（後者については、回復時に書き込みを選択できます）</string>
+    <string name="setup_4_modify_rc_already">修正済み</string>
+    <string name="setup_4_modify_rc_not_yet">未修整</string>
+    <string name="setup_4_modify_rc_warning">この操作が完了すると再起動されます。実行しますか？</string>
+    <string name="setup_6_done">インストールは完了しました。</string>
+    <string name="setup_current_update">最新の更新情報</string>
+    <string name="setup_selinux_check">SeLinuxのチェック</string>
+    <string name="setup_selinux_definition">SeLinux を permissive にする必要があります（最新のモジュールでは必要ない場合があります。）</string>
+    <string name="setup_permissions">パーミッション</string>
+    <string name="setup_permission_ignore_battery">バッテリーの最適化を無効にする</string>
+    <string name="setup_permission_overlay">他のアプリの上に重ねて表示する\n(Preferenceアクティビティで有効にする必要があります)</string>
+    <string name="setup_permission_request">リクエスト</string>
+    <string name="setup_permission_granted">付与</string>
+
+    <!--设置-->
+    <string name="pref_1_t">バックグラウンド</string>
+    <string name="pref_1_1">サービスタイプ</string>
+    <string name="pref_1_2">audioserver.rcの修正(システムの再起動を要求します)</string>
+    <string name="pref_1_2_summary">audioserver.rcを修正し、内蔵サーバを有効にする。これは、/systemがroの場合や、boot.imgに.rcファイルが含まれている場合は動作しません。</string>
+    <string name="pref_1_3">ブート</string>
+    <string name="pref_1_3_summary">ブート時にネイティブデーモンを強制的に起動させる</string>
+    <string name="pref_1_4">ホバーウィンドウサービス</string>
+    <string name="pref_1_4_summary">システムボリュームが変化したときにホバーウィンドウを表示できるようにするサービスを実行する。(バッテリーの最適化を無視することを許可してください、/system/priv-appにネイティブに配置されません。)</string>
+    <string name="pref_2_t">セキュリティ</string>
+    <string name="pref_2_t_summary">デフォルトのミュート、プリセットの初期設定なし</string>
+    <string name="pref_2_1">設定の無いプロセスをデフォルトでミュート</string>
+    <string name="pref_2_1_summary">プロファイルを持たないプロセスは、デフォルトでミュートになります。</string>
+    <string name="pref_2_2">Pidモード</string>
+    <string name="pref_2_2_summary">pidを調整用インジケータとして使用し、設定を保存したくない場合、またはproc read機能が動作しない場合に使用します。</string>
+    <string name="pref_2_3">デフォルトの設定</string>
+    <string name="pref_2_3_summary">プロファイルが存在しない場合のボリューム</string>
+    <string name="pref_2_4">プロテクターサービスの有効化</string>
+    <string name="pref_2_4_summary">システムによって停止される可能性があります。これを使用したい場合はバッテリーの最適化を無効にしてください。</string>
+    <string name="pref_2_5">Rootで実行</string>
+    <string name="pref_2_5_summary">すべてのコマンドはrootで実行されます。（多くの認証プロンプトが表示されますが、Magiskに移動してプロンプトをオフにすることができます）</string>
+    <string name="pref_3_t">その他</string>
+    <string name="pref_3_t_summary">アンインストール方法、プロファイルのクリアなど。</string>
+    <string name="pref_3_1">更新を確認する</string>
+    <string name="pref_3_2">プロファイルを削除</string>
+    <string name="pref_3_3">ネイティブファイルのアンインストール</string>
+    <string name="pref_3_4">プロセス名の代わりにパッケージ名を使用する</string>
+    <string name="pref_3_4_summary">レイアウトとエフェクトが変更されます</string>
+    <string name="pref_3_5">同じパッケージ名を持つプロセスをグループ内に表示する</string>
+    <string name="pref_3_5_summary">Beta</string>
+    <string name="pref_3_6">言語</string>
+    <string name="pref_3_7">最近のタスクから除外する</string>
+    <string name="pref_3_7_summary">最近のタスクにこのアプリを表示するかどうかを切り替えます</string>
+    <string name="pref_3_8">テーマ</string>
+    <string name="pref_3_9">ダークモード</string>
+    <string name="pref_3_10">Anniversary Foreground</string>
+    <string name="pref_3_10_summary">記念日の前景を表示するかどうかを切り替える</string>
+    <string name="pref_4_t">ホバーウィンドウ</string>
+    <string name="pref_4_t_summary">ホバーウィンドウの切り替えとカスタマイズオプション</string>
+    <string name="pref_4_1">ウィンドウの位置</string>
+    <string name="pref_4_2">背景の色</string>
+    <string name="pref_4_3">フロントサービスの利用</string>
+    <string name="pref_4_3_summary">これは、ホバーウィンドウのサービスを維持するためのフォアグラウンド常駐通知を作成するものです。</string>
+    <string name="pref_4_4">消えるまでの時間(秒)</string>
+    <string name="pref_4_5">上の補正距離(dp)</string>
+    <string name="pref_4_6">ランドスケープ用:上の補正距離(dp)</string>
+    <string name="pref_4_7">アイコンの色合い</string>
+    <string name="pref_4_8">スイッチのサイズ(dp)</string>
+    <string name="pref_4_9">文字色</string>
+    <string name="pref_4_10">横の補正距離(dp)</string>
+    <string name="pref_4_11">ボタンの角の半径(dp)</string>
+    <string name="pref_4_12">カードの角の半径(dp)</string>
+    <string name="pref_4_13">シークバーの色</string>
+    <string name="pref_4_14">キー操作に反応してホバーウィンドウを表示</string>
+    <string name="pref_4_14_summary">フロートウィンドウの直接起動(実験)</string>
+    <string name="pref_4_15">横方向の余白(dp)</string>
+    <string name="pref_4_16">フィルター/ホワイトリスト</string>
+    <string name="pref_4_16_summary">設定したパッケージ名はホバーウィンドウに表示されません。</string>
+    <string name="pref_4_17">背景色(ダークモード)</string>
+    <string name="pref_4_18">エントリーがない場合、ホバーウィンドウが表示されません。</string>
+    <string name="pref_4_18_summary">リストにアプリがない場合は、ホバーウィンドウが表示されないので、アプリを強制終了する必要があります。</string>
+    <string name="pref_4_19">デフォルトの拡大ウィンドウ</string>
+    <string name="pref_4_19_summary">オン時に操作パネルを直接表示</string>
+    <string name="pref_4_20">ホバーウィンドウを直接トリガーする</string>
+    <string name="pref_4_20_summary">アクセシビリティサービスを使用してパネルをトリガーし、両方のダイレクトトリガーを同時に有効にしないでください。</string>
+    <string name="pref_4_21">固定アプリケーション</string>
+    <string name="pref_4_21_summary">特定のアプリケーションをホバーウィンドウとNow Playing画面にピン留めする（再生状態は無視する）</string>
+    <string name="pref_4_dark_t">ダークテーマ</string>
+    <string name="pref_4_light_t">ライトテーマ</string>
+    <string name="pref_invalid_integer">無効な整数</string>
+    <string name="pref_invalid_color">無効な色</string>
+    <string name="pref_need_to_restart_playing_process">再生プロセスの完全な再起動が必要（システムの再起動が最適です）</string>
+    <string name="pref_float_set_notice_title">注意</string>
+    <string name="pref_float_set_notice_message">環境設定を変更する前に、前のフロートウィンドウが消えるのをお待ちください。
+        ただし、ウィンドウを画面上に表示したまま更新しない場合は、この限りではありません。</string>
+
+    <string name="pref_default_silent_warning_title">警告</string>
+    <string name="pref_default_silent_warning_message">この機能が有効な場合、電話などの音量が設定されていないとミュートされることがありますので、必ず設定してください</string>
+    <string name="pref_clear_profile_confirm">プロファイルをクリアしています。実行しますか？</string>
+    <string name="profile_configure_app_pick">アプリを選択する</string>
+
+    <string name="morse_2020_failure">あ、1周年の間違いですね、わかってますよね？</string>
+    <string name="morse_2020_success_1">「その他の設定に何かが現れた」という音声が聞こえる"</string>
+    <string name="quiz_2020_title">これは何ですか？</string>
+    <string name="quiz_2020_summary">..---/-----/..---/-----</string>
+    <string name="quiz_2020_math_et_hint">答えは？（キーもアプリ内のどこかにあります。）</string>
+    <string name="quiz_2020_sudoku_instruction">行ごとに空欄を埋め、足りない数字だけを入力し、"12345 "のように数字と数字の間にスペースを入れないでください。</string>
+    <string name="quiz_2020_intro">音をたどっていくと、鍵のかかった箱と2つのクイズがあり、1つのクイズに合格すれば箱が開けられるようなので、箱を開けてみるか。</string>
+    <string name="quiz_2020_failure">結果が一致しない</string>
+    <string name="quiz_2020_success">何かが起動したようです。\n他の設定に戻って確認してみてください。</string>
+    <string name="quiz_2020_guess_success">何か起動してる、\n他の設定に戻して見てください୧⃛(๑⃙⃘◡̈๑⃙⃘)(</string>
+    <string name="anniversary_2020_notice_message">発売から1年ということで、特別な機能を用意したんだけど、ロックを解除するための入り口を見つけて、クイズを解いてね。さあ、頑張れ！(ヒント：Androidのイースターエッグの入り口はどこだ？)</string>
+
+    <string name="sudoku_row_1">一列目</string>
+    <string name="sudoku_row_2">二列目</string>
+    <string name="sudoku_row_3">三列目</string>
+    <string name="sudoku_row_4">四列目</string>
+    <string name="sudoku_row_5">五列目</string>
+    <string name="sudoku_row_6">六列目</string>
+    <string name="sudoku_row_7">七列目</string>
+    <string name="sudoku_row_8">八列目</string>
+    <string name="sudoku_row_9">九列目</string>
+
+    <!--关于-->
+    <string name="au_l_1">バージョン</string>
+    <string name="au_l_1st_anniversary_version">1st アニバーサリー!(</string>
+    <string name="au_l_2">デベロッパー</string>
+    <string name="au_l_2_1">AlcatrazDev, Mr_Dennis</string>
+    <string name="au_l_3">ソースコードを見る</string>
+    <string name="au_l_4">オープンソースライセンス</string>
+    <string name="au_l_4_1">オープンソースへのリスペクト</string>
+    <string name="au_l_5">更新履歴</string>
+    <string name="au_l_6">セットアップの再実行</string>
+    <string name="au_osp">オープンソースプロジェクト</string>
+
+    <string name="lib_version_mismatch">Libのバージョンの不一致，現在のlib用apk[&current_match_version;],11.23.21,elf 0.9.2</string>
+
+    <string name="install_warning">インストール作業には、危険な操作が含まれます(/system/lib(64)/libaudioflinger.so,を/system/etc/init/audioserver.rc に置き換える),
+        この操作により、デバイスの電源が入らなくなることがあります。ブリック、あるいはハードウェアの損傷。ファイルマネージャー(Twrpなど)を搭載している場合は、端末にインストールされているリカバリーをご利用ください。上記ファイルのバックアップを取り、インストール作業を進める</string>
+    <string name="uninstall_steps">Magiskのモジュールをアンインストールまたは無効化するだけです。<!--1. 将备份的libaudioflinger.so放入/system/lib(64)替换文件, 并设置其权限为
+        0644 (rw-r-r)\n
+        2. 删除/system/bin/audiohq\n
+        3. 用备份的audioserver.rc替换/system/etc/init/audioserver.rc\n
+        自动备份文件位置:/sdcard/audiohq_backups-->
+    </string>
+    <string name="install_title">ネイティブファイルがインストールされていない</string>
+    <string name="install_not_installed">モジュールがインストールされていない、一致するバージョンでない、またはSeLinuxがEnforcing、現在の一致するバージョン。: &current_match_version;</string>
+    <string name="install_confirm_title">インストールしますか?</string>
+    <string name="install_confirm_support">サポート: "32-bit LSB arm" /system/bin/audioserver 実行可能なファイルです。自動バックアップ先/sdcard/audiohq_backups,自動バックアップが機能しない場合があります。手動バックアップファイルが存在することを確認してください。インストールに成功すると、自動的に再起動します。</string>
+    <string name="install_confirm_detect">検出: </string>
+    <string name="install_fail_title">インストールが正常に完了しません。</string>
+    <string name="install_fail_message">このダイアログが常に表示される場合は、手動でインストールをお試しください。</string>
+    <string name="install_cant_mount_rw">systemをread/writeでマウントできないので、手動でインストールしてください</string>
+    <string name="install_magisk_not_installed">Magiskがインストールされていない場合、Magiskをインストールする前にネイティブファイルをインストールしてください。</string>
+    <string name="install_retry">リトライ</string>
+
+</resources>

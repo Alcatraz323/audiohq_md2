@@ -5,6 +5,7 @@
         <item>Auto</item>
         <item>Chinese</item>
         <item>English</item>
+        <item>Japanese</item>
     </string-array>
 
     <string-array name="entries_for_theme">
@@ -47,6 +48,7 @@
         <item>Auto</item>
         <item>中文</item>
         <item>English</item>
+        <item>Japanese</item>
     </string-array>
 
     <string-array name="entryvalue_for_theme">
