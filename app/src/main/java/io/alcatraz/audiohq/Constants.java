@@ -7,7 +7,7 @@ import io.alcatraz.audiohq.beans.QueryElement;
 
 public class Constants {
     public static String[] SUPPORT_ABIS = {"armeabi", "armeabi-v7a", "arm64-v8a"};
-    public static int[] SUPPORT_APIS = {26, 27, 28, 29, 30, 31};    //Android 8.0 - Android 12
+    public static int[] SUPPORT_APIS = {26, 27, 28, 29, 30, 31, 32};    //Android 8.0 - Android 12L
     public static String MATCHED_MODULE_VERSION = "0.91";
     public static boolean ANNIVERSARY_1ST = true;
     public static boolean ANNIVERSARY_2ND = false;
