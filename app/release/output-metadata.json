@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "io.alcatraz.audiohq",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 30,
+      "versionName": "0.8_2022_09_16_stable_8_a13",
+      "outputFile": "app-release.apk"
+    }
+  ],
+  "elementType": "File"
+}

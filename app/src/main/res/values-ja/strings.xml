@@ -4,10 +4,10 @@
 <resources>
     <!-- 更新修改部分 -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_date">20220403</string>
-    <string name="update_title">20220403 stable_8_a12L</string>
+    <string name="update_date">20220916</string>
+    <string name="update_title">20220916 stable_8_a13</string>
     <string name="update_info">
-        1.Android 12Lをサポート\n
+        1.Android 13をサポート\n
         2.よくある質問にお答えします\n
         a.バックエンドは必要ですか？\n
         ホバーウィンドウの機能だけがapkの背景を維持する必要があり、基盤となるサービスはapkの背景を必要としません。\n

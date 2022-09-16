@@ -6,8 +6,8 @@ android {
         applicationId "io.alcatraz.audiohq"
         minSdkVersion 26
         targetSdkVersion 31
-        versionCode 29
-        versionName "0.8_2022_04_03_stable_8_a12L"
+        versionCode 30
+        versionName "0.8_2022_09_16_stable_8_a13"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

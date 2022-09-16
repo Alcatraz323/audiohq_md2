@@ -8,10 +8,10 @@
     <string name="support_lib_version">&current_match_version;</string>
     <string name="setup_module_download_url_github" translatable="false">https://github.com/Alcatraz323/audiohq_module/releases</string>
     <string name="setup_module_download_url_fastgit" translatable="false">https://hub.fastgit.org/Alcatraz323/audiohq_module/releases</string>
-    <string name="update_date">20220403</string>
-    <string name="update_title">20220403 stable_8_a12L</string>
+    <string name="update_date">20220916</string>
+    <string name="update_title">20220916 stable_8_a13</string>
     <string name="update_info">
-        1.Android 12L support\n
+        1.Android 13 support\n
     </string>
 
     <!-- Common -->
