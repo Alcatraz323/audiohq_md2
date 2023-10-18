@@ -6,8 +6,8 @@ android {
         applicationId "io.alcatraz.audiohq"
         minSdkVersion 26
         targetSdkVersion 31
-        versionCode 30
-        versionName "0.8_2022_09_16_stable_8_a13"
+        versionCode 31
+        versionName "0.8_2023_10_18_stable_8_a14"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -25,6 +25,7 @@ android {
             abortOnError false
         }
     }
+    namespace 'io.alcatraz.audiohq'
 }
 
 dependencies {
@@ -32,11 +33,11 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'androidx.preference:preference:1.2.0'
-    implementation 'androidx.fragment:fragment:1.4.0'
+    implementation 'androidx.fragment:fragment:1.4.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'com.google.android.material:material:1.6.0-alpha02'
+    implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 }

@@ -4,8 +4,8 @@
 <resources>
     <!-- 更新修改部分 -->
     <string name="support_lib_version">&current_match_version;</string>
-    <string name="update_date">20220916</string>
-    <string name="update_title">20220916 stable_8_a13</string>
+    <string name="update_date">20231018</string>
+    <string name="update_title">20231018 stable_8_a14</string>
     <string name="update_info">
         1.Android 13をサポート\n
         2.よくある質問にお答えします\n
